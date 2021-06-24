@@ -1,0 +1,94 @@
+.mat-table {
+  .flex-8 {
+    flex: 8 8;
+  }
+  .flex-4 {
+    flex: 4 4;
+  }
+  .flex-3 {
+    flex: 3 3;
+  }
+  .flex-2 {
+    flex: 2 2;
+  }
+  .flex-1 {
+    flex: 1 1;
+  }
+  .cell {
+    a {
+      cursor: pointer;
+    }
+  }
+  .origin-column {
+    display: none;
+  }
+  .principal-column {
+    display: none;
+  }
+  .first-driver-column {
+    display: none;
+  }
+  .second-driver-column {
+    display: none;
+  }
+  .engine-column {
+    display: none;
+  }
+  .chassis-column {
+    display: none;
+  }
+  .actions-column {
+    justify-content: flex-end;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .mat-table {
+    .first-driver-column {
+      display: flex;
+    }
+    .second-driver-column {
+      display: flex;
+    }
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .mat-table {
+    .first-driver-column {
+      display: flex;
+    }
+    .second-driver-column {
+      display: flex;
+    }
+    .engine-column {
+      display: flex;
+    }
+    .chassis-column {
+      display: flex;
+    }
+  }
+}
+
+@media only screen and (min-width: 1600px) {
+  .mat-table {
+    .origin-column {
+      display: flex;
+    }
+    .principal-column {
+      display: flex;
+    }
+    .first-driver-column {
+      display: flex;
+    }
+    .second-driver-column {
+      display: flex;
+    }
+    .engine-column {
+      display: flex;
+    }
+    .chassis-column {
+      display: flex;
+    }
+  }
+}

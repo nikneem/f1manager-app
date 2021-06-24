@@ -1,0 +1,82 @@
+<div class="component driver">
+  <mat-card *ngIf="driver">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image">
+        <img src="/assets/icons/race.svg" class="component-type-picture" />
+      </div>
+      <mat-card-title>{{ driver.name }}</mat-card-title>
+      <mat-card-subtitle>&nbsp;</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div
+        class="component-picture"
+        [style.backgroundImage]="'url(' + driver.pictureUrl + ')'"
+      ></div>
+      <dl>
+        <dt>{{ "dashboard.components.bought" | translate }}</dt>
+        <dd>{{ driver.boughtOn | date }}</dd>
+        <dt>{{ "dashboard.components.bought-for" | translate }}</dt>
+        <dd>{{ driver.boughtFor | currency }}</dd>
+        <dt>{{ "dashboard.components.value" | translate }}</dt>
+        <dd>{{ driver.currentPrice | currency }}</dd>
+        <dt>{{ "dashboard.components.points-gained" | translate }}</dt>
+        <dd>{{ driver.pointsGained }}</dd>
+        <dt>{{ "dashboard.components.wear-down" | translate }}</dt>
+        <dd>-</dd>
+        <dt>{{ "dashboard.components.max-wear-down" | translate }}</dt>
+        <dd>-</dd>
+      </dl>
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        mat-flat-button
+        color="warn"
+        *ngIf="driver"
+        (click)="sellDriver()"
+      >
+        {{ "dashboard.components.sell" | translate }}
+      </button>
+    </mat-card-actions>
+  </mat-card>
+  <mat-card *ngIf="!driver">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image">
+        <img src="/assets/icons/axletree.svg" class="component-type-picture" />
+      </div>
+      <mat-card-title>None</mat-card-title>
+      <mat-card-subtitle>
+        Click the buy button to buy a chassis
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div
+        class="component-picture"
+        style="background-image: url(/assets/drivers/driver.jpg)"
+      ></div>
+      <dl>
+        <dt>{{ "dashboard.components.bought" | translate }}</dt>
+        <dd>-</dd>
+        <dt>{{ "dashboard.components.bought-for" | translate }}</dt>
+        <dd>-</dd>
+        <dt>{{ "dashboard.components.value" | translate }}</dt>
+        <dd>-</dd>
+        <dt>{{ "dashboard.components.points-gained" | translate }}</dt>
+        <dd>-</dd>
+        <dt>{{ "dashboard.components.wear-down" | translate }}</dt>
+        <dd>-</dd>
+        <dt>{{ "dashboard.components.max-wear-down" | translate }}</dt>
+        <dd>-</dd>
+      </dl>
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        mat-flat-button
+        color="primary"
+        *ngIf="!driver"
+        (click)="buyDriver()"
+      >
+        {{ "dashboard.components.buy" | translate }}
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

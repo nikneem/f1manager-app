@@ -1,0 +1,42 @@
+<h2 mat-dialog-title>Login</h2>
+<mat-dialog-content>
+  <p>
+    This is where you buy a new chassis. Below is a list of available chassis.
+    Select the chassis you want to buy and confirm to buy the chassis for your
+    team.
+  </p>
+  <div *ngIf="loginForm">
+    <form no-validate [formGroup]="loginForm">
+      <mat-form-field>
+        <input
+          matInput
+          type="text"
+          placeholder="{{ 'user.login.form.username' | translate }}"
+          formControlName="username"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          type="password"
+          placeholder="{{ 'user.login.form.password' | translate }}"
+          formControlName="password"
+        />
+      </mat-form-field>
+    </form>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button
+    mat-flat-button
+    color="primary"
+    *ngIf="loginForm"
+    [disabled]="loginForm.valid && !loginForm.pristine ? null : 'disabled'"
+    (click)="login()"
+  >
+    {{ "buttons.ok" | translate }}
+  </button>
+  <button mat-flat-button color="accent" [mat-dialog-close]="false">
+    {{ "buttons.cancel" | translate }}
+  </button>
+</mat-dialog-actions>

@@ -1,0 +1,49 @@
+<h2 mat-dialog-title>{{ "user.registration.title" | translate }}</h2>
+<mat-dialog-content *ngIf="registrationForm">
+  <p>
+    {{ "user.registration.text" | translate }}
+  </p>
+
+  <form no-validate [formGroup]="registrationForm">
+    <mat-form-field>
+      <input
+        matInput
+        type="text"
+        placeholder="{{ 'user.registration.form.username' | translate }}"
+        formControlName="username"
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        type="email"
+        placeholder="{{ 'user.registration.form.email' | translate }}"
+        formControlName="emailAddress"
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        type="password"
+        placeholder="{{ 'user.registration.form.password' | translate }}"
+        formControlName="password"
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        type="password"
+        placeholder="{{ 'user.registration.form.passwordConfirm' | translate }}"
+        formControlName="passwordCompare"
+      />
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-flat-button color="accent" [mat-dialog-close]="true">
+    {{ "buttons.cancel" | translate }}
+  </button>
+  <button mat-flat-button color="primary" (click)="register()">
+    {{ "buttons.register" | translate }}
+  </button>
+</mat-dialog-actions>

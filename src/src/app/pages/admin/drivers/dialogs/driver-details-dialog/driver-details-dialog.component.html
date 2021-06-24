@@ -1,0 +1,98 @@
+<h2 mat-dialog-title>{{ "admin.drivers.details.title" | translate }}</h2>
+<mat-dialog-content *ngIf="driverForm">
+  <div class="driver-details">
+    <div class="properties">
+      <form [formGroup]="driverForm" no-validate>
+        <input type="hidden" formControlName="id" />
+        <input type="hidden" formControlName="pictureUrl" />
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="{{ 'admin.drivers.details.name' | translate }}"
+            formControlName="name"
+          />
+        </mat-form-field>
+        <mat-form-field class="half-width">
+          <input
+            matInput
+            placeholder="{{ 'admin.drivers.details.country' | translate }}"
+            formControlName="country"
+          />
+        </mat-form-field>
+
+        <mat-form-field class="half-width">
+          <mat-label>{{
+            "admin.drivers.details.date-of-birth" | translate
+          }}</mat-label>
+          <input matInput [matDatepicker]="dob" formControlName="dateOfBirth" />
+          <mat-datepicker-toggle matSuffix [for]="dob"></mat-datepicker-toggle>
+          <mat-datepicker #dob></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field class="half-width">
+          <mat-label>{{
+            "admin.drivers.details.active-from" | translate
+          }}</mat-label>
+          <input
+            matInput
+            [matDatepicker]="actfrom"
+            formControlName="activeFrom"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="actfrom"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #actfrom></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field class="half-width">
+          <mat-label>{{
+            "admin.drivers.details.active-to" | translate
+          }}</mat-label>
+          <input matInput [matDatepicker]="actto" formControlName="activeTo" />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="actto"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #actto></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input
+            matInput
+            type="number"
+            placeholder="{{ 'admin.drivers.details.value' | translate }}"
+            formControlName="value"
+          />
+        </mat-form-field>
+
+        <mat-slide-toggle color="primary" formControlName="isAvailable">{{
+          "admin.drivers.details.available" | translate
+        }}</mat-slide-toggle>
+        <br />
+        <mat-slide-toggle color="primary" formControlName="isDeleted">{{
+          "admin.drivers.details.deleted" | translate
+        }}</mat-slide-toggle>
+      </form>
+    </div>
+    <div class="visual">
+      <f1-upload-image
+        [pictureUrl]="driver.pictureUrl"
+        (fileUploaded)="fileUploaded($event)"
+      ></f1-upload-image>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions *ngIf="driverForm">
+  <button mat-flat-button color="accent" mat-dialog-close>
+    {{ "buttons.cancel" | translate }}
+  </button>
+  <button
+    mat-flat-button
+    color="primary"
+    [disabled]="!driverForm.valid || driverForm.pristine"
+    (click)="save()"
+  >
+    {{ "buttons.save" | translate }}
+  </button>
+</mat-dialog-actions>

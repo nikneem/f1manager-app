@@ -1,0 +1,26 @@
+<h2 mat-dialog-title>Selling your engine</h2>
+<mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+<mat-dialog-content>
+  <p *ngIf="sellConfirmation">
+    The current value of your engine is
+    {{ sellConfirmation.currentValue | currency }}, you have used the engine for
+    {{ sellConfirmation.numberOfRacesDriven }} races meaning that it's warn off
+    for {{ sellConfirmation.wearOffPercentage }}%. When selling your engine, you
+    will receive {{ sellConfirmation.sellingPrice | currency }} for your engine.
+  </p>
+  <h3 *ngIf="sellConfirmation">
+    Sell {{ sellConfirmation.name }} for
+    {{ sellConfirmation.sellingPrice | currency }}
+  </h3>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-flat-button color="accent" mat-dialog-close>Cancel</button>
+  <button
+    mat-flat-button
+    color="warn"
+    [mat-dialog-close]="teamEngineId"
+    [disabled]="!sellConfirmation"
+  >
+    Sell
+  </button>
+</mat-dialog-actions>

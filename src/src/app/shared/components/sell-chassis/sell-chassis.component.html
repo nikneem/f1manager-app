@@ -1,0 +1,27 @@
+<h2 mat-dialog-title>Selling your chassis</h2>
+<mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+<mat-dialog-content>
+  <p *ngIf="sellConfirmation">
+    The current value of your chassis is
+    {{ sellConfirmation.currentValue | currency }}, you have used the chassis
+    for {{ sellConfirmation.numberOfRacesDriven }} races meaning that it's warn
+    off for {{ sellConfirmation.wearOffPercentage }}%. When selling your
+    chassis, you will receive {{ sellConfirmation.sellingPrice | currency }} for
+    your chassis.
+  </p>
+  <h3 *ngIf="sellConfirmation">
+    Sell {{ sellConfirmation.name }} for
+    {{ sellConfirmation.sellingPrice | currency }}
+  </h3>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-flat-button color="accent" mat-dialog-close>Cancel</button>
+  <button
+    mat-flat-button
+    color="warn"
+    [mat-dialog-close]="sellConfirmation?.id"
+    [disabled]="!sellConfirmation"
+  >
+    Sell
+  </button>
+</mat-dialog-actions>

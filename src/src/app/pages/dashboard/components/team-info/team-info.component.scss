@@ -1,0 +1,146 @@
+@import "../../../../../scss/variables.scss";
+
+.team-container {
+  display: flex;
+  flex-flow: column;
+  background-color: $background-color;
+  .team-information {
+    display: flex;
+    flex-flow: column;
+    padding: 1rem;
+    flex-wrap: wrap;
+    .team-information-column {
+      display: flex;
+      flex-flow: column;
+      p {
+        margin: 0;
+      }
+      h1 {
+        font-size: 2rem;
+        line-height: 2rem;
+        margin-bottom: 0.2;
+      }
+      h4 {
+        font-size: 2rem;
+        line-height: 2rem;
+        font-weight: 100;
+        margin-bottom: 0;
+      }
+      input {
+        width: 100%;
+        font-family: "Exo";
+        border: 0;
+        font-size: 3rem;
+        line-height: 3rem;
+        font-weight: 100;
+        background-color: $background-color;
+        color: $text-color;
+      }
+      input:focus {
+        border: 0;
+        outline: none;
+      }
+    }
+    .name {
+      flex: 2 2 100%;
+    }
+    .points {
+      justify-content: center;
+      flex: 1 1 50%;
+    }
+    .money {
+      justify-content: center;
+      flex: 1 1 50%;
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .team-container {
+    .team-information {
+      flex-flow: row;
+    }
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .team-container {
+    .team-information {
+      flex-flow: row;
+      .team-information-column {
+        display: flex;
+        flex-flow: column;
+        p {
+          margin: 0;
+        }
+        h1 {
+          font-size: 4rem;
+          line-height: 4rem;
+        }
+        h4 {
+          font-size: 2.5rem;
+          line-height: 2.5rem;
+          font-weight: 100;
+        }
+      }
+      .name {
+        flex: 5 5 50%;
+      }
+      .points {
+        align-items: flex-end;
+        flex: 2 2 20%;
+      }
+      .money {
+        align-items: flex-end;
+        flex: 3 3 30%;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1600px) {
+  .no-team {
+    .team-create-card {
+      width: 40%;
+    }
+  }
+  .team-container {
+    .team-information {
+      .team-information-column {
+        display: flex;
+        flex-flow: column;
+        p {
+          margin: 0;
+        }
+        h1 {
+          font-size: 4rem;
+          line-height: 4rem;
+        }
+        h4 {
+          font-size: 3rem;
+          line-height: 3rem;
+          font-weight: 100;
+        }
+      }
+      .name {
+        flex: 5 5 50%;
+      }
+      .points {
+        align-items: flex-end;
+        flex: 2 2 20%;
+      }
+      .money {
+        align-items: flex-end;
+        flex: 3 3 30%;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  /* phones */
+}
+
+@media only screen and (max-width: 767px) and (orientation: portrait) {
+  /* portrait phones */
+}

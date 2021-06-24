@@ -1,0 +1,33 @@
+<h2 mat-dialog-title>{{ "leagues.create.title" | translate }}</h2>
+<mat-dialog-content *ngIf="leagueName">
+  {{ "leagues.create.text" | translate }}
+  <br /><br />
+  <form [formGroup]="leagueName" no-validate>
+    <mat-form-field class="full-width">
+      <input
+        matInput
+        placeholder="{{ 'leagues.name' | translate }}"
+        formControlName="name"
+      />
+    </mat-form-field>
+    <div
+      class="field-error-message"
+      *ngIf="leagueName.controls['name'].errors?.leagueNameUnique"
+    >
+      {{ "leagues.create.name-not-unique" | translate }}
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-flat-button color="accent" mat-dialog-close>
+    {{ "buttons.cancel" | translate }}
+  </button>
+  <button
+    mat-flat-button
+    color="primary"
+    (click)="createLeague()"
+    [disabled]="!leagueName.valid"
+  >
+    {{ "buttons.create" | translate }}
+  </button>
+</mat-dialog-actions>

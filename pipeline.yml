@@ -1,0 +1,74 @@
+trigger: 
+- main
+
+stages:
+- stage: build
+  displayName: Build
+  variables:
+  - name: resourceGroupName
+    value: 'F1-Manager-FrontEnd-Dev'
+  - name: azureSubscription
+    value: 'F1-Manager-Dev-FrontEnd'
+  - name: environment
+    value: 'dev'
+  jobs:
+  - job: build_angular_project
+    displayName: Build the Angular project
+    pool:
+      name: 'Azure Pipelines'
+      vmImage: 'ubuntu-latest'
+    steps:
+    - template: pipeline/build-angular.yml
+      parameters:
+        ProjectPath: "src/"
+
+  - job: build_arm_template
+    displayName: Build the ARM template
+    pool:
+      name: 'Azure Pipelines'
+      vmImage: 'ubuntu-latest'
+    steps:
+    - template: pipeline/build-arm.yml
+      parameters:
+        resourceGroupName: ${{variables.resourceGroupName}}
+        azureSubscription: ${{variables.azureSubscription}}
+        csmParametersFile: azuredeploy.parameters.${{variables.environment}}.json
+
+- stage: deploy_to_dev
+  dependsOn:
+  - build
+  displayName: Deployment to development
+  variables:
+  - name: resourceGroupName
+    value: 'F1-Manager-FrontEnd-Dev'
+  - name: azureSubscription
+    value: 'F1-Manager-Dev-FrontEnd'
+  - name: environment
+    value: 'dev'
+  jobs:
+  - job: dev_deploy_arm_template
+    displayName: Deploy ARM template
+    pool:
+      name: 'Azure Pipelines'
+      vmImage: 'windows-2019'
+    steps:
+    - template: pipeline/deploy-arm.yml
+      parameters:
+        resourceGroupName: ${{variables.resourceGroupName}}
+        azureSubscription: ${{variables.azureSubscription}}
+        csmParametersFile: azuredeploy.parameters.${{variables.environment}}.json
+
+  - job: dev_deploy_binaries
+    displayName: Upload to Storage Account
+    dependsOn:
+      - dev_deploy_arm_template
+    pool:
+      name: 'Azure Pipelines'
+      vmImage: 'windows-2019'
+    steps:
+    - template: pipeline/deploy-binaries.yml
+      parameters:
+        azureSubscription: '${{variables.azureSubscription}}'
+        StorageAccount: "f1mgrfe${{variables.environment}}storage"
+
+

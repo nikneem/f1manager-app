@@ -1,0 +1,37 @@
+@import "~@angular/material/theming";
+@import "variables.scss";
+
+$F1Manager-typography: mat-typography-config(
+  $font-family: "Exo, monospace",
+  $body-1: mat-typography-level(15px, 20px, 400),
+);
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core($F1Manager-typography);
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$F1Manager-primary: mat-palette($mat-light-blue);
+$F1Manager-accent: mat-palette($mat-blue-gray, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$F1Manager-warn: mat-palette($mat-red);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$F1Manager-theme: mat-dark-theme(
+  (
+    color: (
+      primary: $F1Manager-primary,
+      accent: $F1Manager-accent,
+      warn: $F1Manager-warn,
+    ),
+  )
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($F1Manager-theme);

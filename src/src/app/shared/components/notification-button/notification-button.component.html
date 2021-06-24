@@ -1,0 +1,11 @@
+<button
+  mat-icon-button
+  aria-label="Notifications menu, showing notifications for teams"
+  [matBadge]="badgeCount"
+  matBadgeColor="warn"
+  matBadgeSize="small"
+  (click)="showNotifications()"
+>
+  <mat-icon *ngIf="!badgeCount">notifications</mat-icon>
+  <mat-icon *ngIf="badgeCount">notification_important</mat-icon>
+</button>

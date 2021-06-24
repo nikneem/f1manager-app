@@ -1,0 +1,123 @@
+{
+  "dashboard": {
+    "info": {
+      "money": "Budget",
+      "points": "Punten"
+    },
+    "components": {
+      "bought": "Gekocht",
+      "bought-for": "Gekocht voor",
+      "buy": "Kopen",
+      "max-wear-down": "Max. slijtage",
+      "points-gained": "Punten verdiend",
+      "sell": "Verkopen",
+      "value": "Huidige waarde",
+      "wear-down": "Slijtage"
+    }
+  },
+  "main": {
+    "server-down": {
+      "title": "Server reageert niet",
+      "description": "Oeps, het lijkt erop dat onze server niet reageert op jouw verzoeken. Omdat we onze servers actief monitoren kun je er vanuit gaan dat we al iemand aan het werk gezet hebben.",
+      "back-to-main": "Terug naar de hoofdpagina"
+    }
+  },
+  "notification": {
+    "raceresultcalculated": {
+      "title": "Race resultaten zijn berekend",
+      "body": "Er zijn nieuw berekende race resultaten. Jouw team heeft {{earnedPoints}} punten verdiend en daarmee ${{earnedMoney}}. Je hebt nu een punten totaal van {{totalPoints}} met {{totalMoney}} in kas."
+    }
+  },
+  "languages": {
+    "dutch": "Nederlands",
+    "english": "Engels"
+  },
+  "navigation": {
+    "analysis": "Analyses",
+    "credits": "Credits",
+    "dashboard": "Dashboard",
+    "rules": "Reglement",
+    "leagues": "Competities"
+  },
+  "buttons": {
+    "cancel": "Annuleren",
+    "close": "Sluiten",
+    "create": "Aanmaken",
+    "next": "Volgende",
+    "ok": "OK",
+    "previous": "Vorige",
+    "save": "Opslaan"
+  },
+  "generic": {
+    "error": "Fout"
+  },
+  "leagues": {
+    "create-tooltip": "Maak een nieuwe competitie en nodig andere teams uit voor jouw competitie",
+    "create": {
+      "name-not-unique": "De naam van jouw competitie is niet uniek",
+      "text": "Geef jouw competitie een naam. De naam moet minimaal 5 karakters zijn, alfanummeriek en uniek",
+      "title": "Maak een nieuwe competitie"
+    },
+    "created-on": "Aangemaakt op",
+    "details": {
+      "members": {
+        "list": "Huidige stand",
+        "money": "Geld",
+        "name": "Naam",
+        "points": "Punten",
+        "position": "Positie"
+      },
+      "requests": {
+        "list": "Deelname verzoeken"
+      }
+    },
+    "empty-state": {
+      "create": "Aanmaken",
+      "createtext": "Maak een eigen competitie aan en nodig teams uit om deel te nemen",
+      "join": "Deelnemen",
+      "jointext": "Zoek voor bestaande competities en stuur een verzoek om deel te nemen",
+      "text": "Je neemt op dit moment niet deel aan een eigen competitie. Je kunt deelnemen door een competitie te zoeken en toegang te vragen, of een eigen competitie te maken",
+      "title": "Geen competities gevonden"
+    },
+    "join-tooltip": "Zoek bestaande competities en neem deel",
+    "members-count": "Leden",
+    "name": "Naam",
+    "error-codes": {
+      "already-in": "Dit team is neemt al deel aan deze competitie",
+      "error": "Oeps, er is iets fout gegaan",
+      "failed-to-leave": "Het verlaten van de competitie is mislukt.",
+      "invalid-name": "De naam is geen geldige naam",
+      "invitation-not-found": "De uitnodiging is niet gevonden",
+      "invitation-pending": "Er is al een uitnodiging verstuurd aan dit team, je zult even moeten wachten op een reactie",
+      "not-a-member": "Je kunt deze actie niet uitvoeren als je geen deel neemt aan deze competitie",
+      "request-not-found": "Deelname verzoek is niet gevonden. Het is misschien verlopen of al behandeld",
+      "request-pending": "Je hebt al een deelname verzoek verstuurd, je zult even moeten wachten op een reactie"
+    },
+    "owner-name": "Eigenaar",
+    "points-average": "Punten gemiddelde",
+    "team-position": "Jouw positie",
+    "search": {
+      "term": "Zoekterm",
+      "title": "Zoek voor bestaande competities"
+    },
+    "title": "Competities",
+    "navigation": {
+      "invitations": "Uitnodigingen",
+      "overview": "Overzicht"
+    }
+  },
+  "notifications": {
+    "explainer": "Ongelezen notificaties zijn feller van kleur. Klik op een notificatie om hem te markeren als gelezen",
+    "title": "Notificaties"
+  },
+  "admin": {
+    "chassis": {
+      "title": "Beheer van chassis"
+    },
+    "drivers": {
+      "details": {
+        "name": "Naam"
+      }
+    }
+  }
+}

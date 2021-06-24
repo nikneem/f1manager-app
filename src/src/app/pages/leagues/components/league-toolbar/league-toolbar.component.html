@@ -1,0 +1,33 @@
+<mat-toolbar>
+  <span>
+    {{ "leagues.title" | translate }}
+    <span *ngIf="leagueName"> - {{ leagueName }}</span>
+  </span>
+  <span class="full-width-spacer"></span>
+  <button
+    mat-icon-button
+    class="search-icon"
+    aria-label="Find existing league to join"
+    matTooltip="{{ 'leagues.join-tooltip' | translate }}"
+    (click)="joinLeagueDialog()"
+  >
+    <mat-icon>search</mat-icon>
+  </button>
+  <button
+    mat-icon-button
+    class="create-icon"
+    aria-label="Create you own league and invite teams to join"
+    matTooltip="{{ 'leagues.create-tooltip' | translate }}"
+    (click)="createLeagueDialog()"
+  >
+    <mat-icon>add_circle</mat-icon>
+  </button>
+  <button
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with menu icon"
+    disabled
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+</mat-toolbar>

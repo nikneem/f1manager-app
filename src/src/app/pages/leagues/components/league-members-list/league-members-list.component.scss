@@ -1,0 +1,23 @@
+.mat-table {
+  width: 100%;
+}
+.table-header {
+  padding: 0 0.5rem;
+  font-weight: 600;
+}
+.table-cell {
+  padding: 0 0.5rem;
+}
+
+.position-column {
+  flex: 1 1 10%;
+}
+.name-column {
+  flex: 5 5 50%;
+}
+.points-column {
+  flex: 2 2 20%;
+}
+.money-column {
+  flex: 2 2 20%;
+}

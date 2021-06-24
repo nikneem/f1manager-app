@@ -1,0 +1,46 @@
+<div class="league-members-information" *ngIf="members">
+  <mat-card>
+    <h2>{{ "leagues.details.members.list" | translate }}</h2>
+    <mat-table [dataSource]="members">
+      <ng-container matColumnDef="position">
+        <div *matHeaderCellDef class="table-header position-column">
+          {{ "leagues.details.members.position" | translate }}
+        </div>
+        <div *matCellDef="let member" class="table-cell position-column">
+          {{ member.position }}
+        </div>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <div *matHeaderCellDef class="table-header name-column">
+          {{ "leagues.details.members.name" | translate }}
+        </div>
+        <div *matCellDef="let member" class="table-cell name-column">
+          {{ member.name }}
+        </div>
+      </ng-container>
+      <ng-container matColumnDef="points">
+        <div *matHeaderCellDef class="table-header points-column">
+          {{ "leagues.details.members.points" | translate }}
+        </div>
+        <div *matCellDef="let member" class="table-cell points-column">
+          {{ member.points }}
+        </div>
+      </ng-container>
+      <ng-container matColumnDef="money">
+        <div *matHeaderCellDef class="table-header money-column">
+          {{ "leagues.details.members.money" | translate }}
+        </div>
+        <div *matCellDef="let member" class="table-cell money-column">
+          {{ member.money | currency }}
+        </div>
+      </ng-container>
+
+      <mat-header-row
+        *matHeaderRowDef="displayedColumns"
+        class="header-cell"
+      ></mat-header-row>
+
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+  </mat-card>
+</div>

@@ -1,0 +1,31 @@
+<div class="team-page">
+  <f1-team-info></f1-team-info>
+  <div class="race-predictions" *ngIf="teamId">Race predictions</div>
+  <div class="team-components" *ngIf="dto">
+    <div class="team-component">
+      <f1-team-first-driver [teamId]="teamId"></f1-team-first-driver>
+    </div>
+    <div class="team-component">
+      <f1-team-second-driver [teamId]="teamId"></f1-team-second-driver>
+    </div>
+    <div class="team-component"></div>
+    <div class="team-component"></div>
+  </div>
+  <div class="no-team" *ngIf="!isLoading && !teamId">
+    <div class="team-create-card">
+      <mat-card>
+        <mat-card-title>No Team</mat-card-title>
+        <mat-card-content>
+          It appears you have no team for this season. If you want to play the
+          F1 Manager for this season, go ahead and create a new team!
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-flat-button color="primary" (click)="createTeam()">
+            Create a new team
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>
+<f1-loading *ngIf="isLoading"></f1-loading>

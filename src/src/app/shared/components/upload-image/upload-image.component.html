@@ -1,0 +1,11 @@
+<div class="file-upload-container">
+    <div class="file-upload" f1Dragndrop (fileDropped)="onFileDropped($event)">
+        <img class="picture" [src]="pictureUrl" />
+        <div class="form-group">
+            <input type="file" id="file" accept="image/*" (change)="onFileChange($event)">
+        </div>
+        <div class="uploading" *ngIf="progress>0">
+            <mat-progress-bar mode="determinate" [value]="progress"></mat-progress-bar>
+        </div>
+    </div>
+</div>

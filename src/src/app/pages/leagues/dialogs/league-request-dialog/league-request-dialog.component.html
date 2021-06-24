@@ -1,0 +1,53 @@
+<h2 mat-dialog-title>{{ "leagues.search.title" | translate }}</h2>
+<mat-dialog-content *ngIf="leagueName">
+  <form [formGroup]="leagueName" no-validate>
+    <mat-form-field class="full-width">
+      <input
+        matInput
+        placeholder="{{ 'leagues.search.term' | translate }}"
+        formControlName="name"
+      />
+    </mat-form-field>
+  </form>
+  <mat-table class="leagues-table" [dataSource]="leagues">
+    <ng-container matColumnDef="name">
+      <div *matHeaderCellDef class="table-header name-column">Name</div>
+      <div *matCellDef="let league" class="table-cell name-column">
+        {{ league.name }}
+      </div>
+    </ng-container>
+    <ng-container matColumnDef="membersCount">
+      <div *matHeaderCellDef class="table-header members-column">Members</div>
+      <div *matCellDef="let league" class="table-cell members-column">
+        {{ league.membersCount }}
+      </div>
+    </ng-container>
+    <ng-container *matNoDataRow>
+      <div class="table-cell center">No data</div>
+    </ng-container>
+    <mat-header-row
+      *matHeaderRowDef="displayedColumns"
+      class="header-cell"
+    ></mat-header-row>
+
+    <mat-row
+      *matRowDef="let row; columns: displayedColumns"
+      (click)="selectRow(row)"
+      [ngClass]="{ highlight: selectedLeague?.id == row.id }"
+    ></mat-row>
+  </mat-table>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <mat-spinner diameter="36" *ngIf="joinLoading"></mat-spinner>
+  <button mat-flat-button color="accent" mat-dialog-close>
+    {{ "buttons.cancel" | translate }}
+  </button>
+  <button
+    mat-flat-button
+    color="primary"
+    (click)="joinLeague()"
+    [disabled]="!selectedLeague"
+  >
+    {{ "buttons.join" | translate }}
+  </button>
+</mat-dialog-actions>

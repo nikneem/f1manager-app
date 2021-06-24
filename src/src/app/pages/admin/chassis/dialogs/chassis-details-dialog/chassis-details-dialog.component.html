@@ -1,0 +1,85 @@
+<h2 mat-dialog-title>{{ "admin.chassis.details.title" | translate }}</h2>
+<mat-dialog-content *ngIf="chassisForm">
+  <form [formGroup]="chassisForm" no-validate>
+    <input type="hidden" formControlName="id" />
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="{{ 'admin.chassis.details.name' | translate }}"
+        formControlName="name"
+      />
+    </mat-form-field>
+
+    <mat-form-field>
+      <input
+        matInput
+        type="number"
+        placeholder="{{ 'admin.chassis.details.weeklyWearOutPercentage' | translate }}"
+        formControlName="weeklyWearOutPercentage"
+      />
+    </mat-form-field>
+
+    <mat-form-field>
+      <input
+        matInput
+        type="number"
+        placeholder="{{ 'admin.chassis.details.maxWearOutPercentage' | translate }}"
+        formControlName="maxWearOutPercentage"
+      />
+    </mat-form-field>
+
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="{{ 'admin.chassis.details.picture' | translate }}"
+        formControlName="pictureUrl"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="half-width">
+      <mat-label>{{
+        "admin.chassis.details.active-from" | translate
+      }}</mat-label>
+      <input matInput [matDatepicker]="actfrom" formControlName="activeFrom" />
+      <mat-datepicker-toggle matSuffix [for]="actfrom"></mat-datepicker-toggle>
+      <mat-datepicker #actfrom></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="half-width">
+      <mat-label>{{ "admin.chassis.details.active-to" | translate }}</mat-label>
+      <input matInput [matDatepicker]="actto" formControlName="activeUntil" />
+      <mat-datepicker-toggle matSuffix [for]="actto"></mat-datepicker-toggle>
+      <mat-datepicker #actto></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input
+        matInput
+        type="number"
+        placeholder="{{ 'admin.chassis.details.value' | translate }}"
+        formControlName="currentValue"
+      />
+    </mat-form-field>
+
+    <mat-slide-toggle color="primary" formControlName="isAvailable">{{
+      "admin.chassis.details.available" | translate
+    }}</mat-slide-toggle>
+    <br />
+    <mat-slide-toggle color="primary" formControlName="isDeleted">{{
+      "admin.chassis.details.deleted" | translate
+    }}</mat-slide-toggle>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions *ngIf="chassisForm">
+  <button mat-flat-button color="accent" mat-dialog-close>
+    {{ "buttons.cancel" | translate }}
+  </button>
+  <button
+    mat-flat-button
+    color="primary"
+    [disabled]="!chassisForm.valid || chassisForm.pristine"
+    (click)="save()"
+  >
+    {{ "buttons.save" | translate }}
+  </button>
+</mat-dialog-actions>

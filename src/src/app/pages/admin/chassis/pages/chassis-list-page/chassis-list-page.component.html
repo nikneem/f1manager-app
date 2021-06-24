@@ -1,0 +1,105 @@
+<f1-admin-toolbar></f1-admin-toolbar>
+<f1-chassis-toolbar (createChassis)="createChassis()"> </f1-chassis-toolbar>
+<div *ngIf="chassis">
+  <mat-table [dataSource]="chassis">
+    <ng-container matColumnDef="name">
+      <mat-header-cell
+        *matHeaderCellDef
+        class="column name-column header flex-8"
+      >
+        {{ "admin.chassis.details.name" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row" class="column name-column cell flex-8">
+        <a (click)="editChassis(row)"> {{ row.name }} </a>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="value">
+      <mat-header-cell
+        *matHeaderCellDef
+        class="column value-column header flex-2"
+      >
+        {{ "admin.chassis.details.value" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row" class="column value-column cell flex-2">
+        {{ row.currentValue }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="activeFrom">
+      <mat-header-cell
+        *matHeaderCellDef
+        class="column active-from-column header flex-4">
+        {{ "admin.chassis.details.active-from" | translate }}
+      </mat-header-cell>
+      <mat-cell
+        *matCellDef="let row"
+        class="column active-from-column cell flex-4"
+      >
+        {{ row.activeFrom | date }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="activeTo">
+      <mat-header-cell
+        *matHeaderCellDef
+        class="column active-to-column header flex-4"
+      >
+        {{ "admin.chassis.details.active-to" | translate }}
+      </mat-header-cell>
+      <mat-cell
+        *matCellDef="let row"
+        class="column active-to-column cell flex-4"
+      >
+        {{ row.activeTo | date }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="isAvailable">
+      <mat-header-cell
+        *matHeaderCellDef
+        class="column available-column header flex-2"
+      >
+        {{ "admin.chassis.details.is-available" | translate }}
+      </mat-header-cell>
+      <mat-cell
+        *matCellDef="let row"
+        class="column available-column cell flex-2"
+      >
+        {{ row.isAvailable }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell
+        *matHeaderCellDef
+        class="column actions-column header flex-1"
+      >
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row" class="column actions-column cell flex-1">
+        <button
+          mat-icon-button
+          (click)="deleteChassis(row)"
+          color="warn"
+          *ngIf="!row.isDeleted"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          (click)="undeleteChassis(row)"
+          *ngIf="row.isDeleted"
+        >
+          <mat-icon>backspace</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row
+      *matRowDef="let row; columns: displayedColumns"
+      [class.deleted]="row.isDeleted"
+    ></mat-row>
+  </mat-table>
+</div>
+<f1-loading *ngIf="isLoading"></f1-loading>

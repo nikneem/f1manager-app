@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>Selling your driver</h2>
+<mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+<mat-dialog-content>
+  <p *ngIf="sellConfirmation">
+    You own this driver for {{ sellConfirmation.numberOfRacesDriven }} races.
+    When selling your driver, you will receive
+    {{ sellConfirmation.sellingPrice | currency }}.
+  </p>
+  <h3 *ngIf="sellConfirmation">
+    Sell {{ sellConfirmation.name }} for
+    {{ sellConfirmation.sellingPrice | currency }}
+  </h3>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-flat-button color="accent" mat-dialog-close>Cancel</button>
+  <button
+    mat-flat-button
+    color="warn"
+    [mat-dialog-close]="sellConfirmation?.id"
+    [disabled]="!sellConfirmation"
+  >
+    Sell
+  </button>
+</mat-dialog-actions>

@@ -1,0 +1,58 @@
+<mat-nav-list>
+  <mat-list-item
+    [routerLink]="['/dashboard']"
+    [routerLinkActive]="['active']"
+    *ngIf="isLoggedIn"
+  >
+    <mat-icon matListIcon>dashboard</mat-icon>
+    <a routerLinkActive="active" matLine>
+      {{ "navigation.dashboard" | translate }}
+    </a>
+  </mat-list-item>
+  <mat-list-item
+    [routerLink]="['/analysis']"
+    [routerLinkActive]="['active']"
+    *ngIf="isLoggedIn"
+  >
+    <mat-icon matListIcon>insights</mat-icon>
+    <a routerLinkActive="active" matLine>
+      {{ "navigation.analysis" | translate }}
+    </a>
+  </mat-list-item>
+  <mat-list-item
+    [routerLink]="['/leagues']"
+    [routerLinkActive]="['active']"
+    *ngIf="isLoggedIn"
+  >
+    <mat-icon matListIcon>emoji_events</mat-icon>
+    <a routerLinkActive="active" matLine>
+      {{ "navigation.leagues" | translate }}
+    </a>
+  </mat-list-item>
+  <mat-list-item
+    [routerLink]="['/rules']"
+    [routerLinkActive]="['active']"
+    *ngIf="isLoggedIn"
+  >
+    <mat-icon matListIcon>gavel</mat-icon>
+    <a routerLinkActive="active" matLine>
+      {{ "navigation.rules" | translate }}
+    </a>
+  </mat-list-item>
+  <mat-list-item [routerLink]="['/credits']" [routerLinkActive]="['active']">
+    <mat-icon matListIcon>loyalty</mat-icon>
+    <a routerLinkActive="active" matLine>
+      {{ "navigation.credits" | translate }}
+    </a>
+  </mat-list-item>
+  <mat-list-item
+    [routerLink]="['/admin']"
+    [routerLinkActive]="['active']"
+    *ngIf="isAdministrator"
+  >
+    <mat-icon matListIcon>settings</mat-icon>
+    <a routerLinkActive="active" matLine>
+      {{ "navigation.admin" | translate }}
+    </a>
+  </mat-list-item>
+</mat-nav-list>

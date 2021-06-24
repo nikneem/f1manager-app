@@ -1,0 +1,85 @@
+<h2 mat-dialog-title>{{ "admin.base-teams.details.title" | translate }}</h2>
+<mat-dialog-content *ngIf="baseTeamForm">
+  <form [formGroup]="baseTeamForm" no-validate>
+    <input type="hidden" formControlName="id" />
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="{{ 'admin.base-teams.details.name' | translate }}"
+        formControlName="name"
+      />
+    </mat-form-field>
+    <mat-form-field class="half-width">
+      <input
+        matInput
+        placeholder="{{ 'admin.base-teams.details.origin' | translate }}"
+        formControlName="origin"
+      />
+    </mat-form-field>
+    <mat-form-field class="half-width">
+      <input
+        matInput
+        placeholder="{{ 'admin.base-teams.details.principal' | translate }}"
+        formControlName="principal"
+      />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select
+        formControlName="firstDriverId"
+        placeholder="{{ 'admin.base-teams.details.first-driver' | translate }}"
+      >
+        <mat-option *ngFor="let driver of availableDrivers" [value]="driver.id">
+          {{ driver.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select
+        formControlName="secondDriverId"
+        placeholder="{{ 'admin.base-teams.details.second-driver' | translate }}"
+      >
+        <mat-option *ngFor="let driver of availableDrivers" [value]="driver.id">
+          {{ driver.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select
+        formControlName="engineId"
+        placeholder="{{ 'admin.base-teams.details.engine' | translate }}"
+      >
+        <mat-option *ngFor="let engine of availableEngines" [value]="engine.id">
+          {{ engine.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select
+        formControlName="chassisId"
+        placeholder="{{ 'admin.base-teams.details.chassis' | translate }}"
+      >
+        <mat-option
+          *ngFor="let chassis of availableChassises"
+          [value]="chassis.id"
+        >
+          {{ chassis.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions *ngIf="baseTeamForm">
+  <button mat-flat-button color="accent" mat-dialog-close>
+    {{ "buttons.cancel" | translate }}
+  </button>
+  <button
+    mat-flat-button
+    color="primary"
+    [disabled]="!baseTeamForm.valid || baseTeamForm.pristine"
+    (click)="save()"
+  >
+    {{ "buttons.save" | translate }}
+  </button>
+</mat-dialog-actions>

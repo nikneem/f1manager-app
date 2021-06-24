@@ -1,0 +1,65 @@
+<h2 mat-dialog-title>Buy a new engine</h2>
+<mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+<mat-dialog-content>
+  <p>
+    This is where you buy a new engine. Below is a list of available engines.
+    Select the engine you want to buy and confirm to but the engine for your
+    team.
+  </p>
+  <div class="components-select engines" *ngIf="engines">
+    <div
+      [class]="
+        selectedEngine == engine
+          ? 'component-select engine selected'
+          : 'component-select engine'
+      "
+      *ngFor="let engine of engines"
+      (click)="selectEngine(engine)"
+    >
+      <div
+        class="picture"
+        [style.backgroundImage]="'url(' + engine.pictureUrl + ')'"
+      >
+        <div class="information">
+          <div class="name" title="Engine name">
+            <h3>{{ engine.name }}</h3>
+          </div>
+          <div class="price" title="Engine price">
+            <p>{{ engine.price | currency }}</p>
+          </div>
+          <div class="manufacturer" title="Engine manufacturer">
+            <p>{{ engine.manufacturer }}</p>
+          </div>
+          <div class="model" title="Engine model">
+            <p>{{ engine.model }}</p>
+          </div>
+          <div class="wearoff">
+            <div
+              class="weekly"
+              title="Weekly wear off, percentage your engine loses value each race used"
+            >
+              <p>Weekly {{ engine.weeklyWeardown }}%</p>
+            </div>
+            <div
+              class="max"
+              title="Max wear off, maximum percentage your engine can lose value"
+            >
+              <p>Max. {{ engine.maxWearDown }}%</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-flat-button color="accent" mat-dialog-close>Cancel</button>
+  <button
+    mat-flat-button
+    color="primary"
+    [mat-dialog-close]="selectedEngine?.id"
+    [disabled]="!selectedEngine"
+  >
+    Buy
+  </button>
+</mat-dialog-actions>

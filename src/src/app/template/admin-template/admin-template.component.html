@@ -1,0 +1,15 @@
+<div class="template-container">
+  <mat-drawer-container class="navigation-container">
+    <mat-drawer mode="side" opened>
+      <f1-admin-template-navigation-toggle></f1-admin-template-navigation-toggle>
+      <f1-admin-template-navigation></f1-admin-template-navigation>
+    </mat-drawer>
+    <mat-drawer-content>
+      <f1-admin-template-header></f1-admin-template-header>
+      <div class="page-container">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>
+<p-toast></p-toast>

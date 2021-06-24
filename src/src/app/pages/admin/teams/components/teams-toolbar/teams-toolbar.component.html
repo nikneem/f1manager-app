@@ -1,0 +1,15 @@
+<mat-toolbar color="warn">
+  <span>
+    {{ "admin.base-teams.title" | translate }}
+  </span>
+  <span class="full-width-spacer"></span>
+  <button
+    mat-icon-button
+    class="create-icon"
+    aria-label="Create a new team"
+    matTooltip="{{ 'admin.base-teams.create-tooltip' | translate }}"
+    (click)="createBaseTeam()"
+  >
+    <mat-icon>add_circle</mat-icon>
+  </button>
+</mat-toolbar>

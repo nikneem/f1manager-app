@@ -1,0 +1,36 @@
+<div class="team-container" *ngIf="dto">
+  <div class="team-information" *ngIf="!dto.isTeamOwner">
+    <div class="team-information-column name">
+      <h1>{{ dto.name }}</h1>
+    </div>
+    <div class="team-information-column points">
+      <p>{{ "dashboard.info.points" | translate }}</p>
+      <h4>{{ dto.points }}</h4>
+    </div>
+    <div class="team-information-column money">
+      <p>{{ "dashboard.info.money" | translate }}</p>
+      <h4>
+        {{ dto.money ? (dto.money / 1000000 | currency) : (0 | currency) }}
+        Mln.
+      </h4>
+    </div>
+  </div>
+  <div class="team-information" *ngIf="dto.isTeamOwner && teamForm">
+    <div class="team-information-column name">
+      <form [formGroup]="teamForm">
+        <input type="text" formControlName="name" class="teamname" />
+      </form>
+    </div>
+    <div class="team-information-column points">
+      <p>{{ "dashboard.info.points" | translate }}</p>
+      <h4>{{ dto.points }}</h4>
+    </div>
+    <div class="team-information-column money">
+      <p>{{ "dashboard.info.money" | translate }}</p>
+      <h4>
+        {{ dto.money ? (dto.money / 1000000 | currency) : (0 | currency) }}
+        Mln.
+      </h4>
+    </div>
+  </div>
+</div>

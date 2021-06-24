@@ -1,0 +1,50 @@
+<f1-league-toolbar></f1-league-toolbar>
+<div class="leagues-page">
+  <div class="leagues-container">
+    <div class="my-leagues">
+      <div class="list" *ngIf="mine && mine.length > 0">
+        <div
+          class="league"
+          *ngFor="let league of mine"
+          (click)="leagueDetails(league)"
+        >
+          <div class="league-container">
+            <div class="name">
+              <h2>{{ league.name }}</h2>
+            </div>
+            <div class="info">
+              <dl>
+                <dt>Owner</dt>
+                <dd>{{ league.ownerName }}</dd>
+                <dt>Members</dt>
+                <dd>{{ league.membersCount }}</dd>
+                <dt>Your position</dt>
+                <dd>{{ league.teamPosition }}</dd>
+                <dt>Average points</dt>
+                <dd>{{ league.pointsAverage }}</dd>
+              </dl>
+            </div>
+            <div class="link">
+              <a [routerLink]="['/leagues/details', league.id]"> More &gt;</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="no-league" *ngIf="mine && mine.length === 0">
+        <div class="explainer">
+          <h2>{{ "leagues.empty-state.title" | translate }}</h2>
+          <p>{{ "leagues.empty-state.text" | translate }}</p>
+        </div>
+        <div class="action join">
+          <h2>{{ "leagues.empty-state.join" | translate }}</h2>
+          <p>{{ "leagues.empty-state.jointext" | translate }}</p>
+        </div>
+        <div class="action create">
+          <h2>{{ "leagues.empty-state.create" | translate }}</h2>
+          <p>{{ "leagues.empty-state.createtext" | translate }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

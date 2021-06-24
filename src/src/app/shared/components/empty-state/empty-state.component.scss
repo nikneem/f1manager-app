@@ -1,0 +1,19 @@
+.empty-state-container {
+  display: flex;
+  flex-flow: column;
+  width: 100%;
+  padding: 2rem;
+  align-items: center;
+  .empty-state-panel {
+    text-align: center;
+    .empty-state-image {
+      opacity: 0.5;
+    }
+    .empty-state-text {
+      opacity: 0.4;
+      h2 {
+        font-weight: 100;
+      }
+    }
+  }
+}

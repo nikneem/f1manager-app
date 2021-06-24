@@ -1,0 +1,116 @@
+<f1-admin-toolbar></f1-admin-toolbar>
+<f1-teams-toolbar></f1-teams-toolbar>
+<div *ngIf="baseTeams">
+  <mat-table [dataSource]="baseTeams">
+    <ng-container matColumnDef="name">
+      <mat-header-cell
+        *matHeaderCellDef
+        class="column name-column header flex-8"
+      >
+        {{ "admin.base-teams.details.name" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row" class="column name-column cell flex-8">
+        <a (click)="editBaseTeam(row)"> {{ row.name }} </a>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="origin">
+      <mat-header-cell
+        *matHeaderCellDef
+        class="column origin-column header flex-8"
+      >
+        {{ "admin.base-teams.details.origin" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row" class="column origin-column cell flex-8">
+        {{ row.origin }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="principal">
+      <mat-header-cell
+        *matHeaderCellDef
+        class="column principal-column header flex-8"
+      >
+        {{ "admin.base-teams.details.principal" | translate }}
+      </mat-header-cell>
+      <mat-cell
+        *matCellDef="let row"
+        class="column principal-column cell flex-8"
+      >
+        {{ row.principal }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="firstDriver">
+      <mat-header-cell
+        *matHeaderCellDef
+        class="column first-driver-column header flex-8"
+      >
+        {{ "admin.base-teams.details.first-driver" | translate }}
+      </mat-header-cell>
+      <mat-cell
+        *matCellDef="let row"
+        class="column first-driver-column cell flex-8"
+      >
+        {{ row.firstDriver }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="secondDriver">
+      <mat-header-cell
+        *matHeaderCellDef
+        class="column second-driver-column header flex-8"
+      >
+        {{ "admin.base-teams.details.second-driver" | translate }}
+      </mat-header-cell>
+      <mat-cell
+        *matCellDef="let row"
+        class="column second-driver-column cell flex-8"
+      >
+        {{ row.secondDriver }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="engine">
+      <mat-header-cell
+        *matHeaderCellDef
+        class="column engine-column header flex-8"
+      >
+        {{ "admin.base-teams.details.engine" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row" class="column engine-column cell flex-8">
+        {{ row.engine }}
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="chassis">
+      <mat-header-cell
+        *matHeaderCellDef
+        class="column chassis-column header flex-8"
+      >
+        {{ "admin.base-teams.details.chassis" | translate }}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row" class="column chassis-column cell flex-8">
+        {{ row.chassis }}
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <mat-header-cell
+        *matHeaderCellDef
+        class="column actions-column header flex-1"
+      >
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row" class="column actions-column cell flex-1">
+        <button mat-icon-button (click)="deleteBaseTeam(row)" color="warn">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+</div>
+<f1-empty-state
+  *ngIf="!isLoading && (!baseTeams || baseTeams.length === 0)"
+></f1-empty-state>
+<f1-loading *ngIf="isLoading"></f1-loading>

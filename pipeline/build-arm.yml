@@ -1,0 +1,28 @@
+parameters:
+  azureSubscription: ''  # defaults for any parameters that aren't specified
+  resourceGroupName: ''
+  csmParametersFile: '' # a file name with extension
+  artifactName: 'arm-templates'
+
+steps:
+  - task: CopyFiles@2
+    displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)/${{parameters.artifactName}}'
+    inputs:
+      SourceFolder: './deployment'
+      Contents: '*.json'
+      TargetFolder: '$(Build.ArtifactStagingDirectory)/${{parameters.artifactName}}'
+
+  - task: AzureResourceGroupDeployment@2
+    displayName: 'Validate ARM Template Deployment'
+    inputs:
+      azureSubscription: ${{parameters.azureSubscription}}
+      resourceGroupName: ${{parameters.resourceGroupName}}
+      csmFile: '$(Build.ArtifactStagingDirectory)/${{parameters.artifactName}}/azuredeploy.json'
+      csmParametersFile: '$(Build.ArtifactStagingDirectory)/${{parameters.artifactName}}/${{parameters.csmParametersFile}}'
+      deploymentMode: 'Validation'
+
+  - task: PublishPipelineArtifact@1
+    displayName: 'Publish Pipeline Artifact'
+    inputs:
+      targetPath: '$(Build.ArtifactStagingDirectory)/${{parameters.artifactName}}'
+      artifact: '${{parameters.artifactName}}'

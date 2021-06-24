@@ -1,0 +1,22 @@
+@import "../../../scss/variables.scss";
+
+.mat-nav-list {
+  .active {
+    color: $primary;
+  }
+  .mat-list-item {
+    .mat-list-item-content {
+      margin: 0;
+    }
+  }
+  a {
+    display: none;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .mat-nav-list {
+    a {
+      display: inline-block;
+    }
+  }
+}

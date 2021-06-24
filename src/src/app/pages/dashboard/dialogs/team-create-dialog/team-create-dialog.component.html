@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>Create a new team</h2>
+<mat-dialog-content>
+  The only thing we need to know, is the name of your team. You can change this
+  name at a later. Team names must be alphanumeric and between 2 and 100
+  characters.
+  <br /><br />
+  <form [formGroup]="teamNameForm" no-validate>
+    <mat-form-field class="full-width">
+      <input matInput placeholder="Team name" formControlName="name" />
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-flat-button color="accent" mat-dialog-close>Cancel</button>
+  <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+  <button
+    mat-flat-button
+    color="primary"
+    [mat-dialog-close]="teamNameForm.controls['name'].value"
+    [disabled]="!teamNameForm.valid"
+  >
+    Create
+  </button>
+</mat-dialog-actions>

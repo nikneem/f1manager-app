@@ -1,0 +1,20 @@
+parameters:
+  azureSubscription: ''             # Name of the service connection to Azure
+  ArtifactName: "FrontEndProject"   # Name of the artifact to download
+  StorageAccount: ""                # Name of the storage account to publish to
+
+steps:
+  - task: DownloadPipelineArtifact@0
+    displayName: "Download Artifact: ${{ parameters.ArtifactName }}"
+    inputs:
+      artifactName: "${{ parameters.ArtifactName }}"
+      targetPath: $(System.DefaultWorkingDirectory)/${{ parameters.ArtifactName }}
+
+  - task: AzureFileCopy@3
+    displayName: 'AzureBlob File Copy'
+    inputs:
+      SourcePath: '$(System.DefaultWorkingDirectory)/${{ parameters.ArtifactName }}'
+      azureSubscription: ${{ parameters.azureSubscription }}
+      Destination: AzureBlob
+      storage: ${{ parameters.StorageAccount }}
+      ContainerName: '$web'

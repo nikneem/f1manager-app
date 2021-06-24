@@ -1,0 +1,59 @@
+<h2 mat-dialog-title>Buy a new chassis</h2>
+<mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+<mat-dialog-content>
+  <p>
+    This is where you buy a new chassis. Below is a list of available chassis.
+    Select the chassis you want to buy and confirm to buy the chassis for your
+    team.
+  </p>
+  <div class="components-select chassises" *ngIf="chassis">
+    <div
+      [class]="
+        selectedChassis == chas
+          ? 'component-select chassis selected'
+          : 'component-select chassis'
+      "
+      *ngFor="let chas of chassis"
+      (click)="selectChassis(chas)"
+    >
+      <div
+        class="picture"
+        [style.backgroundImage]="'url(' + chas.pictureUrl + ')'"
+      >
+        <div class="information">
+          <div class="name" title="Chassis name">
+            <h3>{{ chas.name }}</h3>
+          </div>
+          <div class="price" title="Chassis price">
+            <p>{{ chas.currentValue | currency }}</p>
+          </div>
+          <div class="wearoff">
+            <div
+              class="weekly"
+              title="Weekly wear off, percentage your engine loses value each race used"
+            >
+              <p>Weekly {{ chas.weeklyWearOutPercentage }}%</p>
+            </div>
+            <div
+              class="max"
+              title="Max wear off, maximum percentage your engine can lose value"
+            >
+              <p>Max. {{ chas.maxWearOutPercentage }}%</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-flat-button color="accent" mat-dialog-close>Cancel</button>
+  <button
+    mat-flat-button
+    color="primary"
+    [mat-dialog-close]="selectedChassis?.id"
+    [disabled]="!selectedChassis"
+  >
+    Buy
+  </button>
+</mat-dialog-actions>

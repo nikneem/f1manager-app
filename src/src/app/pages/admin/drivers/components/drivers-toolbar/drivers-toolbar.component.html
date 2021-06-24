@@ -1,0 +1,28 @@
+<mat-toolbar color="warn">
+  <span>
+    {{ "admin.drivers.title" | translate }}
+  </span>
+  <span class="full-width-spacer"></span>
+  <form [formGroup]="filterForm" *ngIf="filterForm">
+    <div class="search">
+      <div class="search-field">
+        <input formControlName="name" placeholder="search" class="search-box" />
+      </div>
+      <div class="search-field">
+        <mat-slide-toggle
+          formControlName="deleted"
+          color="primary"
+        ></mat-slide-toggle>
+      </div>
+    </div>
+  </form>
+  <button
+    mat-icon-button
+    class="create-icon"
+    aria-label="Create a new driver in the system"
+    matTooltip="{{ 'admin.drivers.create-tooltip' | translate }}"
+    (click)="createDriverButtonClicked()"
+  >
+    <mat-icon>add_circle</mat-icon>
+  </button>
+</mat-toolbar>

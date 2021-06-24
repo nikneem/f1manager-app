@@ -1,0 +1,42 @@
+@import "../../../../scss/variables.scss";
+
+.notifications-list {
+  .notification-item {
+    margin-bottom: 1rem;
+    .notification-message {
+      background-color: $background-color-dark;
+      color: rgba($color: $text-color, $alpha: 0.5);
+      padding: 1rem;
+      border-radius: 0.5rem;
+      h3,
+      p {
+        margin: 0;
+      }
+      .headline {
+        display: flex;
+        flex-flow: row;
+        h3 {
+          margin-left: 0.5rem;
+        }
+      }
+    }
+    .is-new {
+      color: $text-color;
+    }
+    .info {
+      .mat-icon {
+        color: $info;
+      }
+    }
+    .error {
+      .mat-icon {
+        color: $error;
+      }
+    }
+    .success {
+      .mat-icon {
+        color: $success;
+      }
+    }
+  }
+}

@@ -1,0 +1,219 @@
+{
+  "generic": {
+    "error": "Error"
+  },
+  "buttons": {
+    "close": "Close",
+    "ok": "OK",
+    "cancel": "Cancel",
+    "next": "Next",
+    "previous": "Previous",
+    "save": "Save",
+    "create": "Create",
+    "register": "Register"
+  },
+  "user": {
+    "login": {
+      "title": "User login",
+      "text": "Enter your username and password to log in",
+      "form": {
+        "username": "Username",
+        "password": "Password"
+      }
+    },
+    "registration": {
+      "title": "Registration form",
+      "text": "Fill out the following form to register. You will receive in email to confirm your registration.",
+      "form": {
+        "username": "Username",
+        "email": "Email address",
+        "password": "Password",
+        "passwordConfirm": "Confirm password"
+      }
+    }
+  },
+  "dashboard": {
+    "info": {
+      "name": "Name",
+      "points": "Points",
+      "money": "Money"
+    },
+    "components": {
+      "buy": "Buy",
+      "sell": "Sell",
+      "bought": "Bought",
+      "bought-for": "Bought for",
+      "value": "Current value",
+      "points-gained": "Points gained",
+      "wear-down": "Wear down",
+      "max-wear-down": "Max. wear down"
+    }
+  },
+  "main": {
+    "server-down": {
+      "title": "Server down",
+      "description": "Oops, the server seems to be not responding to your requests. As we actively monitor our environment, you can assume we've got someone on it already.",
+      "back-to-main": "Bring me back to main"
+    }
+  },
+  "maintenance": {
+    "error-codes": {
+      "object-deleted": "This item is removed and cannot be modified.",
+      "not-an-admin": "You have to be a system administrator to perform this action",
+      "value-out-of-range": "The value for this component is out of range",
+      "picture-url-invalid": "The URL to the picture is an invalid URL"
+    }
+  },
+  "notification": {
+    "raceresultcalculated": {
+      "title": "Race results are calculated!",
+      "body": "New race results are calculated. You earned {{earnedPoints}} points making ${{earnedMoney}}. You now have a total of {{totalPoints}} with {{totalMoney}} money available."
+    }
+  },
+  "notifications": {
+    "title": "Notifications",
+    "explainer": "Unread notifications appear bright, click or tap notifications to mark them as read."
+  },
+  "leagues": {
+    "title": "Leagues",
+    "join-tooltip": "Find existing leagues and request to join",
+    "create-tooltip": "Create a new league and invite other teams to join",
+    "navigation": {
+      "overview": "Overview",
+      "invitations": "Invitations"
+    },
+    "empty-state": {
+      "title": "No leagues found",
+      "text": "You are currently not a member of a league. You can search for a league to join or create a league yourself.",
+      "join": "Join",
+      "jointext": "Search for existing leagues and request access to those leagues to join them",
+      "create": "Create",
+      "createtext": "Create a league yourself and invite other teams to join your league"
+    },
+    "create": {
+      "title": "Create a new league",
+      "text": "Name your league, the league name must be at least 5 characters, alphanumeric and unique",
+      "name-not-unique": "The name of your league is already taken, enter a different name"
+    },
+    "search": {
+      "title": "Search existing leagues to join",
+      "term": "Search query"
+    },
+    "error-codes": {
+      "invalid-name": "The name is invalid for a league",
+      "already-in": "Team cannot be added to this league because the team is already in",
+      "invitation-pending": "There is already an invitation pending for this team",
+      "invitation-not-found": "The invitation could not be found",
+      "request-pending": "There is already a request pending to join this league, please wait for approval",
+      "request-not-found": "The request is not found. It's either expired or already assessed",
+      "failed-to-leave": "Could not leave this league, membership not found (you probably already left?)",
+      "not-a-member": "You cannot do this, you are not a member of this league",
+      "error": "Oops, an error occured concerning leagues"
+    },
+    "details": {
+      "members": {
+        "list": "League standings",
+        "position": "Position",
+        "name": "Name",
+        "points": "Points",
+        "money": "Money"
+      },
+      "requests": {
+        "list": "Requests to join league",
+        "name": "Team name",
+        "requested-on": "Requested on",
+        "actions": ""
+      }
+    },
+    "name": "Name",
+    "owner-name": "Owner",
+    "members-count": "Members",
+    "team-position": "Your position",
+    "points-average": "Average points",
+    "created-on": "Created on"
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "analysis": "Analysis",
+    "leagues": "Leagues",
+    "rules": "Rules",
+    "credits": "Credits",
+    "admin": "Admin"
+  },
+  "languages": {
+    "english": "English",
+    "dutch": "Dutch"
+  },
+  "admin": {
+    "base-teams": {
+      "title": "Base teams maintenance",
+      "create-tooltip": "Create a new team",
+      "details": {
+        "name": "Name",
+        "origin": "Origin",
+        "principal": "Team principal",
+        "first-driver": "First driver",
+        "second-driver": "Second driver",
+        "engine": "Engine",
+        "chassis": "Chassis"
+      },
+      "delete": {
+        "title": "Delete base team",
+        "message": "Are you sure you wish to delete base team '{{name}}' from the system?"
+      }
+    },
+    "chassis": {
+      "title": "Chassis maintenance",
+      "create-tooltip": "Create a new chassis",
+      "delete": {
+        "title": "Delete chassis",
+        "message": "Are you sure you wish to delete chassis '{{name}}' from the system?"
+      },
+      "undelete": {
+        "title": "Recover chassis",
+        "message": "Are you sure you wish to recover chassis '{{name}}'?"
+      },
+      "details": {
+        "name": "Name",
+        "value": "Current value",
+        "picture": "Picture URL",
+        "active-from": "Active from",
+        "active-to": "Active until",
+        "is-available": "Active",
+        "is-active": "Active",
+        "available": "Chassis is marked as available",
+        "deleted": "Chassis is marked as deleted"
+      }
+    },
+    "drivers": {
+      "title": "Drivers maintenance",
+      "create-tooltip": "Create a new driver",
+      "delete": {
+        "title": "Delete driver",
+        "message": "Are you sure you wish to delete driver '{{name}}' from the system?"
+      },
+      "undelete": {
+        "title": "Recover driver",
+        "message": "Are you sure you wish to recover driver '{{name}}'?"
+      },
+      "details": {
+        "title": "Driver details",
+        "name": "Name",
+        "value": "Current value",
+        "country": "Country",
+        "picture": "Picture URL",
+        "date-of-birth": "Date of birth",
+        "active-from": "Active from",
+        "active-to": "Active until",
+        "is-available": "Active",
+        "is-active": "Active",
+        "available": "Driver is marked as available",
+        "deleted": "Driver is marked as deleted"
+      }
+    }
+  },
+  "empty-state": {
+    "title": "Nothing to see here",
+    "text": "No items found to be shown. You may want to adjust your filter settings, or start adding items"
+  }
+}

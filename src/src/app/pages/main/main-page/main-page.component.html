@@ -1,0 +1,55 @@
+<div class="main-page-container">
+  <div class="main-page-header">
+    <mat-toolbar>
+      <span>F1 Manager</span>
+      <span class="full-width-spacer"></span>
+      <f1-user-registration-button
+        *ngIf="!isLoggedIn"
+      ></f1-user-registration-button>
+      <f1-user-login-button></f1-user-login-button>
+      <button
+        mat-flat-button
+        color="primary"
+        (click)="navigateToDashboard()"
+        *ngIf="isLoggedIn"
+      >
+        To the manager &gt;&gt;
+      </button>
+    </mat-toolbar>
+  </div>
+  <div class="main-page-visual">
+    <div class="main-page-jumbo">
+      <h1>Are you a Formula 1 Team Manager?</h1>
+      <p>
+        Buy and manage your own team, and see how you'd do as a Formula 1 Team
+        manager.
+      </p>
+    </div>
+  </div>
+  <div class="main-page-explainer">
+    <div class="one-third">
+      <mat-card>
+        <mat-card-title>Our F1 Manager</mat-card-title>
+        <mat-card-content>
+          Our F1 Manager lets you manage your own team. Buy and maintain your
+          team and make sure your parts don't wear down. Trade parts effectively
+          and build your own Formula 1 empire. The performance of your team
+          depends on actual Formula 1 races driven around the world.
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  <div class="main-page-explainer">
+    <div class="two-third">
+      <mat-card>
+        <mat-card-title>Our F1 Manager</mat-card-title>
+        <mat-card-content>
+          Our F1 Manager lets you manage your own team. Buy and maintain your
+          team and make sure your parts don't wear down. Trade parts effectively
+          and build your own Formula 1 empire. The performance of your team
+          depends on actual Formula 1 races driven around the world.
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

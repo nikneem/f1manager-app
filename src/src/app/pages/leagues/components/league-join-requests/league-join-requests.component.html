@@ -1,0 +1,50 @@
+<div class="league-join-requests" *ngIf="isOwner">
+  <mat-card>
+    <h2>{{ "leagues.details.requests.list" | translate }}</h2>
+    <mat-table [dataSource]="requests" *ngIf="requests">
+      <ng-container matColumnDef="name">
+        <div *matHeaderCellDef class="table-header name-column">
+          {{ "leagues.details.requests.name" | translate }}
+        </div>
+        <div *matCellDef="let request" class="table-cell name-column">
+          {{ request.teamName }}
+        </div>
+      </ng-container>
+      <ng-container matColumnDef="requestedOn">
+        <div *matHeaderCellDef class="table-header requestedOn-column">
+          {{ "leagues.details.requests.requested-on" | translate }}
+        </div>
+        <div *matCellDef="let request" class="table-cell requestedOn-column">
+          {{ request.requestedOn | date }}
+        </div>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <div *matHeaderCellDef class="table-header actions-column">
+          {{ "leagues.details.requests.actions" | translate }}
+        </div>
+        <div *matCellDef="let request" class="table-cell actions-column">
+          <button
+            mat-flat-button
+            color="primary"
+            (click)="acceptRequest(request)"
+          >
+            Accept
+          </button>
+          <button
+            mat-flat-button
+            color="warn"
+            (click)="declineRequest(request)"
+          >
+            Decline
+          </button>
+        </div>
+      </ng-container>
+      <mat-header-row
+        *matHeaderRowDef="displayedColumns"
+        class="header-cell"
+      ></mat-header-row>
+
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+  </mat-card>
+</div>

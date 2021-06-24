@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>{{ title }}</h2>
+<mat-dialog-content>
+  {{ message }}
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-flat-button color="accent" [mat-dialog-close]="false">
+    {{ "buttons.cancel" | translate }}
+  </button>
+  <button mat-flat-button color="primary" [mat-dialog-close]="true">
+    {{ "buttons.ok" | translate }}
+  </button>
+</mat-dialog-actions>

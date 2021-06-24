@@ -1,0 +1,45 @@
+<h2 mat-dialog-title>{{ "notifications.title" | translate }}</h2>
+<h4 mat-dialog-title>{{ "notifications.explainer" | translate }}</h4>
+<mat-dialog-content>
+  <div class="notifications-list">
+    <div class="notification-item" *ngFor="let notification of notifications">
+      <div
+        [class]="'notification-message ' + notification.severity"
+        [class.is-new]="!notification.isRead"
+        (click)="markAsRead(notification)"
+      >
+        <div class="headline">
+          <mat-icon
+            *ngIf="
+              notification.severity !== 'error' &&
+              notification.severity !== 'success'
+            "
+          >
+            info
+          </mat-icon>
+          <mat-icon *ngIf="notification.severity === 'success'">
+            check_circle
+          </mat-icon>
+          <mat-icon *ngIf="notification.severity === 'error'">
+            warning_amber
+          </mat-icon>
+          <h3
+            [translate]="notification.titleTranslationKey"
+            [translateParams]="notification.substitutions"
+          ></h3>
+        </div>
+        <div class="body">
+          <p
+            [translate]="notification.bodyTranslationKey"
+            [translateParams]="notification.substitutions"
+          ></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-flat-button color="accent" mat-dialog-close>
+    {{ "buttons.close" | translate }}
+  </button>
+</mat-dialog-actions>

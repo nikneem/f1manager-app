@@ -1,0 +1,75 @@
+@import "./variables.scss";
+
+.components-select {
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+  column-gap: 0.5rem;
+  row-gap: 0.5rem;
+  .component-select {
+    flex: 90%;
+    cursor: pointer;
+    .picture {
+      background-image: url("/assets/chassis/chassis.jpg");
+      background-size: cover;
+      background-repeat: no-repeat;
+      padding-top: 6rem;
+
+      .information {
+        color: rgba($color: #ffffff, $alpha: 0.6);
+        background-color: rgba($color: #000000, $alpha: 0.6);
+        padding: 1rem;
+        h3,
+        p {
+          margin: 0;
+        }
+      }
+    }
+    .picture:hover {
+      .information {
+        color: #fff;
+        background-color: rgba($color: #000000, $alpha: 0.8);
+      }
+    }
+  }
+  .selected {
+    .picture {
+      .information {
+        background-color: $primary;
+        color: #fff;
+      }
+    }
+  }
+  .selected:hover {
+    .picture {
+      .information {
+        background-color: $primary;
+        color: #fff;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .components-select {
+    .component-select {
+      flex: 40%;
+    }
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .components-select {
+    .component-select {
+      flex: 30%;
+    }
+  }
+}
+
+@media only screen and (min-width: 1600px) {
+  .components-select {
+    .component-select {
+      flex: 18%;
+    }
+  }
+}

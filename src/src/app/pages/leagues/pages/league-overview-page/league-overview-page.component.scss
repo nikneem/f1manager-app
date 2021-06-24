@@ -1,0 +1,76 @@
+@import "../../../../../scss/variables.scss";
+
+.leagues-page {
+  .leagues-container {
+    display: flex;
+    flex-flow: column;
+    .my-leagues {
+      display: flex;
+      flex-flow: row;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      .list {
+        width: 100%;
+        gap: 0.5rem;
+        display: flex;
+        flex-flow: column;
+        .league {
+          flex: 4 4 100%;
+          background-color: $background-color;
+          padding: 1rem;
+          cursor: pointer;
+          .name {
+            color: $primary;
+          }
+          .info {
+            dl {
+              dt {
+                margin: 0;
+                width: 50%;
+                float: left;
+              }
+              dd {
+                margin: 0;
+                width: 50%;
+                float: left;
+              }
+            }
+          }
+          .link {
+            clear: both;
+          }
+        }
+        .league:hover {
+          background-color: $primary;
+          .name {
+            color: #fff;
+          }
+        }
+      }
+      .no-league {
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        .explainer {
+          flex: 2 2 80%;
+          background-color: $background-color;
+          padding: 1rem;
+        }
+        .action {
+          cursor: pointer;
+          background-color: $background-color;
+          padding: 1rem;
+          flex: 1 1 40%;
+        }
+        .action:hover {
+          background-color: $primary;
+          padding: 1rem;
+          flex: 1 1 40%;
+        }
+      }
+    }
+  }
+}

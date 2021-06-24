@@ -1,0 +1,45 @@
+<h2 mat-dialog-title>Buy a new driver</h2>
+<mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+<mat-dialog-content>
+  <p>
+    This is where you buy a new driver. Below is a list of available drivers.
+    Select the driver you want to buy and confirm to but the engine for your
+    team.
+  </p>
+  <div class="components-select drivers" *ngIf="drivers">
+    <div
+      [class]="
+        selectedDriver == driver
+          ? 'component-select driver selected'
+          : 'component-select driver'
+      "
+      *ngFor="let driver of drivers"
+      (click)="selectDriver(driver)"
+    >
+      <div
+        class="picture"
+        [style.backgroundImage]="'url(' + driver.pictureUrl + ')'"
+      >
+        <div class="information">
+          <div class="name" title="Driver name">
+            <h3>{{ driver.name }}</h3>
+          </div>
+          <div class="price" title="Driver price">
+            <p>{{ driver.value | currency }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-flat-button color="accent" mat-dialog-close>Cancel</button>
+  <button
+    mat-flat-button
+    color="primary"
+    [mat-dialog-close]="selectedDriver?.id"
+    [disabled]="!selectedDriver"
+  >
+    Buy
+  </button>
+</mat-dialog-actions>

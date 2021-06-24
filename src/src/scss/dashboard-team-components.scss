@@ -1,0 +1,71 @@
+.team-components {
+  display: flex;
+  flex-flow: column;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  .team-component {
+    .component {
+      .mat-card {
+        .component-type-picture {
+          width: 42px;
+          height: 42px;
+        }
+        .mat-card-content {
+          .component-picture {
+            width: 100%;
+            height: 200px;
+            background-image: url("/assets/engines/redbull.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+          }
+          dl {
+            dt {
+              clear: left;
+              float: left;
+              width: 50%;
+              margin: 0;
+              text-align: right;
+              padding-right: 1rem;
+            }
+            dd {
+              width: 50%;
+              margin: 0;
+              margin-left: 50%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .team-components {
+    flex-flow: row;
+    flex-wrap: wrap;
+    .team-component {
+      flex: 40%;
+      .component {
+        .mat-card {
+          .mat-card-content {
+            .component-picture {
+              height: 300px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+}
+
+@media only screen and (min-width: 1600px) {
+  .team-components {
+    flex-flow: row;
+    .team-component {
+      flex: 20%;
+    }
+  }
+}
