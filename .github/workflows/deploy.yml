@@ -18,7 +18,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: npm install and npm run build
-        working-dir: src
+        working-directory: src
         run: |
           npm i
           npm run build:prod
