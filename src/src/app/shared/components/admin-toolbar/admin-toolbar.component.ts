@@ -9,7 +9,7 @@ export class AdminToolbarComponent implements OnInit {
   links = [
     { link: '/admin/teams', text: 'Teams' },
     { link: '/admin/drivers', text: 'Drivers' },
-    // { link: '/admin/engines', text: 'Engines' },
+    { link: '/admin/engines', text: 'Engines' },
     { link: '/admin/chassis', text: 'Chassis' },
     { link: '/admin/results', text: 'Race results' },
   ];

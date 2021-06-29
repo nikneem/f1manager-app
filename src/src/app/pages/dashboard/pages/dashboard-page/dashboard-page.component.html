@@ -8,7 +8,9 @@
     <div class="team-component">
       <f1-team-second-driver [teamId]="teamId"></f1-team-second-driver>
     </div>
-    <div class="team-component"></div>
+    <div class="team-component">
+      <f1-team-engine [teamId]="teamId"></f1-team-engine>
+    </div>
     <div class="team-component"></div>
   </div>
   <div class="no-team" *ngIf="!isLoading && !teamId">

@@ -4,7 +4,7 @@ import { TeamEngineDto } from './team-engine-models';
 
 export const teamEngineGet = createAction(
   '[TeamEngine] Get',
-  props<{ teamEngineId: string }>()
+  props<{ teamId: string }>()
 );
 export const teamEngineBuy = createAction(
   '[TeamEngine] Buy',

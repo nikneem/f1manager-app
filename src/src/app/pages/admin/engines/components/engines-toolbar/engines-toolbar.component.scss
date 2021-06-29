@@ -1,0 +1,28 @@
+.search-box {
+  border: solid 1px #fff;
+  font-family: Exo, monospace;
+  background: transparent;
+  padding: 0.5rem;
+  color: #fff;
+  outline: none;
+}
+
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #fff;
+  opacity: 0.75;
+}
+.search {
+  display: none;
+  flex-flow: row;
+
+  .search-field {
+    padding-right: 1rem;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .search {
+    display: flex;
+  }
+}

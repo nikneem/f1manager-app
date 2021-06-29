@@ -18,6 +18,9 @@ import { ChassisDetailsDialogComponent } from './chassis/dialogs/chassis-details
 import { TranslateModule } from '@ngx-translate/core';
 import { RaceResultsPageComponent } from './results/pages/race-results-page/race-results-page.component';
 import { RaceResultsToolbarComponent } from './results/components/race-results-toolbar/race-results-toolbar.component';
+import { EnginesListPageComponent } from './engines/pages/engines-list-page/engines-list-page.component';
+import { EnginesToolbarComponent } from './engines/components/engines-toolbar/engines-toolbar.component';
+import { EngineDetailsDialogComponent } from './engines/dialogs/engine-details-dialog/engine-details-dialog.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,10 @@ import { RaceResultsToolbarComponent } from './results/components/race-results-t
     ChassisListPageComponent,
     ChassisDetailsDialogComponent,
     RaceResultsPageComponent,
-    RaceResultsToolbarComponent
+    RaceResultsToolbarComponent,
+    EnginesListPageComponent,
+    EnginesToolbarComponent,
+    EngineDetailsDialogComponent
   ],
   imports: [
     CommonModule,

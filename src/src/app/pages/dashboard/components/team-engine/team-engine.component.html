@@ -1,1 +1,84 @@
-<p>team-engine works!</p>
+<div class="component engine">
+  <mat-card *ngIf="engine">
+    <mat-card-header>
+      <div mat-card-avatar>
+        <img src="/assets/icons/piston.svg" class="component-type-picture" />
+      </div>
+      <mat-card-title>{{ engine.name }}</mat-card-title>
+      <mat-card-subtitle>
+        {{ engine.manufacturer }}
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div
+        class="component-picture"
+        [style.backgroundImage]="'url(' + engine.pictureUrl + ')'"
+      ></div>
+      <dl *ngIf="engine">
+        <dt>{{ "dashboard.components.bought" | translate }}</dt>
+        <dd>{{ engine.boughtOn | date }}</dd>
+        <dt>{{ "dashboard.components.bought-for" | translate }}</dt>
+        <dd>{{ engine.boughtFor | currency }}</dd>
+        <dt>{{ "dashboard.components.value" | translate }}</dt>
+        <dd>{{ engine.currentPrice | currency }}</dd>
+        <dt>{{ "dashboard.components.points-gained" | translate }}</dt>
+        <dd>{{ engine.pointsGained }}</dd>
+        <dt>{{ "dashboard.components.wear-down" | translate }}</dt>
+        <dd>{{ engine.wearOff | number: "2.2" }}%</dd>
+        <dt>{{ "dashboard.components.max-wear-down" | translate }}</dt>
+        <dd>{{ engine.maxWearOff | number: "2.2" }}%</dd>
+      </dl>
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        mat-flat-button
+        color="warn"
+        *ngIf="engine"
+        (click)="sellEngine()"
+      >
+        {{ "dashboard.components.sell" | translate }}
+      </button>
+    </mat-card-actions>
+  </mat-card>
+  <mat-card *ngIf="!engine">
+    <mat-card-header>
+      <div mat-card-avatar>
+        <img src="/assets/icons/piston.svg" class="component-type-picture" />
+      </div>
+      <mat-card-title>None</mat-card-title>
+      <mat-card-subtitle>
+        Click the buy button to buy an engine
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div
+        class="component-picture"
+        style="background-image: url(/assets/engines/engine.jpg)"
+      ></div>
+      <dl>
+        <dt>{{ "dashboard.components.bought" | translate }}</dt>
+        <dd>-</dd>
+        <dt>{{ "dashboard.components.bought-for" | translate }}</dt>
+        <dd>-</dd>
+        <dt>{{ "dashboard.components.value" | translate }}</dt>
+        <dd>-</dd>
+        <dt>{{ "dashboard.components.points-gained" | translate }}</dt>
+        <dd>-</dd>
+        <dt>{{ "dashboard.components.wear-down" | translate }}</dt>
+        <dd>-</dd>
+        <dt>{{ "dashboard.components.max-wear-down" | translate }}</dt>
+        <dd>-</dd>
+      </dl>
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        mat-flat-button
+        color="primary"
+        *ngIf="!engine"
+        (click)="buyEngine()"
+      >
+        {{ "dashboard.components.buy" | translate }}
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

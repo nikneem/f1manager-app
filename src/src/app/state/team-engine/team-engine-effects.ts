@@ -25,7 +25,7 @@ export class TeamEngineEffects {
     this.actions$.pipe(
       ofType(teamEngineGet),
       mergeMap((action) =>
-        this.teamsService.getEngine(action.teamEngineId).pipe(
+        this.teamsService.getEngine(action.teamId).pipe(
           map((payload) => {
             return teamEngineGetSuccess({ payload: payload });
           }),

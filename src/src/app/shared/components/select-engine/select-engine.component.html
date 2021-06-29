@@ -25,7 +25,7 @@
             <h3>{{ engine.name }}</h3>
           </div>
           <div class="price" title="Engine price">
-            <p>{{ engine.price | currency }}</p>
+            <p>{{ engine.value | currency }}</p>
           </div>
           <div class="manufacturer" title="Engine manufacturer">
             <p>{{ engine.manufacturer }}</p>
@@ -38,13 +38,13 @@
               class="weekly"
               title="Weekly wear off, percentage your engine loses value each race used"
             >
-              <p>Weekly {{ engine.weeklyWeardown }}%</p>
+              <p>Weekly {{ engine.weeklyWearOff }}%</p>
             </div>
             <div
               class="max"
               title="Max wear off, maximum percentage your engine can lose value"
             >
-              <p>Max. {{ engine.maxWearDown }}%</p>
+              <p>Max. {{ engine.maxWearOff }}%</p>
             </div>
           </div>
         </div>

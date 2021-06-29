@@ -67,14 +67,13 @@ export class TeamsService {
     return this.http.delete<TeamDriverDto>(url);
   }
 
-  public getEngine(teamEngineId: string): Observable<TeamEngineDto> {
-    var url = `${environment.backendUrl}/api/team/engine/${teamEngineId}`;
-    return this.http.get<TeamDetailsDto>(url);
+  public getEngine(teamId: string): Observable<TeamEngineDto> {
+    var url = `${environment.backendUrl}/api/team/engine/${teamId}`;
+    return this.http.get<TeamEngineDto>(url);
   }
   public buyEngine(engineId: string): Observable<TeamEngineDto> {
-    var url = `${environment.backendUrl}/api/team/engine`;
-    var payload = new ComponentPurchaseDto(engineId);
-    return this.http.post<TeamDetailsDto>(url, payload);
+    var url = `${environment.backendUrl}/api/team/engine/${engineId}/buy`;
+    return this.http.get<TeamDetailsDto>(url);
   }
   public sellEngineConfirmation(
     teamEngineId: string

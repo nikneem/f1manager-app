@@ -33,8 +33,10 @@ export class SelectEngineComponent implements OnInit, OnDestroy {
       .select((str) => str.engineState.errorMessage)
       .subscribe((val) => (this.errorMessage = val));
     this.engineListSubscription = this.store
-      .select((str) => str.engineState.engines)
-      .subscribe((val) => (this.engines = val));
+      .select((str) => str.engineState.activeEngines)
+      .subscribe((val) => {
+        this.engines = val;
+      });
 
     this.store.dispatch(engineGetAvailable());
   }

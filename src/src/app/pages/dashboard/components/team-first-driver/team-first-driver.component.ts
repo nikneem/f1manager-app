@@ -46,7 +46,6 @@ export class TeamFirstDriverComponent implements OnInit, OnDestroy {
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        console.log(`Selling chassis ${result}`);
         this.store.dispatch(teamDriverSell({ teamDriverId: result }));
       }
     });
