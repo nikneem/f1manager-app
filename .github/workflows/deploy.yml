@@ -34,9 +34,9 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: dev-app
-          path: dev-published/
+          path: src/dev-published/
       - name: Publish Prod Artifact
         uses: actions/upload-artifact@v2
         with:
           name: prod-app
-          path: prod-published/
+          path: src/prod-published/
