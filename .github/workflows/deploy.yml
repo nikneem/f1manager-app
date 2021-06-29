@@ -22,7 +22,21 @@ jobs:
         run: |
           npm i
           npm i @angular/cli -g
-      - name: npm install and npm run build
+      - name: Compile Angular app with Dev config
         working-directory: src
         run: |
           ng build --configuration development --output-path ./dev-published
+      - name: Compile Angular app with Dev config
+        working-directory: src
+        run: |
+          ng build --configuration production --output-path ./prod-published
+      - name: Publish Dev Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: dev-app
+          path: dev-published/
+      - name: Publish Prod Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: prod-app
+          path: prod-published/
