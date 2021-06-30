@@ -181,4 +181,4 @@ jobs:
         uses: Azure/cli@1.0.4
         with:
           azcliversion: 2.23.0
-          inlineScript: az cdn custom-domain enable-https -g 'F1Manager-Prod-App' --profile-name 'f1app-prod-weu' --endpoint-name 'f1app-prod-weu' -n 'app-prod-f1mgr-com'
+          inlineScript: az cdn custom-domain enable-https -g 'F1Manager-Prod-App' --profile-name 'f1app-prod-weu' --endpoint-name 'f1app-prod-weu' -n 'app-f1mgr-com'

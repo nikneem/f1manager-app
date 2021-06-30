@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  backendUrl: 'https://dev-api.f1mgr.com',
+  backendUrl: 'https://api.f1mgr.com',
 };
