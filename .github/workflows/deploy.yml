@@ -71,3 +71,31 @@ jobs:
         with:
           azcliversion: 2.23.0
           inlineScript: az deployment group create --resource-group ${{ secrets.AZURE_DEV_RESOURCE_GROUP }} --template-file ./infrastructure/main.bicep --mode Incremental
+
+  deploy-dev:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: api-artifact
+          path: ./published
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_DEV }}
+      - name: Add storage extension
+        uses: Azure/cli@1.0.4
+        with:
+          azcliversion: 2.23.0
+          inlineScript: az extension add --name storage-preview -y
+      - name: Create static website
+        uses: Azure/cli@1.0.4
+        with:
+          azcliversion: 2.23.0
+          inlineScript: az storage blob service-properties update --account-name f1appdevweu --static-website --404-document 'index.html' --index-document 'index.html'
+      - name: Upload files
+        uses: Azure/cli@1.0.4
+        with:
+          azcliversion: 2.23.0
+          inlineScript: az storage blob directory upload -c '$web' --account-name f1appdevweu -s "./published*" -d directory --recursive
