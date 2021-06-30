@@ -101,8 +101,13 @@ jobs:
         with:
           azcliversion: 2.23.0
           inlineScript: az storage blob service-properties update --account-name f1appdevweu --static-website --404-document 'index.html' --index-document 'index.html'
+      - name: Delete all the files from storage
+        uses: Azure/cli@1.0.4
+        with:
+          azcliversion: 2.23.0
+          inlineScript: az storage blob delete-batch --source "$web" --account-name f1appdevweu
       - name: Upload files
         uses: Azure/cli@1.0.4
         with:
           azcliversion: 2.23.0
-          inlineScript: az storage blob directory upload -c '$web' --account-name f1appdevweu -s "./published/*" -d '/' --recursive
+          inlineScript: az storage fs directory upload -f "$web" --account-name "f1appdevweu" -s "./published/*" --recursive
