@@ -47,33 +47,34 @@ jobs:
           name: bicep-templates
           path: infrastructure/
 
-  infrastructure-incremental-dev:
-    needs: publish-bicep
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download Artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: bicep-templates
-          path: ./infrastructure
-      - name: Azure Login
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_DEV }}
-      - name: Azure Create Resource Group
-        uses: Azure/cli@1.0.4
-        with:
-          azcliversion: 2.23.0
-          inlineScript: az group create -l westeurope -n ${{ secrets.AZURE_DEV_RESOURCE_GROUP }}
-      - name: Deploy Infrastructure
-        id: arm
-        uses: Azure/cli@1.0.4
-        with:
-          azcliversion: 2.23.0
-          inlineScript: az deployment group create --resource-group ${{ secrets.AZURE_DEV_RESOURCE_GROUP }} --template-file ./infrastructure/main.bicep --mode Incremental
+  # infrastructure-incremental-dev:
+  #   needs: publish-bicep
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Download Artifact
+  #       uses: actions/download-artifact@v2
+  #       with:
+  #         name: bicep-templates
+  #         path: ./infrastructure
+  #     - name: Azure Login
+  #       uses: azure/login@v1
+  #       with:
+  #         creds: ${{ secrets.AZURE_DEV }}
+  #     - name: Azure Create Resource Group
+  #       uses: Azure/cli@1.0.4
+  #       with:
+  #         azcliversion: 2.23.0
+  #         inlineScript: az group create -l westeurope -n ${{ secrets.AZURE_DEV_RESOURCE_GROUP }}
+  #     - name: Deploy Infrastructure
+  #       id: arm
+  #       uses: Azure/cli@1.0.4
+  #       with:
+  #         azcliversion: 2.23.0
+  #         inlineScript: az deployment group create --resource-group ${{ secrets.AZURE_DEV_RESOURCE_GROUP }} --template-file ./infrastructure/main.bicep --mode Incremental
 
   deploy-dev:
-    needs: [build, infrastructure-incremental-dev]
+    needs: [build]
+    #    needs: [build, infrastructure-incremental-dev]
     runs-on: ubuntu-latest
     steps:
       - name: Download Artifact
@@ -90,6 +91,11 @@ jobs:
         with:
           azcliversion: 2.23.0
           inlineScript: az extension add --name storage-preview -y
+      - name: Allow dynamic installation
+        uses: Azure/cli@1.0.4
+        with:
+          azcliversion: 2.23.0
+          inlineScript: az config set extension.use_dynamic_install=yes_without_prompt
       - name: Create static website
         uses: Azure/cli@1.0.4
         with:
