@@ -75,7 +75,7 @@ jobs:
   deploy-dev:
     needs: [build]
     #    needs: [build, infrastructure-incremental-dev]
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Download Artifact
         uses: actions/download-artifact@v2
@@ -90,7 +90,7 @@ jobs:
         uses: Azure/cli@1.0.4
         with:
           azcliversion: 2.23.0
-          inlineScript: az storage blob service-properties update --account-name f1appdevweu --static-website --404-document "index.html" --index-document "index.html"
+          inlineScript: az storage blob service-properties update --account-name f1appdevweu --static-website --404-document 'index.html' --index-document 'index.html'
       - name: Allow setting up extensions
         uses: Azure/cli@1.0.4
         with:
@@ -100,15 +100,15 @@ jobs:
         uses: Azure/cli@1.0.4
         with:
           azcliversion: 2.23.0
-          inlineScript: az storage fs delete --name "$web" --account-name f1appdevweu -y
+          inlineScript: az storage fs delete --name $web --account-name f1appdevweu -y
         continue-on-error: true
       - name: Upload files
         uses: Azure/cli@1.0.4
         with:
           azcliversion: 2.23.0
-          inlineScript: az storage fs directory upload -f "$web" --account-name f1appdevweu -s "./published/*" --recursive
+          inlineScript: az storage fs directory upload -f $web --account-name f1appdevweu -s ./published/* --recursive
       - name: Enable HTTPS
         uses: Azure/cli@1.0.4
         with:
           azcliversion: 2.23.0
-          inlineScript: az cdn custom-domain enable-https -g "F1Manager-Dev-App" --profile-name f1app-dev-weu --endpoint-name f1app-dev-weu -n app-dev-f1mgr-com
+          inlineScript: az cdn custom-domain enable-https -g F1Manager-Dev-App --profile-name f1app-dev-weu --endpoint-name f1app-dev-weu -n app-dev-f1mgr-com
