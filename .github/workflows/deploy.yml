@@ -86,16 +86,6 @@ jobs:
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_DEV }}
-      - name: Add storage extension
-        uses: Azure/cli@1.0.4
-        with:
-          azcliversion: 2.23.0
-          inlineScript: az extension add --name storage-preview -y
-      - name: Allow dynamic installation
-        uses: Azure/cli@1.0.4
-        with:
-          azcliversion: 2.23.0
-          inlineScript: az config set extension.use_dynamic_install=yes_without_prompt
       - name: Create static website
         uses: Azure/cli@1.0.4
         with:
@@ -111,4 +101,4 @@ jobs:
         uses: Azure/cli@1.0.4
         with:
           azcliversion: 2.23.0
-          inlineScript: az storage fs directory upload -f "$web" --account-name "f1appdevweu" -s "./published/*" --recursive
+          inlineScript: az storage fs directory upload -f "$web" --account-name "f1appdevweu" -s "./published/*" --recursive -y
