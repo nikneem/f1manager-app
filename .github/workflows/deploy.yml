@@ -106,4 +106,9 @@ jobs:
         uses: Azure/cli@1.0.4
         with:
           azcliversion: 2.23.0
-          inlineScript: az storage blob directory upload -c '$web' --account-name f1appdevweu -s "./published/*" --recursive
+          inlineScript: az storage fs directory upload -f "$web" --account-name f1appdevweu -s "./published/*" --recursive
+      - name: Enable HTTPS
+        uses: Azure/cli@1.0.4
+        with:
+          azcliversion: 2.23.0
+          inlineScript: az cdn custom-domain enable-https -g "F1Manager-Dev-App" --profile-name f1app-dev-weu --endpoint-name f1app-dev-weu -n app-dev-f1mgr-com
