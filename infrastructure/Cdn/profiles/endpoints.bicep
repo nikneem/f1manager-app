@@ -9,8 +9,8 @@ resource cdnEndpoint 'Microsoft.Cdn/profiles/endpoints@2020-09-01' = {
       {
         name: endpointName
         properties: {
-          hostName: 'f1appdeveur.z6.web.core.windows.net'
-          originHostHeader: 'f1appdeveur.z6.web.core.windows.net'
+          hostName: 'f1appdevweu.z6.web.core.windows.net'
+          originHostHeader: 'f1appdevweu.z6.web.core.windows.net'
           priority: 1
           weight: 1000
           enabled: true
