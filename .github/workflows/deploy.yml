@@ -101,4 +101,4 @@ jobs:
         uses: Azure/cli@1.0.4
         with:
           azcliversion: 2.23.0
-          inlineScript: inlineScript: az storage blob directory upload -c '$web' --account-name f1appdevweu -s "./published/*" --recursive
+          inlineScript: az storage blob directory upload -c '$web' --account-name f1appdevweu -s "./published/*" --recursive
