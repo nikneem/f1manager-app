@@ -91,6 +91,11 @@ jobs:
         with:
           azcliversion: 2.23.0
           inlineScript: az storage blob service-properties update --account-name f1appdevweu --static-website --404-document 'index.html' --index-document 'index.html'
+      - name: Allow setting up extensions
+        uses: Azure/cli@1.0.4
+        with:
+          azcliversion: 2.23.0
+          inlineScript: az config set extension.use_dynamic_install=yes_without_prompt
       - name: Delete all the files from storage
         uses: Azure/cli@1.0.4
         with:
