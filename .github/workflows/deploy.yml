@@ -117,6 +117,8 @@ jobs:
   infrastructure-incremental-prod:
     needs: deploy-dev
     runs-on: ubuntu-latest
+    environment:
+      name: Production
     steps:
       - name: Download Artifact
         uses: actions/download-artifact@v2

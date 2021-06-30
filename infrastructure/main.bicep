@@ -31,11 +31,13 @@ module cdnProfileModule 'Cdn/profiles.bicep' = {
 module cdnProfileEndpointModule 'Cdn/profiles/endpoints.bicep' = {
   dependsOn: [
     cdnProfileModule
+    storageAccountModule
   ]
   name: 'cdnProfileEndpointModule'
   params: {
     cdnProfileName: cdnProfileModule.outputs.cdnProfileName
     endpointName: '${systemName}-${environmentName}-${azureRegion}'
+    storageAccountName: storageAccountModule.outputs.storageAccountName
   }
 }
 
