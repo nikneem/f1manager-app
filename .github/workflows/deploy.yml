@@ -105,7 +105,7 @@ jobs:
         uses: Azure/cli@1.0.4
         with:
           azcliversion: 2.23.0
-          inlineScript: az storage blob delete-batch -s "$web" --account-name f1appdevweu --auth-mode login
+          inlineScript: az storage fs delete --name "$web" --account-name f1appdevweu -y
         continue-on-error: true
       - name: Upload files
         uses: Azure/cli@1.0.4
