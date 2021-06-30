@@ -22,20 +22,20 @@ jobs:
         working-directory: src
         run: |
           ng build --configuration development --output-path ./dev-published
-      - name: Compile Angular app with Dev config
-        working-directory: src
-        run: |
-          ng build --configuration production --output-path ./prod-published
+      # - name: Compile Angular app with Dev config
+      #   working-directory: src
+      #   run: |
+      #     ng build --configuration production --output-path ./prod-published
       - name: Publish Dev Artifact
         uses: actions/upload-artifact@v2
         with:
           name: dev-app
           path: src/dev-published/
-      - name: Publish Prod Artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: prod-app
-          path: src/prod-published/
+      # - name: Publish Prod Artifact
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: prod-app
+      #     path: src/prod-published/
 
   publish-bicep:
     runs-on: ubuntu-latest
@@ -101,4 +101,4 @@ jobs:
         uses: Azure/cli@1.0.4
         with:
           azcliversion: 2.23.0
-          inlineScript: az storage fs directory upload -f "$web" --account-name "f1appdevweu" -s "./published/*" --recursive -y
+          inlineScript: inlineScript: az storage blob directory upload -c '$web' --account-name f1appdevweu -s "./published/*" --recursive
