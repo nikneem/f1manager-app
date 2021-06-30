@@ -22,20 +22,20 @@ jobs:
         working-directory: src
         run: |
           ng build --configuration development --output-path ./dev-published
-      # - name: Compile Angular app with Dev config
-      #   working-directory: src
-      #   run: |
-      #     ng build --configuration production --output-path ./prod-published
+      - name: Compile Angular app with Dev config
+        working-directory: src
+        run: |
+          ng build --configuration production --output-path ./prod-published
       - name: Publish Dev Artifact
         uses: actions/upload-artifact@v2
         with:
           name: dev-app
           path: src/dev-published/
-      # - name: Publish Prod Artifact
-      #   uses: actions/upload-artifact@v2
-      #   with:
-      #     name: prod-app
-      #     path: src/prod-published/
+      - name: Publish Prod Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: prod-app
+          path: src/prod-published/
 
   publish-bicep:
     runs-on: ubuntu-latest
@@ -75,6 +75,8 @@ jobs:
   deploy-dev:
     needs: [build, infrastructure-incremental-dev]
     runs-on: ubuntu-latest
+    environment:
+      name: Development
     steps:
       - name: Download Artifact
         uses: actions/download-artifact@v2
@@ -111,3 +113,70 @@ jobs:
         with:
           azcliversion: 2.23.0
           inlineScript: az cdn custom-domain enable-https -g 'F1Manager-Dev-App' --profile-name 'f1app-dev-weu' --endpoint-name 'f1app-dev-weu' -n 'app-dev-f1mgr-com'
+
+  infrastructure-incremental-prod:
+    needs: deploy-dev
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: bicep-templates
+          path: ./infrastructure
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_DEV }}
+      - name: Azure Create Resource Group
+        uses: Azure/cli@1.0.4
+        with:
+          azcliversion: 2.23.0
+          inlineScript: az group create -l westeurope -n ${{ secrets.AZURE_PROD_RESOURCE_GROUP }}
+      - name: Deploy Infrastructure
+        id: arm
+        uses: Azure/cli@1.0.4
+        with:
+          azcliversion: 2.23.0
+          inlineScript: az deployment group create --resource-group ${{ secrets.AZURE_PROD_RESOURCE_GROUP }} --template-file ./infrastructure/main.bicep --mode Incremental --parameters environmentName=prod
+
+  deploy-prod:
+    needs: [deploy-dev, infrastructure-incremental-prod]
+    runs-on: ubuntu-latest
+    environment:
+      name: Production
+    steps:
+      - name: Download Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: prod-app
+          path: ./published
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_DEV }}
+      - name: Create static website
+        uses: Azure/cli@1.0.4
+        with:
+          azcliversion: 2.23.0
+          inlineScript: az storage blob service-properties update --account-name f1appprodweu --static-website --404-document 'index.html' --index-document 'index.html'
+      - name: Allow setting up extensions
+        uses: Azure/cli@1.0.4
+        with:
+          azcliversion: 2.23.0
+          inlineScript: az config set extension.use_dynamic_install=yes_without_prompt
+        # - name: Delete all the files from storage
+        #   uses: Azure/cli@1.0.4
+        #   with:
+        #     azcliversion: 2.23.0
+        #     inlineScript: az storage fs delete --name '$web' --account-name 'f1appprodweu' -y
+        continue-on-error: true
+      - name: Upload files
+        uses: Azure/cli@1.0.4
+        with:
+          azcliversion: 2.23.0
+          inlineScript: az storage fs directory upload -f '$web' --account-name 'f1appprodweu' -s './published/*' --recursive
+      - name: Enable HTTPS
+        uses: Azure/cli@1.0.4
+        with:
+          azcliversion: 2.23.0
+          inlineScript: az cdn custom-domain enable-https -g 'F1Manager-Prod-App' --profile-name 'f1app-prod-weu' --endpoint-name 'f1app-prod-weu' -n 'app-prod-f1mgr-com'
