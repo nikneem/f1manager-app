@@ -79,7 +79,7 @@ jobs:
       - name: Download Artifact
         uses: actions/download-artifact@v2
         with:
-          name: api-artifact
+          name: dev-app
           path: ./published
       - name: Azure Login
         uses: azure/login@v1
