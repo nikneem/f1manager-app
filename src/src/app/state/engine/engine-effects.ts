@@ -14,6 +14,7 @@ import {
   engineGetList,
   engineGetListSuccess,
   engineUndelete,
+  engineUndeleteSuccess,
   engineUpdate,
   engineUpdateSuccess,
 } from './engine-actions';
@@ -102,7 +103,7 @@ export class EngineEffects {
       ofType(engineUndelete),
       mergeMap((act) =>
         this.engineService.undelete(act.id).pipe(
-          map((chassis) => engineUpdateSuccess({ payload: chassis })),
+          map((chassis) => engineUndeleteSuccess({ id: act.id })),
           catchError((err) => {
             if (err.status === 409) {
               return of(

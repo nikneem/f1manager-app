@@ -1,14 +1,16 @@
 export class ChassisDto {
   public id?: string;
   public name?: string;
+  public manufacturer?: string;
+  public model?: string;
   public pictureUrl?: string;
-  public currentValue?: number;
-  public weeklyWearOutPercentage?: number;
-  public maxWearOutPercentage?: number;
-  public activeFrom?: Date;
-  public activeUntil?: Date;
+  public value?: number;
+  public weeklyWearOff?: number;
+  public maxWearOff?: number;
   public isAvailable?: boolean;
   public isDeleted?: boolean;
+  public activeFrom?: Date;
+  public activeUntil?: Date;
 
   constructor(init?: Partial<ChassisDto>) {
     Object.assign(this, init);

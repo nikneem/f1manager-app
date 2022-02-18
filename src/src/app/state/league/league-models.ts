@@ -8,12 +8,9 @@ export class LeagueCreateDto {
 export class LeagueDto {
   public id?: string;
   public name?: string;
-  public ownerName?: string;
-  public isOwner?: boolean;
+  public isMaintainer?: boolean;
   public createdOn?: string;
-  public membersCount?: number;
-  public teamPosition?: number;
-  public pointsAverage?: number;
+  public members?: Array<LeagueMemberDto>;
 
   constructor(init?: Partial<LeagueDto>) {
     Object.assign(this, init);
@@ -23,7 +20,7 @@ export class LeagueDto {
 export class LeagueListItemDto {
   public id?: string;
   public name?: string;
-  public membersCount?: number;
+  public members?: number;
   public createdOn?: string;
 
   constructor(init?: Partial<LeagueListItemDto>) {
@@ -32,8 +29,8 @@ export class LeagueListItemDto {
 }
 
 export class LeagueMemberDto {
-  public id?: string;
   public teamId?: string;
+  public isMaintainer?: boolean;
   public name?: string;
   public points?: number;
   public money?: number;

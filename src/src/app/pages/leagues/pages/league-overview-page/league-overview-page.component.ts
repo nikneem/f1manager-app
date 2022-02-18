@@ -6,7 +6,7 @@ import { LeagueCreateDialogComponent } from '@pages/leagues/dialogs/league-creat
 import { LeagueRequestDialogComponent } from '@pages/leagues/dialogs/league-request-dialog/league-request-dialog.component';
 import { AppState } from '@state/app.state';
 import { leagueGetMine } from '@state/league/league-actions';
-import { LeagueDto } from '@state/league/league-models';
+import { LeagueDto, LeagueListItemDto } from '@state/league/league-models';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -19,7 +19,7 @@ export class LeagueOverviewPageComponent implements OnInit, OnDestroy {
   private myLeaguesLoadingSubscription?: Subscription;
 
   public isLoadingMine: boolean = false;
-  public mine?: Array<LeagueDto>;
+  public mine?: Array<LeagueListItemDto>;
 
   constructor(
     private store: Store<AppState>,
@@ -33,7 +33,7 @@ export class LeagueOverviewPageComponent implements OnInit, OnDestroy {
   joinExistingLeague() {
     this.dialog.open(LeagueRequestDialogComponent);
   }
-  leagueDetails(league: LeagueDto) {
+  leagueDetails(league: LeagueListItemDto) {
     this.router.navigate([`/leagues/details`, league.id]);
   }
   ngOnInit(): void {

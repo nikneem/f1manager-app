@@ -79,9 +79,7 @@ export class EngineDetailsDialogComponent implements OnInit, OnDestroy {
       activeFrom: new FormControl(this.engine.activeFrom, [
         Validators.required,
       ]),
-      activeUntil: new FormControl(this.engine.activeUntil, [
-        Validators.required,
-      ]),
+      activeUntil: new FormControl(this.engine.activeUntil),
       pictureUrl: new FormControl(this.engine.pictureUrl),
       value: new FormControl(this.engine.value, [Validators.required]),
       weeklyWearOff: new FormControl(this.engine.weeklyWearOff),

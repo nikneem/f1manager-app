@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+import { TeamFilterDto } from '@state/team/team-models';
 import {
   LeagueCreateDto,
   LeagueDto,
@@ -10,7 +11,7 @@ import {
 export const leagueGetMine = createAction('[League] Get Mine');
 export const leagueGetMineSuccess = createAction(
   '[League] Get Mine Success',
-  props<{ payload: Array<LeagueDto> | undefined }>()
+  props<{ payload: Array<LeagueListItemDto> | undefined }>()
 );
 export const leagueGetMineFailed = createAction(
   '[League] Get Mine Failed',
@@ -28,11 +29,11 @@ export const leagueGetSuccess = createAction(
 
 export const leagueGetMembers = createAction(
   '[League] Get Members',
-  props<{ leagueId: string }>()
+  props<{ filter: TeamFilterDto }>()
 );
 export const leagueGetMembersSuccess = createAction(
   '[League] Get Members Success',
-  props<{ payload: Array<LeagueMemberDto> }>()
+  props<{ members: Array<LeagueMemberDto> }>()
 );
 
 export const leagueGetRequests = createAction(

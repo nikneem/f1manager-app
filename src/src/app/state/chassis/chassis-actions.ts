@@ -46,6 +46,10 @@ export const chassisUndelete = createAction(
   '[Chassis] Undelete',
   props<{ id: string }>()
 );
+export const chassisUndeleteSuccess = createAction(
+  '[Chassis] Undelete Success',
+  props<{ id: string }>()
+);
 
 export const chassisGetAvailable = createAction('[Chassis] Get Available');
 export const chassisGetAvailableSuccess = createAction(

@@ -1,5 +1,6 @@
 export class TeamDriverDto {
   id?: string;
+  driverId?: string;
   name?: string;
   pictureUrl?: string;
   boughtOn?: Date;

@@ -45,8 +45,8 @@ export class LeagueJoinRequestsComponent implements OnInit, OnDestroy {
       .subscribe((val) => {
         this.leagueId = undefined;
         this.isOwner = false;
-        if (val?.isOwner && val?.id) {
-          this.isOwner = val.isOwner;
+        if (val?.isMaintainer && val?.id) {
+          this.isOwner = val.isMaintainer;
           this.leagueId = val.id;
           this.store.dispatch(leagueGetRequests({ leagueId: val.id }));
         }

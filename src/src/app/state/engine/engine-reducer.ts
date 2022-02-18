@@ -10,6 +10,7 @@ import {
   engineGetAvailableSuccess,
   engineGetList,
   engineGetListSuccess,
+  engineUndeleteSuccess,
   engineUpdate,
   engineUpdateSuccess,
 } from './engine-actions';
@@ -56,6 +57,9 @@ const _engineReducer = createReducer(
   on(engineDeleteSuccess, (state, { id }) =>
     engineDeleteSuccessHandler(state, id)
   ),
+  on(engineUndeleteSuccess, (state, { id }) =>
+    engineUndeleteSuccessHandler(state, id)
+  ),
 
   on(engineGetAvailable, (state) => ({
     ...state,
@@ -100,12 +104,13 @@ function engineUpdateSuccessHandler(
   let chassisList = copyState.engines
     ? new Array<EngineDto>(...copyState.engines)
     : new Array<EngineDto>();
-
-  const chassisIndex = chassisList.findIndex((elm) => elm.id === payload.id);
-  if (chassisIndex >= 0) {
-    chassisList.splice(chassisIndex, 1, payload);
+  if (payload) {
+    const chassisIndex = chassisList.findIndex((elm) => elm.id === payload.id);
+    if (chassisIndex >= 0) {
+      chassisList.splice(chassisIndex, 1, payload);
+    }
+    copyState.engines = chassisList;
   }
-  copyState.engines = chassisList;
   copyState.isLoading = false;
 
   return copyState;
@@ -133,6 +138,27 @@ function engineDeleteSuccessHandler(
     } else {
       chassisList.splice(chassisIndex, 1);
     }
+  }
+  copyState.engines = chassisList;
+  copyState.isLoading = false;
+
+  return copyState;
+}
+function engineUndeleteSuccessHandler(
+  state: EngineState,
+  id: string
+): EngineState {
+  const copyState: EngineState = Object.assign({}, state);
+
+  let chassisList = copyState.engines
+    ? new Array<EngineDto>(...copyState.engines)
+    : new Array<EngineDto>();
+
+  const chassisIndex = chassisList.findIndex((elm) => elm.id === id);
+  if (chassisIndex >= 0) {
+    const copyEngine: EngineDto = Object.assign({}, chassisList[chassisIndex]);
+    copyEngine.isDeleted = false;
+    chassisList.splice(chassisIndex, 1, copyEngine);
   }
   copyState.engines = chassisList;
   copyState.isLoading = false;

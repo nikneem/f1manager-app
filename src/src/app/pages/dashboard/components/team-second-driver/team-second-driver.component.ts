@@ -4,6 +4,7 @@ import { SelectDriverComponent } from '@components/select-driver/select-driver.c
 import { SellDriverComponent } from '@components/sell-driver/sell-driver.component';
 import { Store } from '@ngrx/store';
 import { AppState } from '@state/app.state';
+import { DriverDto } from '@state/driver/driver-models';
 import {
   teamDriverBuyFirst,
   teamDriverSell,
@@ -21,12 +22,15 @@ import { Subscription } from 'rxjs';
 })
 export class TeamSecondDriverComponent implements OnInit, OnDestroy {
   private teamDriverChangedSubscription?: Subscription;
+  private availableDriversSubscription?: Subscription;
 
   @Input() public teamId?: string;
 
+  public driverInfo?: DriverDto;
   public driver?: TeamDriverDto;
   public isLoading: boolean = true;
   public errorMessage?: string;
+  public availableDrivers?: Array<DriverDto>;
 
   constructor(private store: Store<AppState>, private dialog: MatDialog) {}
 
@@ -52,6 +56,16 @@ export class TeamSecondDriverComponent implements OnInit, OnDestroy {
       }
     });
   }
+  public enrichDriverInformation() {
+    if (this.availableDrivers && this.driver?.driverId) {
+      const driverIndex = this.availableDrivers.findIndex(
+        (elm) => elm.id === this.driver?.driverId
+      );
+      if (driverIndex >= 0) {
+        this.driverInfo = this.availableDrivers[driverIndex];
+      }
+    }
+  }
 
   private loadTeamDriverDetails(teamId: string) {
     this.store.dispatch(
@@ -66,14 +80,24 @@ export class TeamSecondDriverComponent implements OnInit, OnDestroy {
       this.loadTeamDriverDetails(this.teamId);
     }
     this.teamDriverChangedSubscription = this.store
-      .select((str) => str.teamDriverState)
+      .select((str) => str.teamDriverState.secondDriver)
       .subscribe((val) => {
-        this.driver = val.secondDriver;
+        this.driver = val;
+        this.enrichDriverInformation();
+      });
+    this.availableDriversSubscription = this.store
+      .select((str) => str.driverState.activeDrivers)
+      .subscribe((val) => {
+        this.availableDrivers = val;
+        this.enrichDriverInformation();
       });
   }
   ngOnDestroy(): void {
     if (this.teamDriverChangedSubscription) {
       this.teamDriverChangedSubscription.unsubscribe();
+    }
+    if (this.availableDriversSubscription) {
+      this.availableDriversSubscription.unsubscribe();
     }
   }
 }

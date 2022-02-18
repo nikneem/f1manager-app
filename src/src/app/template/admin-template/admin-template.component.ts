@@ -3,6 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { AppState } from '@state/app.state';
+import { driverGetAvailable } from '@state/driver/driver-actions';
 import { NotificationMessageDto } from '@state/notification/notification-models';
 import { MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
@@ -61,6 +62,8 @@ export class AdminTemplateComponent implements OnInit, OnDestroy {
             );
         }
       });
+
+    this.store.dispatch(driverGetAvailable());
   }
   ngOnDestroy(): void {
     if (this.notificationSubscription) {

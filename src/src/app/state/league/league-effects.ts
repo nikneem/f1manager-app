@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LeaguesService } from '@services/leagues.service';
+import { TeamsService } from '@services/teams.service';
 import { notifySnackbar } from '@state/notification/notification-actions';
 import { from, of } from 'rxjs';
 import { catchError, debounceTime, map, mergeMap } from 'rxjs/operators';
@@ -34,6 +35,7 @@ import { LeagueListItemDto } from './league-models';
 export class LeagueEffects {
   constructor(
     private leaguesService: LeaguesService,
+    private teamsService: TeamsService,
     private actions$: Actions
   ) {}
 
@@ -79,8 +81,10 @@ export class LeagueEffects {
     this.actions$.pipe(
       ofType(leagueGetMembers),
       mergeMap((action) =>
-        this.leaguesService.getMembers(action.leagueId).pipe(
-          map((league) => leagueGetMembersSuccess({ payload: league })),
+        this.teamsService.search(action.filter).pipe(
+          map((payload) =>
+            leagueGetMembersSuccess({ members: payload.entities })
+          ),
           catchError((err) => {
             if (err.status === 409) {
               return of(leagueFailed({ errorMessage: err.error.errorMessage }));
@@ -127,7 +131,6 @@ export class LeagueEffects {
           .pipe(
             mergeMap(() => [
               leagueAcceptRequestSuccess({ requestId: action.requestId }),
-              leagueGetMembers({ leagueId: action.leagueId }),
             ]),
             catchError((err) => {
               if (err.status === 409) {
@@ -157,7 +160,6 @@ export class LeagueEffects {
               leagueAcceptRequestSuccess({ requestId: action.requestId })
             ),
             catchError((err) => {
-              debugger;
               if (err.status === 409) {
                 return of(
                   leagueFailed({ errorMessage: err.error.errorMessage })

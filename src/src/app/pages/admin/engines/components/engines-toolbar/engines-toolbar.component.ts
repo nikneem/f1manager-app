@@ -10,6 +10,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '@state/app.state';
 import { chassisFilterUpdate } from '@state/chassis/chassis-actions';
 import { ChassisListFilterDto } from '@state/chassis/chassis-models';
+import { engineFilterUpdate } from '@state/engine/engine-actions';
 import { EnginesListFilterDto } from '@state/engine/engine-models';
 import { Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
@@ -41,7 +42,7 @@ export class EnginesToolbarComponent implements OnInit, OnDestroy {
 
     this.filterForm.valueChanges.pipe(debounceTime(380)).subscribe((value) => {
       const filter = new EnginesListFilterDto(value);
-      this.store.dispatch(chassisFilterUpdate({ payload: filter }));
+      this.store.dispatch(engineFilterUpdate({ payload: filter }));
     });
   }
 

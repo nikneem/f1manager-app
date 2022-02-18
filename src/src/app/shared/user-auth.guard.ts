@@ -31,7 +31,8 @@ export class UserAuthGuard implements CanActivate {
     | boolean
     | UrlTree {
     if (!this.isLoggedIn) {
-      console.log('User is not authorized for this route');
+      localStorage.setItem('login-redirect', state.url);
+      console.log(`User is not authorized for this route ${state.url}`);
     }
     return this.isLoggedIn;
   }

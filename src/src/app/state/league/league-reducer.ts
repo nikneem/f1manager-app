@@ -21,7 +21,13 @@ import {
   leagueSearch,
   leagueSearchSuccess,
 } from './league-actions';
-import { LeagueDto, LeagueJoinRequestDto } from './league-models';
+import * as _ from 'lodash';
+import {
+  LeagueDto,
+  LeagueJoinRequestDto,
+  LeagueListItemDto,
+  LeagueMemberDto,
+} from './league-models';
 import { INITIAL_LEAGUE_STATE, LeagueState } from './league-state';
 
 const _leagueReducer = createReducer(
@@ -57,6 +63,7 @@ const _leagueReducer = createReducer(
   on(leagueGet, (state) => ({
     ...state,
     isLoading: true,
+    league: undefined,
     errorMessage: undefined,
   })),
   on(leagueGetSuccess, (state, { payload }) => ({
@@ -70,12 +77,9 @@ const _leagueReducer = createReducer(
     isLoading: true,
     errorMessage: undefined,
   })),
-  on(leagueGetMembersSuccess, (state, { payload }) => ({
-    ...state,
-    isLoading: false,
-    leagueMembers: payload,
-  })),
-
+  on(leagueGetMembersSuccess, (state, { members }) => {
+    return leagueEnrichMembers(state, members);
+  }),
   on(leagueGetRequestsSuccess, (state, { payload }) => ({
     ...state,
     leagueRequests: payload,
@@ -119,18 +123,55 @@ const _leagueReducer = createReducer(
   }))
 );
 
+function leagueEnrichMembers(
+  state: LeagueState,
+  members: Array<LeagueMemberDto>
+): LeagueState {
+  const copyState: LeagueState = Object.assign({}, state);
+  if (copyState.league) {
+    let league = Object.assign({}, copyState.league);
+    let membersList = copyState.league?.members
+      ? new Array<LeagueMemberDto>(...copyState.league.members)
+      : new Array<LeagueMemberDto>();
+    members.forEach((elm, index) => {
+      const existingMember = membersList.find((r) => r.teamId === elm.teamId);
+      if (existingMember) {
+        let existingIndex = membersList.indexOf(existingMember);
+        if (existingIndex >= 0) {
+          let enrichedMember = new LeagueMemberDto({
+            teamId: elm.teamId,
+            name: elm.name,
+            money: elm.money,
+            points: elm.points,
+            isMaintainer: elm.isMaintainer,
+          });
+          membersList.splice(existingIndex, 1, enrichedMember);
+        }
+      }
+    });
+    league.members = _.orderBy(membersList, ['points'], 'desc');
+    copyState.league = league;
+  }
+  copyState.isLoading = false;
+  return copyState;
+}
 function leagueCreatedSuccessHandler(
   state: LeagueState,
   message: LeagueDto
 ): LeagueState {
   const copyState: LeagueState = Object.assign({}, state);
-
-  debugger;
   let leaguesList = copyState.mine
-    ? new Array<LeagueDto>(...copyState.mine)
-    : new Array<LeagueDto>();
+    ? new Array<LeagueListItemDto>(...copyState.mine)
+    : new Array<LeagueListItemDto>();
 
-  leaguesList.push(message);
+  let newListItem = new LeagueListItemDto({
+    id: message.id,
+    createdOn: message.createdOn,
+    name: message.name,
+    members: message.members?.length,
+  });
+
+  leaguesList.push(newListItem);
   copyState.mine = leaguesList;
   copyState.isLoading = false;
 
@@ -141,8 +182,6 @@ function leagueRequestAssessmentResultHandler(
   requestId: string | undefined
 ): LeagueState {
   const copyState: LeagueState = Object.assign({}, state);
-
-  debugger;
   let requestsList = copyState.leagueRequests
     ? new Array<LeagueJoinRequestDto>(...copyState.leagueRequests)
     : new Array<LeagueJoinRequestDto>();

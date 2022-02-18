@@ -4,13 +4,13 @@
       <div mat-card-avatar class="example-header-image">
         <img src="/assets/icons/race.svg" class="component-type-picture" />
       </div>
-      <mat-card-title>{{ driver.name }}</mat-card-title>
-      <mat-card-subtitle>&nbsp;</mat-card-subtitle>
+      <mat-card-title>{{ driverInfo?.name }}</mat-card-title>
+      <mat-card-subtitle>{{ driverInfo?.country }}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
       <div
         class="component-picture"
-        [style.backgroundImage]="'url(' + driver.pictureUrl + ')'"
+        [style.backgroundImage]="'url(' + driverInfo?.pictureUrl + ')'"
       ></div>
       <dl>
         <dt>{{ "dashboard.components.bought" | translate }}</dt>
@@ -18,7 +18,7 @@
         <dt>{{ "dashboard.components.bought-for" | translate }}</dt>
         <dd>{{ driver.boughtFor | currency }}</dd>
         <dt>{{ "dashboard.components.value" | translate }}</dt>
-        <dd>{{ driver.currentPrice | currency }}</dd>
+        <dd>{{ driverInfo?.value | currency }}</dd>
         <dt>{{ "dashboard.components.points-gained" | translate }}</dt>
         <dd>{{ driver.pointsGained }}</dd>
         <dt>{{ "dashboard.components.wear-down" | translate }}</dt>

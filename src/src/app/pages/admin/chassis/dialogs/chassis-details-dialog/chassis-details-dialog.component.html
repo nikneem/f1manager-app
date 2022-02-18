@@ -1,74 +1,108 @@
-<h2 mat-dialog-title>{{ "admin.chassis.details.title" | translate }}</h2>
+<h2 mat-dialog-title>{{ "admin.drivers.details.title" | translate }}</h2>
 <mat-dialog-content *ngIf="chassisForm">
-  <form [formGroup]="chassisForm" no-validate>
-    <input type="hidden" formControlName="id" />
-    <mat-form-field>
-      <input
-        matInput
-        placeholder="{{ 'admin.chassis.details.name' | translate }}"
-        formControlName="name"
-      />
-    </mat-form-field>
+  <div class="driver-details">
+    <div class="properties">
+      <form [formGroup]="chassisForm" no-validate>
+        <input type="hidden" formControlName="id" />
+        <input type="hidden" formControlName="pictureUrl" />
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="{{ 'admin.chassis.details.name' | translate }}"
+            formControlName="name"
+          />
+        </mat-form-field>
+        <mat-form-field class="half-width">
+          <input
+            matInput
+            placeholder="{{ 'admin.chassis.details.manufacturer' | translate }}"
+            formControlName="manufacturer"
+          />
+        </mat-form-field>
+        <mat-form-field class="half-width">
+          <input
+            matInput
+            placeholder="{{ 'admin.chassis.details.model' | translate }}"
+            formControlName="model"
+          />
+        </mat-form-field>
 
-    <mat-form-field>
-      <input
-        matInput
-        type="number"
-        placeholder="{{ 'admin.chassis.details.weeklyWearOutPercentage' | translate }}"
-        formControlName="weeklyWearOutPercentage"
-      />
-    </mat-form-field>
+        <mat-form-field class="half-width">
+          <mat-label>{{
+            "admin.chassis.details.active-from" | translate
+          }}</mat-label>
+          <input
+            matInput
+            [matDatepicker]="actfrom"
+            formControlName="activeFrom"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="actfrom"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #actfrom></mat-datepicker>
+        </mat-form-field>
 
-    <mat-form-field>
-      <input
-        matInput
-        type="number"
-        placeholder="{{ 'admin.chassis.details.maxWearOutPercentage' | translate }}"
-        formControlName="maxWearOutPercentage"
-      />
-    </mat-form-field>
+        <mat-form-field class="half-width">
+          <mat-label>{{
+            "admin.chassis.details.active-to" | translate
+          }}</mat-label>
+          <input
+            matInput
+            [matDatepicker]="actto"
+            formControlName="activeUntil"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="actto"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #actto></mat-datepicker>
+        </mat-form-field>
 
-    <mat-form-field>
-      <input
-        matInput
-        placeholder="{{ 'admin.chassis.details.picture' | translate }}"
-        formControlName="pictureUrl"
-      />
-    </mat-form-field>
+        <mat-form-field class="half-width">
+          <input
+            matInput
+            type="number"
+            placeholder="{{
+              'admin.chassis.details.weekly-wearoff' | translate
+            }}"
+            formControlName="weeklyWearOff"
+          />
+        </mat-form-field>
+        <mat-form-field class="half-width">
+          <input
+            matInput
+            type="number"
+            placeholder="{{ 'admin.chassis.details.max-wearoff' | translate }}"
+            formControlName="maxWearOff"
+          />
+        </mat-form-field>
 
-    <mat-form-field class="half-width">
-      <mat-label>{{
-        "admin.chassis.details.active-from" | translate
-      }}</mat-label>
-      <input matInput [matDatepicker]="actfrom" formControlName="activeFrom" />
-      <mat-datepicker-toggle matSuffix [for]="actfrom"></mat-datepicker-toggle>
-      <mat-datepicker #actfrom></mat-datepicker>
-    </mat-form-field>
+        <mat-form-field>
+          <input
+            matInput
+            type="number"
+            placeholder="{{ 'admin.chassis.details.value' | translate }}"
+            formControlName="value"
+          />
+        </mat-form-field>
 
-    <mat-form-field class="half-width">
-      <mat-label>{{ "admin.chassis.details.active-to" | translate }}</mat-label>
-      <input matInput [matDatepicker]="actto" formControlName="activeUntil" />
-      <mat-datepicker-toggle matSuffix [for]="actto"></mat-datepicker-toggle>
-      <mat-datepicker #actto></mat-datepicker>
-    </mat-form-field>
-
-    <mat-form-field>
-      <input
-        matInput
-        type="number"
-        placeholder="{{ 'admin.chassis.details.value' | translate }}"
-        formControlName="currentValue"
-      />
-    </mat-form-field>
-
-    <mat-slide-toggle color="primary" formControlName="isAvailable">{{
-      "admin.chassis.details.available" | translate
-    }}</mat-slide-toggle>
-    <br />
-    <mat-slide-toggle color="primary" formControlName="isDeleted">{{
-      "admin.chassis.details.deleted" | translate
-    }}</mat-slide-toggle>
-  </form>
+        <mat-slide-toggle color="primary" formControlName="isAvailable">{{
+          "admin.chassis.details.available" | translate
+        }}</mat-slide-toggle>
+        <br />
+        <mat-slide-toggle color="primary" formControlName="isDeleted">{{
+          "admin.chassis.details.deleted" | translate
+        }}</mat-slide-toggle>
+      </form>
+    </div>
+    <div class="visual">
+      <f1-upload-image
+        [pictureUrl]="chassis.pictureUrl"
+        (fileUploaded)="fileUploaded($event)"
+      ></f1-upload-image>
+    </div>
+  </div>
 </mat-dialog-content>
 <mat-dialog-actions *ngIf="chassisForm">
   <button mat-flat-button color="accent" mat-dialog-close>

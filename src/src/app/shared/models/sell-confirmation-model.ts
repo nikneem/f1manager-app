@@ -18,3 +18,11 @@ export class ComponentPurchaseDto {
     this.componentId = cId;
   }
 }
+
+export interface CollectionResult<T> {
+  page: number;
+  pageSize: number;
+  totalPages: number;
+  totalEntries: number;
+  entities: Array<T>;
+}

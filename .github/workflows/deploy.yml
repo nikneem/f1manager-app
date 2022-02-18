@@ -22,7 +22,7 @@ jobs:
         working-directory: src
         run: |
           ng build --configuration development --output-path ./dev-published
-      - name: Compile Angular app with Dev config
+      - name: Compile Angular app with Prod config
         working-directory: src
         run: |
           ng build --configuration production --output-path ./prod-published

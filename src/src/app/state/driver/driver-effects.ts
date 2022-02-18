@@ -16,6 +16,7 @@ import {
   driverGetList,
   driverGetListSuccess,
   driverUndelete,
+  driverUndeleteSuccess,
   driverUpdate,
   driverUpdateSuccess,
 } from './driver-actions';
@@ -80,7 +81,7 @@ export class DriverEffects {
       ofType(driverUndelete),
       mergeMap((act) =>
         this.driversService.undelete(act.id).pipe(
-          map((driver) => driverUpdateSuccess({ payload: driver })),
+          map((driver) => driverUndeleteSuccess({ id: act.id })),
           catchError((err) => this.handleError(err))
         )
       )

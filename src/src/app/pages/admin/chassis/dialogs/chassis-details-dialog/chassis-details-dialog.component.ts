@@ -18,10 +18,10 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'f1-chassis-details-dialog',
   templateUrl: './chassis-details-dialog.component.html',
-  styleUrls: ['./chassis-details-dialog.component.scss']
+  styleUrls: ['./chassis-details-dialog.component.scss'],
 })
 export class ChassisDetailsDialogComponent implements OnInit, OnDestroy {
-  private chassis: ChassisDto;
+  public chassis: ChassisDto;
   public chassisForm?: FormGroup;
   public isLoading: boolean = false;
   private isLoadingSubscription?: Subscription;
@@ -42,8 +42,13 @@ export class ChassisDetailsDialogComponent implements OnInit, OnDestroy {
       new ChassisDto({
         isAvailable: true,
         isDeleted: false,
-        currentValue: 20000000,
+        value: 20000000,
       });
+  }
+
+  fileUploaded(filename: string) {
+    this.chassisForm?.patchValue({ pictureUrl: filename });
+    this.chassisForm?.controls['pictureUrl'].markAsDirty();
   }
 
   save() {
@@ -52,12 +57,12 @@ export class ChassisDetailsDialogComponent implements OnInit, OnDestroy {
       return;
     }
     if (this.chassisForm?.valid) {
-      const chassisModel = new ChassisDto(this.chassisForm?.value);
-      if (!chassisModel.id) {
-        this.store.dispatch(chassisCreate({ payload: chassisModel }));
+      const engineModel = new ChassisDto(this.chassisForm?.value);
+      if (!engineModel.id) {
+        this.store.dispatch(chassisCreate({ payload: engineModel }));
       } else {
         this.store.dispatch(
-          chassisUpdate({ id: chassisModel.id, payload: chassisModel })
+          chassisUpdate({ id: engineModel.id, payload: engineModel })
         );
       }
     }
@@ -67,22 +72,18 @@ export class ChassisDetailsDialogComponent implements OnInit, OnDestroy {
     this.chassisForm = new FormGroup({
       id: new FormControl(this.chassis.id),
       name: new FormControl(this.chassis.name, [Validators.required]),
-      weeklyWearOutPercentage: new FormControl(this.chassis.weeklyWearOutPercentage, [
+      manufacturer: new FormControl(this.chassis.manufacturer, [
         Validators.required,
       ]),
-      maxWearOutPercentage: new FormControl(this.chassis.maxWearOutPercentage, [
-        Validators.required,
-      ]),
-      pictureUrl: new FormControl(this.chassis.pictureUrl, [
-        Validators.required,
-      ]),
-      currentValue: new FormControl(this.chassis.currentValue, [
-        Validators.required,
-      ]),
+      model: new FormControl(this.chassis.model, [Validators.required]),
       activeFrom: new FormControl(this.chassis.activeFrom, [
         Validators.required,
       ]),
       activeUntil: new FormControl(this.chassis.activeUntil),
+      pictureUrl: new FormControl(this.chassis.pictureUrl),
+      value: new FormControl(this.chassis.value, [Validators.required]),
+      weeklyWearOff: new FormControl(this.chassis.weeklyWearOff),
+      maxWearOff: new FormControl(this.chassis.maxWearOff),
       isAvailable: new FormControl(this.chassis.isAvailable),
       isDeleted: new FormControl(this.chassis.isDeleted),
     });

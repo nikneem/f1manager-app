@@ -10,6 +10,7 @@ import {
   chassisGetAvailableSuccess,
   chassisGetList,
   chassisGetListSuccess,
+  chassisUndeleteSuccess,
   chassisUpdate,
   chassisUpdateSuccess,
 } from './chassis-actions';
@@ -55,6 +56,9 @@ const _chassisReducer = createReducer(
   })),
   on(chassisDeleteSuccess, (state, { id }) =>
     chassisDeleteSuccessHandler(state, id)
+  ),
+  on(chassisUndeleteSuccess, (state, { id }) =>
+    chassisUndeleteSuccessHandler(state, id)
   ),
 
   on(chassisGetAvailable, (state) => ({
@@ -124,7 +128,10 @@ function chassisDeleteSuccessHandler(
   const chassisIndex = chassisList.findIndex((elm) => elm.id === id);
   if (chassisIndex >= 0) {
     if (copyState.filter.deleted) {
-      const copyChassis: ChassisDto = Object.assign({}, chassisList[chassisIndex]);
+      const copyChassis: ChassisDto = Object.assign(
+        {},
+        chassisList[chassisIndex]
+      );
       copyChassis.isDeleted = true;
       chassisList.splice(chassisIndex, 1, copyChassis);
     } else {
@@ -136,7 +143,34 @@ function chassisDeleteSuccessHandler(
 
   return copyState;
 }
+function chassisUndeleteSuccessHandler(
+  state: ChassisState,
+  id: string
+): ChassisState {
+  const copyState: ChassisState = Object.assign({}, state);
 
-export function chassisReducer(state: ChassisState | undefined, action: Action) {
+  let chassisList = copyState.chassis
+    ? new Array<ChassisDto>(...copyState.chassis)
+    : new Array<ChassisDto>();
+
+  const chassisIndex = chassisList.findIndex((elm) => elm.id === id);
+  if (chassisIndex >= 0) {
+    const copyChassis: ChassisDto = Object.assign(
+      {},
+      chassisList[chassisIndex]
+    );
+    copyChassis.isDeleted = false;
+    chassisList.splice(chassisIndex, 1, copyChassis);
+  }
+  copyState.chassis = chassisList;
+  copyState.isLoading = false;
+
+  return copyState;
+}
+
+export function chassisReducer(
+  state: ChassisState | undefined,
+  action: Action
+) {
   return _chassisReducer(state, action);
 }

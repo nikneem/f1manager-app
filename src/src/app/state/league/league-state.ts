@@ -7,7 +7,7 @@ import {
 
 export interface LeagueState {
   isLoadingMine: boolean;
-  mine?: Array<LeagueDto>;
+  mine?: Array<LeagueListItemDto>;
 
   searchTerm?: string;
   searchResults?: Array<LeagueListItemDto>;

@@ -162,29 +162,6 @@
         "message": "Are you sure you wish to delete base team '{{name}}' from the system?"
       }
     },
-    "chassis": {
-      "title": "Chassis maintenance",
-      "create-tooltip": "Create a new chassis",
-      "delete": {
-        "title": "Delete chassis",
-        "message": "Are you sure you wish to delete chassis '{{name}}' from the system?"
-      },
-      "undelete": {
-        "title": "Recover chassis",
-        "message": "Are you sure you wish to recover chassis '{{name}}'?"
-      },
-      "details": {
-        "name": "Name",
-        "value": "Current value",
-        "picture": "Picture URL",
-        "active-from": "Active from",
-        "active-to": "Active until",
-        "is-available": "Active",
-        "is-active": "Active",
-        "available": "Chassis is marked as available",
-        "deleted": "Chassis is marked as deleted"
-      }
-    },
     "drivers": {
       "title": "Drivers maintenance",
       "create-tooltip": "Create a new driver",
@@ -209,6 +186,60 @@
         "is-active": "Active",
         "available": "Driver is marked as available",
         "deleted": "Driver is marked as deleted"
+      }
+    },
+    "engines": {
+      "title": "Engines maintenance",
+      "create-tooltip": "Create a new engine",
+      "delete": {
+        "title": "Delete engine",
+        "message": "Are you sure you wish to delete engine '{{name}}' from the system?"
+      },
+      "undelete": {
+        "title": "Recover engine",
+        "message": "Are you sure you wish to recover engine '{{name}}'?"
+      },
+      "details": {
+        "name": "Name",
+        "manufacturer": "Manufacturer",
+        "model": "Model",
+        "weekly-wearoff": "Weekly wear-off",
+        "max-wearoff": "Maximum wear-off",
+        "value": "Current value",
+        "picture": "Picture URL",
+        "active-from": "Active from",
+        "active-to": "Active until",
+        "is-available": "Active",
+        "is-active": "Active",
+        "available": "Engine is marked as available",
+        "deleted": "Engine is marked as deleted"
+      }
+    },
+    "chassis": {
+      "title": "Chassis maintenance",
+      "create-tooltip": "Create a new chassis",
+      "delete": {
+        "title": "Delete chassis",
+        "message": "Are you sure you wish to delete chassis '{{name}}' from the system?"
+      },
+      "undelete": {
+        "title": "Recover chassis",
+        "message": "Are you sure you wish to recover chassis '{{name}}'?"
+      },
+      "details": {
+        "name": "Name",
+        "manufacturer": "Manufacturer",
+        "model": "Model",
+        "weekly-wearoff": "Weekly wear-off",
+        "max-wearoff": "Maximum wear-off",
+        "value": "Current value",
+        "picture": "Picture URL",
+        "active-from": "Active from",
+        "active-to": "Active until",
+        "is-available": "Active",
+        "is-active": "Active",
+        "available": "Chassis is marked as available",
+        "deleted": "Chassis is marked as deleted"
       }
     }
   },

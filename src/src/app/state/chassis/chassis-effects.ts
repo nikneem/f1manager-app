@@ -15,6 +15,7 @@ import {
   chassisGetList,
   chassisGetListSuccess,
   chassisUndelete,
+  chassisUndeleteSuccess,
   chassisUpdate,
   chassisUpdateSuccess,
 } from './chassis-actions';
@@ -103,7 +104,7 @@ export class ChassisEffects {
       ofType(chassisUndelete),
       mergeMap((act) =>
         this.chassisService.undelete(act.id).pipe(
-          map((chassis) => chassisUpdateSuccess({ payload: chassis })),
+          map((chassis) => chassisUndeleteSuccess({ id: act.id })),
           catchError((err) => {
             if (err.status === 409) {
               return of(

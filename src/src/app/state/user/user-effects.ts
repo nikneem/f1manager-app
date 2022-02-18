@@ -86,7 +86,11 @@ export class UserEffects {
             return userLoginSucceeded({ result: payload });
           }),
           tap(() => {
-            this.router.navigate(['/dashboard']);
+            let redirect = localStorage.getItem('login-redirect');
+            localStorage.removeItem('login-redirect');
+            if (redirect) {
+              this.router.navigate([redirect]);
+            }
           }),
           catchError((err) => {
             if (err.status === 409) {
@@ -109,11 +113,9 @@ export class UserEffects {
       mergeMap((action) =>
         this.usersService.register(action.dto).pipe(
           map((payload) => {
-            debugger;
             return userLoginSucceeded({ result: payload });
           }),
           tap(() => {
-            debugger;
             this.router.navigate(['/dashboard']);
           }),
           catchError((err) => {

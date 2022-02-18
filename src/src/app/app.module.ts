@@ -76,7 +76,7 @@ export function createTranslateLoader(http: HttpClient) {
       metaReducers,
       initialState: INITIAL_APPSTATE,
     }),
-    StoreDevtoolsModule.instrument({ maxAge: 5 }),
+    StoreDevtoolsModule.instrument({ maxAge: 15 }),
     EffectsModule.forRoot([
       UserEffects,
       PlayerEffects,

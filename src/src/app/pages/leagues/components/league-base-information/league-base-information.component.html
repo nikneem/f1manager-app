@@ -9,39 +9,6 @@
           formControlName="name"
         />
       </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>{{ "leagues.owner-name" | translate }}</mat-label>
-        <input
-          matInput
-          placeholder="{{ 'leagues.owner-name' | translate }}"
-          formControlName="ownerName"
-        />
-      </mat-form-field>
-      <mat-form-field class="half-width">
-        <mat-label>{{ "leagues.members-count" | translate }}</mat-label>
-        <input
-          matInput
-          placeholder="{{ 'leagues.members-count' | translate }}"
-          formControlName="membersCount"
-        />
-      </mat-form-field>
-      <mat-form-field class="half-width">
-        <mat-label>{{ "leagues.team-position" | translate }}</mat-label>
-        <input
-          matInput
-          placeholder="{{ 'leagues.team-position' | translate }}"
-          formControlName="teamPosition"
-        />
-      </mat-form-field>
-      <mat-form-field class="half-width">
-        <mat-label>{{ "leagues.points-average" | translate }}</mat-label>
-        <input
-          matInput
-          placeholder="{{ 'leagues.points-average' | translate }}"
-          formControlName="pointsAverage"
-        />
-      </mat-form-field>
-
       <mat-form-field class="half-width">
         <mat-label>{{ "leagues.created-on" | translate }}</mat-label>
         <input matInput [matDatepicker]="picker" formControlName="createdOn" />

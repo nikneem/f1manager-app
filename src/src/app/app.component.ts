@@ -87,7 +87,7 @@ export class AppComponent implements OnInit, OnDestroy {
             'f1mgr-refresh-token',
             val,
             expirationDate,
-            undefined,
+            '/',
             window.location.hostname,
             false,
             'Strict'
@@ -99,7 +99,7 @@ export class AppComponent implements OnInit, OnDestroy {
                 token: new RefreshTokenDto({ token: val }),
               })
             );
-          }, 6000000);
+          }, 60000);
         }
       });
   }

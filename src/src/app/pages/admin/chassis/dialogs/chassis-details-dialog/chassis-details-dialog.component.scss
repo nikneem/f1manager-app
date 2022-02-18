@@ -1,0 +1,9 @@
+.driver-details {
+  display: flex;
+  .properties {
+    flex: 8 8 80%;
+  }
+  .visual {
+    flex: 2 2 20%;
+  }
+}

@@ -6,6 +6,18 @@ export class TeamCreateDto {
   }
 }
 
+export interface TeamFilterDto {
+  name: string;
+  teamIds: Array<string>;
+}
+
+export interface TeamListItemDto {
+  id: string;
+  name: string;
+  points: number;
+  money: number;
+}
+
 export class TeamDetailsDto {
   public id?: string;
   public name?: string;

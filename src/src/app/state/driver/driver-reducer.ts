@@ -10,6 +10,7 @@ import {
   driverGetAvailableSuccess,
   driverGetList,
   driverGetListSuccess,
+  driverUndeleteSuccess,
   driverUpdate,
   driverUpdateSuccess,
 } from './driver-actions';
@@ -55,6 +56,9 @@ const _driverReducer = createReducer(
   })),
   on(driverDeleteSuccess, (state, { id }) =>
     driverDeleteSuccessHandler(state, id)
+  ),
+  on(driverUndeleteSuccess, (state, { id }) =>
+    driverUndeleteSuccessHandler(state, id)
   ),
 
   on(driverGetAvailable, (state) => ({
@@ -130,6 +134,28 @@ function driverDeleteSuccessHandler(
     } else {
       driversList.splice(driverIndex, 1);
     }
+  }
+  copyState.drivers = driversList;
+  copyState.isLoading = false;
+
+  return copyState;
+}
+
+function driverUndeleteSuccessHandler(
+  state: DriverState,
+  id: string
+): DriverState {
+  const copyState: DriverState = Object.assign({}, state);
+
+  let driversList = copyState.drivers
+    ? new Array<DriverDto>(...copyState.drivers)
+    : new Array<DriverDto>();
+
+  const driverIndex = driversList.findIndex((elm) => elm.id === id);
+  if (driverIndex >= 0) {
+    const copyDriver: DriverDto = Object.assign({}, driversList[driverIndex]);
+    copyDriver.isDeleted = false;
+    driversList.splice(driverIndex, 1, copyDriver);
   }
   copyState.drivers = driversList;
   copyState.isLoading = false;

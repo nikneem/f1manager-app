@@ -6,11 +6,14 @@ import { TeamEngineDto } from '@state/team-engine/team-engine-models';
 import {
   TeamCreateDto,
   TeamDetailsDto,
+  TeamFilterDto,
+  TeamListItemDto,
   TeamUpdateDto,
 } from '@state/team/team-models';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import {
+  CollectionResult,
   ComponentPurchaseDto,
   SellConfirmationDto,
 } from '../shared/models/sell-confirmation-model';
@@ -24,6 +27,13 @@ export class TeamsService {
   public getOwn(): Observable<TeamDetailsDto> {
     var url = `${environment.backendUrl}/api/team`;
     return this.http.get<TeamDetailsDto>(url);
+  }
+
+  public search(
+    dto: TeamFilterDto
+  ): Observable<CollectionResult<TeamListItemDto>> {
+    var url = `${environment.backendUrl}/api/team/search`;
+    return this.http.post<CollectionResult<TeamListItemDto>>(url, dto);
   }
 
   public create(team: TeamCreateDto): Observable<TeamDetailsDto> {

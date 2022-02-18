@@ -46,6 +46,10 @@ export const engineUndelete = createAction(
   '[Engine] Undelete',
   props<{ id: string }>()
 );
+export const engineUndeleteSuccess = createAction(
+  '[Engine] Undelete Success',
+  props<{ id: string }>()
+);
 
 export const engineGetAvailable = createAction('[Engine] Get Available');
 export const engineGetAvailableSuccess = createAction(

@@ -24,25 +24,9 @@ export class LeagueBaseInformationComponent implements OnInit, OnDestroy {
     if (this.league) {
       this.leagueForm = new FormGroup({
         name: new FormControl(
-          { value: this.league.name, disabled: !this.league.isOwner },
+          { value: this.league.name, disabled: !this.league.isMaintainer },
           [Validators.required, Validators.min(5), Validators.max(100)]
         ),
-        ownerName: new FormControl({
-          value: this.league.ownerName,
-          disabled: true,
-        }),
-        membersCount: new FormControl({
-          value: this.league.membersCount,
-          disabled: true,
-        }),
-        teamPosition: new FormControl({
-          value: this.league.teamPosition,
-          disabled: true,
-        }),
-        pointsAverage: new FormControl({
-          value: this.league.pointsAverage,
-          disabled: true,
-        }),
         createdOn: new FormControl({
           value: this.league.createdOn,
           disabled: true,

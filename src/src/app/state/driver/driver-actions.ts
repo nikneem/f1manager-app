@@ -46,6 +46,10 @@ export const driverUndelete = createAction(
   '[Driver] Undelete',
   props<{ id: string }>()
 );
+export const driverUndeleteSuccess = createAction(
+  '[Driver] Undelete Success',
+  props<{ id: string }>()
+);
 
 export const driverGetAvailable = createAction('[Driver] Get Available');
 export const driverGetAvailableSuccess = createAction(

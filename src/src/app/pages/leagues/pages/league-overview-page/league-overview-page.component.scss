@@ -10,11 +10,14 @@
       flex-wrap: wrap;
       gap: 0.5rem;
       .list {
+        gap: 0.5rem 0.5rem;
+
         width: 100%;
-        gap: 0.5rem;
         display: flex;
-        flex-flow: column;
+        flex-flow: row wrap;
+        justify-content: center;
         .league {
+          display: flex;
           flex: 4 4 100%;
           background-color: $background-color;
           padding: 1rem;
@@ -69,6 +72,48 @@
           background-color: $primary;
           padding: 1rem;
           flex: 1 1 40%;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .leagues-page {
+    .leagues-container {
+      .my-leagues {
+        .list {
+          .league {
+            flex: 2 2 45%;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .leagues-page {
+    .leagues-container {
+      .my-leagues {
+        .list {
+          .league {
+            flex: 3 3 30%;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1600px) {
+  .leagues-page {
+    .leagues-container {
+      .my-leagues {
+        .list {
+          .league {
+            flex: 1 1 20%;
+          }
         }
       }
     }

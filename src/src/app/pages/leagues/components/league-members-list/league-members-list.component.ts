@@ -7,6 +7,8 @@ import {
 } from '@state/league/league-actions';
 import { LeagueMemberDto } from '@state/league/league-models';
 import { Subscription } from 'rxjs';
+import * as _ from 'lodash';
+import { TeamFilterDto } from '@state/team/team-models';
 
 @Component({
   selector: 'f1-league-members-list',
@@ -17,16 +19,23 @@ export class LeagueMembersListComponent implements OnInit, OnDestroy {
   private leagueMembersSubscription?: Subscription;
   private leagueSubscription?: Subscription;
 
-  public members: Array<LeagueMemberDto> | undefined;
+  public members?: Array<LeagueMemberDto>;
   private leagueId: string | undefined;
   displayedColumns: string[] = ['position', 'name', 'points', 'money'];
   constructor(private store: Store<AppState>) {}
 
   ngOnInit(): void {
     this.leagueMembersSubscription = this.store
-      .select((str) => str.leaguesState.leagueMembers)
+      .select((str) => str.leaguesState.league?.members)
       .subscribe((val) => {
+        let enrich = !this.members || this.members.length !== val?.length;
         this.members = val;
+        if (enrich) {
+          let filter = {
+            teamIds: _.map(this.members, 'teamId'),
+          } as TeamFilterDto;
+          this.store.dispatch(leagueGetMembers({ filter: filter }));
+        }
       });
 
     this.leagueSubscription = this.store
@@ -34,7 +43,6 @@ export class LeagueMembersListComponent implements OnInit, OnDestroy {
       .subscribe((val) => {
         if (val?.id && val?.id !== this.leagueId) {
           this.leagueId = val.id;
-          this.store.dispatch(leagueGetMembers({ leagueId: val.id }));
         }
       });
   }

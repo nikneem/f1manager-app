@@ -20,9 +20,9 @@ export class LeaguesService {
     const url = `${environment.backendUrl}/api/leagues`;
     return this.http.post<LeagueCreateDto>(url, payload);
   }
-  public myLeagues(): Observable<Array<LeagueDto>> {
+  public myLeagues(): Observable<Array<LeagueListItemDto>> {
     const url = `${environment.backendUrl}/api/leagues/mine`;
-    return this.http.get<Array<LeagueDto>>(url);
+    return this.http.get<Array<LeagueListItemDto>>(url);
   }
   public get(leagueId: string): Observable<LeagueDto> {
     const url = `${environment.backendUrl}/api/leagues/${leagueId}`;

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from '@state/app.state';
 import { CookieService } from 'ngx-cookie-service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'f1-main-page',
@@ -11,8 +12,8 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class MainPageComponent implements OnInit, OnDestroy {
   public isLoggedIn: boolean = false;
-
-  constructor(private router: Router) {}
+  private loggedInSubscription?: Subscription;
+  constructor(private router: Router, private store: Store<AppState>) {}
 
   login() {}
 
@@ -20,6 +21,14 @@ export class MainPageComponent implements OnInit, OnDestroy {
     this.router.navigate(['/dashboard']);
   }
 
-  ngOnInit(): void {}
-  ngOnDestroy(): void {}
+  ngOnInit(): void {
+    this.loggedInSubscription = this.store
+      .select((str) => str.userState.isLoggedOn)
+      .subscribe((val) => (this.isLoggedIn = val));
+  }
+  ngOnDestroy(): void {
+    if (this.loggedInSubscription) {
+      this.loggedInSubscription.unsubscribe();
+    }
+  }
 }
