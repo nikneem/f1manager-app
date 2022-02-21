@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  backendUrl: 'https://dev-api.f1mgr.com',
+  backendUrl: 'https://f1man-api-dev-weu-app.azurewebsites.net',
 };
