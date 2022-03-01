@@ -1,6 +1,8 @@
 export class TeamChassisDto {
   id?: string;
   name?: string;
+  manufacturer?: string;
+  model?: string;
   pictureUrl?: string;
   boughtOn?: Date;
   boughtFor?: number;

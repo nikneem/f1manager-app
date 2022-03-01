@@ -1,10 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '@state/app.state';
-import {
-  leagueGetMembers,
-  leagueGetMembersSuccess,
-} from '@state/league/league-actions';
+import { leagueGetMembers } from '@state/league/league-actions';
 import { LeagueMemberDto } from '@state/league/league-models';
 import { Subscription } from 'rxjs';
 import * as _ from 'lodash';
@@ -34,7 +31,9 @@ export class LeagueMembersListComponent implements OnInit, OnDestroy {
           let filter = {
             teamIds: _.map(this.members, 'teamId'),
           } as TeamFilterDto;
-          this.store.dispatch(leagueGetMembers({ filter: filter }));
+          if (filter.teamIds.length > 0) {
+            this.store.dispatch(leagueGetMembers({ filter: filter }));
+          }
         }
       });
 

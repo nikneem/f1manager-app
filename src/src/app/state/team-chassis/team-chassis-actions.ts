@@ -8,7 +8,7 @@ export const teamChassisGet = createAction(
 );
 export const teamChassisBuy = createAction(
   '[TeamChassis] Buy',
-  props<{ teamId: string; chassisId: string }>()
+  props<{ chassisId: string }>()
 );
 export const teamChassisGetSuccess = createAction(
   '[TeamChassis] GetSuccess',
@@ -17,7 +17,7 @@ export const teamChassisGetSuccess = createAction(
 
 export const teamChassisSellConfirmation = createAction(
   '[TeamChassis] Sell Confirmation',
-  props<{ teamId: string }>()
+  props<{ teamChassisId: string }>()
 );
 export const teamChassisSellConfirmationSuccess = createAction(
   '[TeamChassis] Sell Confirmation Success',

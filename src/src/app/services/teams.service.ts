@@ -97,14 +97,11 @@ export class TeamsService {
   }
 
   public getChassis(teamId: string): Observable<TeamChassisDto> {
-    var url = `${environment.backendUrl}/api/team/${teamId}/chassis`;
+    var url = `${environment.backendUrl}/api/team/chassis/${teamId}`;
     return this.http.get<TeamChassisDto>(url);
   }
-  public buyChassis(
-    teamId: string,
-    chassisId: string
-  ): Observable<TeamChassisDto> {
-    var url = `${environment.backendUrl}/api/team/${teamId}/chassis/${chassisId}`;
+  public buyChassis(chassisId: string): Observable<TeamChassisDto> {
+    var url = `${environment.backendUrl}/api/team/chassis/${chassisId}/buy`;
     return this.http.get<TeamChassisDto>(url);
   }
   public sellChassisConfirmation(

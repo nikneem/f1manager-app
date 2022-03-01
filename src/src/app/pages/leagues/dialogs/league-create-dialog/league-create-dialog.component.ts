@@ -1,11 +1,9 @@
-import { Component, Injectable, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   AbstractControl,
-  AsyncValidator,
   AsyncValidatorFn,
   FormControl,
   FormGroup,
-  ValidationErrors,
   Validators,
 } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -18,8 +16,8 @@ import {
   leagueCreateSuccess,
 } from '@state/league/league-actions';
 import { LeagueCreateDto } from '@state/league/league-models';
-import { Observable, of, Subscription, timer } from 'rxjs';
-import { catchError, map, switchMap, takeUntil } from 'rxjs/operators';
+import { of, Subscription } from 'rxjs';
+import { catchError, debounceTime, map } from 'rxjs/operators';
 
 @Component({
   selector: 'f1-league-create-dialog',
@@ -73,6 +71,7 @@ export function leagueValidator(
     return leaguesService
       .checkName(new LeagueCreateDto({ name: control.value }))
       .pipe(
+        debounceTime(750),
         map(() => null),
         catchError(() => of({ leagueNameUnique: true }))
       );

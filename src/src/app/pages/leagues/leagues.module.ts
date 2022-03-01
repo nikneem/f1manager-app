@@ -15,6 +15,7 @@ import { LeagueToolbarComponent } from './components/league-toolbar/league-toolb
 import { LeagueBaseInformationComponent } from './components/league-base-information/league-base-information.component';
 import { LeagueMembersListComponent } from './components/league-members-list/league-members-list.component';
 import { LeagueJoinRequestsComponent } from './components/league-join-requests/league-join-requests.component';
+import { LeagueDetailsToolbarComponent } from './components/league-details-toolbar/league-details-toolbar.component';
 
 @NgModule({
   imports: [
@@ -34,6 +35,7 @@ import { LeagueJoinRequestsComponent } from './components/league-join-requests/l
     LeagueBaseInformationComponent,
     LeagueMembersListComponent,
     LeagueJoinRequestsComponent,
+    LeagueDetailsToolbarComponent,
   ],
 })
 export class LeaguesModule {}

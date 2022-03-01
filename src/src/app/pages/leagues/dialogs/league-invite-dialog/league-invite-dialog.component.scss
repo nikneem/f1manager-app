@@ -1,0 +1,30 @@
+@import "../../../../../scss/variables.scss";
+
+table {
+  width: 100%;
+}
+.table-header {
+  padding: 0 0.5rem;
+  font-weight: 600;
+}
+.header-cell {
+  background-color: $primary;
+}
+.table-cell {
+  padding: 0 0.5rem;
+}
+.name-column {
+  flex: 3 3 75%;
+}
+.members-column {
+  flex: 1 1 25%;
+}
+.center {
+  text-align: center;
+  opacity: 0.7;
+  padding: 1rem 1rem;
+}
+.highlight {
+  background-color: $accent;
+  color: #444;
+}

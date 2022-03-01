@@ -34,7 +34,9 @@ export class SelectChassisComponent implements OnInit, OnDestroy {
       .subscribe((val) => (this.errorMessage = val));
     this.chassisListSubscription = this.store
       .select((str) => str.chassisState.activeChassis)
-      .subscribe((val) => (this.chassis = val));
+      .subscribe((val) => {
+        this.chassis = val;
+      });
 
     this.store.dispatch(chassisGetAvailable());
   }

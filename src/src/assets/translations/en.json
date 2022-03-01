@@ -99,6 +99,10 @@
       "title": "Search existing leagues to join",
       "term": "Search query"
     },
+    "invites": {
+      "title": "Search for teams to join league",
+      "term": "Teamname"
+    },
     "error-codes": {
       "invalid-name": "The name is invalid for a league",
       "already-in": "Team cannot be added to this league because the team is already in",

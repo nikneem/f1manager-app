@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { AppState } from '@state/app.state';
 import { teamChassisSellConfirmation } from '@state/team-chassis/team-chassis-actions';
@@ -13,36 +14,34 @@ import { SellConfirmationDto } from '../../models/sell-confirmation-model';
 export class SellChassisComponent implements OnInit {
   private loadingSubscription?: Subscription;
   private errorMessageSubscription?: Subscription;
-  private teamIdSubscription?: Subscription;
   private sellProposalSubscription?: Subscription;
 
   public isLoading: boolean = false;
   public errorMessage?: string;
   public sellConfirmation?: SellConfirmationDto;
-  private teamId?: string;
+  private teamChassisId: string;
 
-  constructor(private store: Store<AppState>) {}
+  constructor(
+    private store: Store<AppState>,
+    @Inject(MAT_DIALOG_DATA) public data: { teamChassisId: string }
+  ) {
+    this.teamChassisId = data.teamChassisId;
+  }
 
   ngOnInit(): void {
     this.loadingSubscription = this.store
-      .select((str) => str.chassisState.isLoading)
+      .select((str) => str.teamChassisState.isLoading)
       .subscribe((val) => (this.isLoading = val));
     this.errorMessageSubscription = this.store
-      .select((str) => str.chassisState.errorMessage)
+      .select((str) => str.teamChassisState.errorMessage)
       .subscribe((val) => (this.errorMessage = val));
     this.sellProposalSubscription = this.store
       .select((str) => str.teamChassisState.sellConfirmation)
       .subscribe((val) => (this.sellConfirmation = val));
-    this.teamIdSubscription = this.store
-      .select((str) => str.teamState.id)
-      .subscribe((val) => {
-        this.teamId = val;
-        if (this.teamId) {
-          this.store.dispatch(
-            teamChassisSellConfirmation({ teamId: this.teamId })
-          );
-        }
-      });
+
+    this.store.dispatch(
+      teamChassisSellConfirmation({ teamChassisId: this.teamChassisId })
+    );
   }
   ngOnDestroy(): void {
     if (this.loadingSubscription) {
@@ -53,9 +52,6 @@ export class SellChassisComponent implements OnInit {
     }
     if (this.sellProposalSubscription) {
       this.sellProposalSubscription.unsubscribe();
-    }
-    if (this.teamIdSubscription) {
-      this.teamIdSubscription.unsubscribe();
     }
   }
 }
