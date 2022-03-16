@@ -22,6 +22,8 @@ export const userLoginSucceeded = createAction(
   props<{ result: LoginResultDto }>()
 );
 
+export const userLogout = createAction('[User] Logout');
+
 export const userRefresh = createAction(
   '[User] Refresh',
   props<{ token: RefreshTokenDto }>()

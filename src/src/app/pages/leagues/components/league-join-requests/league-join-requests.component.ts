@@ -21,20 +21,28 @@ export class LeagueJoinRequestsComponent implements OnInit, OnDestroy {
 
   public isOwner: boolean = false;
   public requests: Array<LeagueJoinRequestDto> | undefined;
-  displayedColumns: string[] = ['name', 'requestedOn', 'actions'];
+  displayedColumns: string[] = [
+    'teamName',
+    'createdOn',
+    'expiresOn',
+    'actions',
+  ];
   constructor(private store: Store<AppState>) {}
 
   acceptRequest(request: LeagueJoinRequestDto) {
-    if (this.leagueId && request.id) {
+    if (this.leagueId && request.teamId) {
       this.store.dispatch(
-        leagueAcceptRequest({ leagueId: this.leagueId, requestId: request.id })
+        leagueAcceptRequest({ leagueId: this.leagueId, teamId: request.teamId })
       );
     }
   }
   declineRequest(request: LeagueJoinRequestDto) {
-    if (this.leagueId && request.id) {
+    if (this.leagueId && request.teamId) {
       this.store.dispatch(
-        leagueDeclineRequest({ leagueId: this.leagueId, requestId: request.id })
+        leagueDeclineRequest({
+          leagueId: this.leagueId,
+          teamId: request.teamId,
+        })
       );
     }
   }
@@ -43,9 +51,7 @@ export class LeagueJoinRequestsComponent implements OnInit, OnDestroy {
     this.selectedLeagueSubscription = this.store
       .select((str) => str.leaguesState.league)
       .subscribe((val) => {
-        this.leagueId = undefined;
-        this.isOwner = false;
-        if (val?.isMaintainer && val?.id) {
+        if (val?.isMaintainer && val?.id && this.leagueId !== val.id) {
           this.isOwner = val.isMaintainer;
           this.leagueId = val.id;
           this.store.dispatch(leagueGetRequests({ leagueId: val.id }));

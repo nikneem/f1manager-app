@@ -27,6 +27,19 @@ export const leagueGetSuccess = createAction(
   props<{ payload: LeagueDto }>()
 );
 
+export const leagueCreate = createAction(
+  '[League] Create',
+  props<{ payload: LeagueCreateDto }>()
+);
+export const leagueCreateSuccess = createAction(
+  '[League] Create Success',
+  props<{ payload: LeagueDto }>()
+);
+export const leagueCreateFailed = createAction(
+  '[League] Create Failed',
+  props<{ errorMessage: string | undefined }>()
+);
+
 export const leagueGetMembers = createAction(
   '[League] Get Members',
   props<{ filter: TeamFilterDto }>()
@@ -47,32 +60,19 @@ export const leagueGetRequestsSuccess = createAction(
 
 export const leagueAcceptRequest = createAction(
   '[League] Accept Requests',
-  props<{ leagueId: string; requestId: string }>()
+  props<{ leagueId: string; teamId: string }>()
 );
 export const leagueAcceptRequestSuccess = createAction(
   '[League] Get Accept Success',
-  props<{ requestId: string | undefined }>()
+  props<{ teamId: string | undefined }>()
 );
 export const leagueDeclineRequest = createAction(
   '[League] Get Decline Requests',
-  props<{ leagueId: string; requestId: string }>()
+  props<{ leagueId: string; teamId: string }>()
 );
 export const leagueDeclineRequestSuccess = createAction(
   '[League] Get Decline Requests Success',
-  props<{ requestId: string | undefined }>()
-);
-
-export const leagueCreate = createAction(
-  '[League] Create',
-  props<{ payload: LeagueCreateDto }>()
-);
-export const leagueCreateSuccess = createAction(
-  '[League] Create Success',
-  props<{ payload: LeagueDto }>()
-);
-export const leagueCreateFailed = createAction(
-  '[League] Create Failed',
-  props<{ errorMessage: string | undefined }>()
+  props<{ teamId: string | undefined }>()
 );
 
 export const leagueJoin = createAction(

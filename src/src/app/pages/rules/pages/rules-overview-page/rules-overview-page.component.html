@@ -1,0 +1,13 @@
+<f1-rules-toolbar></f1-rules-toolbar>
+
+<div class="game-rules-page">
+  <div class="game-rules" *ngIf="rulesSections">
+    <div class="rule" *ngFor="let rule of rulesSections">
+      <mat-card>
+        <mat-card-content>
+          <markdown [src]="rule"> </markdown>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

@@ -37,7 +37,7 @@ import { EngineDetailsDialogComponent } from './engines/dialogs/engine-details-d
     RaceResultsToolbarComponent,
     EnginesListPageComponent,
     EnginesToolbarComponent,
-    EngineDetailsDialogComponent
+    EngineDetailsDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -45,7 +45,7 @@ import { EngineDetailsDialogComponent } from './engines/dialogs/engine-details-d
     SharedModule,
     ReactiveFormsModule,
     EffectsModule.forFeature([BaseTeamEffects]),
-    TranslateModule
+    TranslateModule,
   ],
   exports: [],
 })

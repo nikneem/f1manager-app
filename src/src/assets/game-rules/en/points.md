@@ -8,8 +8,6 @@ Prior to every race, you can do a winner and strategy prediction. Select the dri
 
 ## Drivers
 
-You team consists of two drivers. Your drivers will gain points depending on how they perform in an actual Formula 1 race. Your driver can gain points with qualification results, races results, overtakes, and finishing the race. The table below shows the amount of points earned for drivers depending on their positions, for both the qualification and the race.
-
 | Position | Qualification | Race |
 | -------- | ------------- | ---- |
 | 1        | 15            | 25   |
@@ -33,12 +31,12 @@ You team consists of two drivers. Your drivers will gain points depending on how
 | 19       | 0             | 2    |
 | 20       | 0             | 2    |
 
+You team consists of two drivers. Your drivers will gain points depending on how they perform in an actual Formula 1 race. Your driver can gain points with qualification results, races results, overtakes, and finishing the race. The table below shows the amount of points earned for drivers depending on their positions, for both the qualification and the race.
+
 Finally, drivers can also earn overtake points. 2 points per position gained. This means that when a driver qualifies 11th, and finishes 5th, 6 positions are gained meaning 12 points. The overtake points also count when the driver lost positions during the race. So the overtake points can also turn out to be negative. Finally, when your driver finishes the race, you will receive a bonus of 10 points.
 
 ## Engines
 
-Like drivers you gain points with qualification and race results for your engine. Keep in mind that although you own only one engine, there are actually two drivers with that engine in their car. This means the points calculations for an engine after the race, depends on the performance of two drivers. Unlike drivers, no points will be gained with overtake actions. Instead you will receive a 10 points bonus when your engine qualifies first and finishes first (this does not nessecarily have to be the same driver). And an additional 10 points when your engine drove the fastest lap.
-
 | Position | Qualification | Race |
 | -------- | ------------- | ---- |
 | 1        | 10            | 20   |
@@ -61,11 +59,11 @@ Like drivers you gain points with qualification and race results for your engine
 | 18       | 0             | 3    |
 | 19       | 0             | 3    |
 | 20       | 0             | 2    |
+
+Like drivers you gain points with qualification and race results for your engine. Keep in mind that although you own only one engine, there are actually two drivers with that engine in their car. This means the points calculations for an engine after the race, depends on the performance of two drivers. Unlike drivers, no points will be gained with overtake actions. Instead you will receive a 10 points bonus when your engine qualifies first and finishes first (this does not nessecarily have to be the same driver). And an additional 10 points when your engine drove the fastest lap.
 
 ## Chassis
 
-Like drivers you gain points with qualification and race results for your chassis. Keep in mind that although you own only one chassis, there are actually two drivers with that chassis. This means the points calculations for a chassis after the race, depends on the performance of two drivers. Unlike drivers, no points will be gained with overtake actions. Instead you will receive a 10 points bonus when your chassis drove the fastest lap.
-
 | Position | Qualification | Race |
 | -------- | ------------- | ---- |
 | 1        | 10            | 20   |
@@ -88,3 +86,5 @@ Like drivers you gain points with qualification and race results for your chassi
 | 18       | 0             | 3    |
 | 19       | 0             | 3    |
 | 20       | 0             | 2    |
+
+Like drivers you gain points with qualification and race results for your chassis. Keep in mind that although you own only one chassis, there are actually two drivers with that chassis. This means the points calculations for a chassis after the race, depends on the performance of two drivers. Unlike drivers, no points will be gained with overtake actions. Instead you will receive a 10 points bonus when your chassis drove the fastest lap.

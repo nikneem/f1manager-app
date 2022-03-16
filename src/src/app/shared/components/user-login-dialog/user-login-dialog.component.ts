@@ -5,7 +5,8 @@ import { userLogin, userLoginAttempt } from '@state/user/user-actions';
 import { LoginRequestDto } from '@state/user/user-models';
 import { Subscription } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { UserResetPasswordDialogComponent } from '@components/user-reset-password-dialog/user-reset-password-dialog.component';
 
 @Component({
   selector: 'f1-user-login-dialog',
@@ -25,6 +26,7 @@ export class UserLoginDialogComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store<AppState>,
+    private dialog: MatDialog,
     private dialogRef: MatDialogRef<UserLoginDialogComponent>
   ) {}
 
@@ -38,6 +40,18 @@ export class UserLoginDialogComponent implements OnInit, OnDestroy {
         Validators.required,
         Validators.minLength(6),
       ]),
+    });
+  }
+
+  onKeyUp(event: any) {
+    if (event.key === 'Enter') {
+      this.login();
+    }
+  }
+
+  passwordReset() {
+    this.dialog.open(UserResetPasswordDialogComponent, {
+      width: '20%',
     });
   }
 

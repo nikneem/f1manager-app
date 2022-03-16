@@ -38,6 +38,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LeaguesModule } from '@pages/leagues/leagues.module';
 import { AdminModule } from '@pages/admin/admin.module';
 import { UserEffects } from '@state/user/user-effects';
+import { MarkdownModule } from 'ngx-markdown';
+import { UserModule } from '@pages/user/user.module';
 
 let metaReducers: any[] = [];
 if (environment.production === false) {
@@ -65,6 +67,8 @@ export function createTranslateLoader(http: HttpClient) {
     AnalysisModule,
     CreditsModule,
     AdminModule,
+    UserModule,
+    MarkdownModule.forRoot({ loader: HttpClient }),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

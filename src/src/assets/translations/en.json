@@ -10,7 +10,9 @@
     "previous": "Previous",
     "save": "Save",
     "create": "Create",
-    "register": "Register"
+    "register": "Register",
+    "confirm": "Confirm",
+    "forgotpassword": "Forgot password"
   },
   "user": {
     "login": {
@@ -21,6 +23,31 @@
         "password": "Password"
       }
     },
+    "resetpassword": {
+      "title": "Reset password",
+      "text": "Enter your username or email address to reset your password. You will receive a confirmation mail shortly.",
+      "confirmation": "If your username or email exists in our system, you will receive an email shortly",
+      "form": {
+        "usernameoremail": "Username or email address",
+        "host": "Host"
+      }
+    },
+    "resetpasswordverification": {
+      "title": "Reset password verification",
+      "text": "After password reset, you receive a verification code through email. Click the link in the email, or fill out the username or email address and the verification code to complete resetting your password.",
+      "form": {
+        "username": "Username or email address",
+        "code": "Verification code"
+      },
+      "success": {
+        "title": "Password has changed",
+        "text": "Your password is changed, you can now log in using your new password."
+      },
+      "failed": {
+        "title": "Password reset failed",
+        "text": "Either your username or email address, or your verification code is incorrect or expired. Please try to reset your password again."
+      }
+    },
     "registration": {
       "title": "Registration form",
       "text": "Fill out the following form to register. You will receive in email to confirm your registration.",
@@ -29,6 +56,24 @@
         "email": "Email address",
         "password": "Password",
         "passwordConfirm": "Confirm password"
+      }
+    },
+    "change-password": {
+      "title": "User - Change password",
+      "text": "To change your password, you must first enter your current password. Then chose a new password and confirm that password in the last field. Due to security reasons, we demand passwords to contain at least one lowecase character, one uppercase character, and one digit. The password must be at least 8 characters long.",
+      "form": {
+        "oldpassword": "Old password",
+        "newpassword": "New password",
+        "confirmpassword": "Confirm password",
+        "passwords-do-not-match": "The new password and the confirm password field do not match"
+      },
+      "success": {
+        "title": "Password changed",
+        "text": "Your password has changed. You will receive a confirmation email shortly"
+      },
+      "failed": {
+        "title": "Password change failed",
+        "text": "Changing your password failed. Please try again"
       }
     }
   },
@@ -84,7 +129,7 @@
     },
     "empty-state": {
       "title": "No leagues found",
-      "text": "You are currently not a member of a league. You can search for a league to join or create a league yourself.",
+      "text": "With leagues, you can play the Formula 1 Manager game with your friends. Create an isolated league for just you and your friends and invite them to join your league. This way, you can create an isolated competition for just the one you like.",
       "join": "Join",
       "jointext": "Search for existing leagues and request access to those leagues to join them",
       "create": "Create",
@@ -103,7 +148,8 @@
       "title": "Search for teams to join league",
       "term": "Teamname"
     },
-    "error-codes": {
+    "errors": {
+      "requestalreadypending": "There is already a request pending to join this league, please wait for approval",
       "invalid-name": "The name is invalid for a league",
       "already-in": "Team cannot be added to this league because the team is already in",
       "invitation-pending": "There is already an invitation pending for this team",
@@ -125,8 +171,10 @@
       "requests": {
         "list": "Requests to join league",
         "name": "Team name",
-        "requested-on": "Requested on",
-        "actions": ""
+        "created-on": "Requested on",
+        "expires-on": "Expiration",
+        "actions": "",
+        "no-pending-requests": "No pending join requests"
       }
     },
     "name": "Name",
@@ -135,6 +183,9 @@
     "team-position": "Your position",
     "points-average": "Average points",
     "created-on": "Created on"
+  },
+  "rules": {
+    "title": "Game rules"
   },
   "navigation": {
     "dashboard": "Dashboard",

@@ -21,12 +21,16 @@
           type="password"
           placeholder="{{ 'user.login.form.password' | translate }}"
           formControlName="password"
+          (keyup)="onKeyUp($event)"
         />
       </mat-form-field>
     </form>
   </div>
 </mat-dialog-content>
 <mat-dialog-actions>
+  <button mat-flat-button color="accent" (click)="passwordReset()">
+    {{ "buttons.forgotpassword" | translate }}
+  </button>
   <button
     mat-flat-button
     color="primary"

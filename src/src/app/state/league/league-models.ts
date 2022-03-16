@@ -40,10 +40,10 @@ export class LeagueMemberDto {
 }
 
 export class LeagueJoinRequestDto {
-  public id?: string;
   public teamId?: string;
   public teamName?: string;
-  public requestedOn?: Date;
+  public createdOn?: Date;
+  public expiresOn?: Date;
   constructor(init?: Partial<LeagueJoinRequestDto>) {
     Object.assign(this, init);
   }
