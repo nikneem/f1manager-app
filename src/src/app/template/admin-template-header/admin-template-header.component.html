@@ -1,7 +1,6 @@
 <mat-toolbar color="primary">
   <span>F1 Manager</span>
   <span class="full-width-spacer"></span>
-  <f1-notification-button></f1-notification-button>
   <f1-language-button></f1-language-button>
 
   <button
@@ -16,6 +15,7 @@
 
   <mat-menu #menu="matMenu">
     <button mat-menu-item>Item 1</button>
+    <button mat-menu-item (click)="changepass()">Change Password</button>
     <button mat-menu-item (click)="logout()">Logout</button>
   </mat-menu>
 

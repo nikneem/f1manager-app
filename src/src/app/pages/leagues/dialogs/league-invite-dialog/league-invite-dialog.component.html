@@ -1,1 +1,40 @@
-<p>league-invite-dialog works!</p>
+<h2 mat-dialog-title>{{ "leagues.invites.title" | translate }}</h2>
+<mat-dialog-content *ngIf="teamsForm">
+  <form [formGroup]="teamsForm" no-validate>
+    <mat-form-field class="full-width">
+      <input
+        matInput
+        placeholder="{{ 'leagues.invites.term' | translate }}"
+        formControlName="name"
+      />
+    </mat-form-field>
+  </form>
+  <mat-table class="leagues-table" [dataSource]="teams">
+    <ng-container matColumnDef="name">
+      <div *matHeaderCellDef class="table-header name-column">Name</div>
+      <div *matCellDef="let team" class="table-cell name-column">
+        {{ team.name }}
+      </div>
+    </ng-container>
+    <ng-container matColumnDef="points">
+      <div *matHeaderCellDef class="table-header members-column">Points</div>
+      <div *matCellDef="let team" class="table-cell members-column">
+        {{ team.points }}
+      </div>
+    </ng-container>
+    <ng-container *matNoDataRow>
+      <div class="table-cell center">No data</div>
+    </ng-container>
+    <mat-header-row
+      *matHeaderRowDef="displayedColumns"
+      class="header-cell"
+    ></mat-header-row>
+
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-flat-button color="accent" mat-dialog-close>
+    {{ "buttons.cancel" | translate }}
+  </button>
+</mat-dialog-actions>

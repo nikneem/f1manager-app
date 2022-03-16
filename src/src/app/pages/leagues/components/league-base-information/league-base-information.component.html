@@ -9,12 +9,6 @@
           formControlName="name"
         />
       </mat-form-field>
-      <mat-form-field class="half-width">
-        <mat-label>{{ "leagues.created-on" | translate }}</mat-label>
-        <input matInput [matDatepicker]="picker" formControlName="createdOn" />
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
     </mat-card>
   </form>
 </div>

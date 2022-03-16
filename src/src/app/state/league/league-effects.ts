@@ -126,26 +126,22 @@ export class LeagueEffects {
     this.actions$.pipe(
       ofType(leagueAcceptRequest),
       mergeMap((action) =>
-        this.leaguesService
-          .acceptRequest(action.leagueId, action.requestId)
-          .pipe(
-            mergeMap(() => [
-              leagueAcceptRequestSuccess({ requestId: action.requestId }),
-            ]),
-            catchError((err) => {
-              if (err.status === 409) {
-                return of(
-                  leagueFailed({ errorMessage: err.error.errorMessage })
-                );
-              } else {
-                return of(
-                  leagueFailed({
-                    errorMessage: 'An unknown error occured...',
-                  })
-                );
-              }
-            })
-          )
+        this.leaguesService.acceptRequest(action.leagueId, action.teamId).pipe(
+          mergeMap(() => [
+            leagueAcceptRequestSuccess({ teamId: action.teamId }),
+          ]),
+          catchError((err) => {
+            if (err.status === 409) {
+              return of(leagueFailed({ errorMessage: err.error.errorMessage }));
+            } else {
+              return of(
+                leagueFailed({
+                  errorMessage: 'An unknown error occured...',
+                })
+              );
+            }
+          })
+        )
       )
     )
   );
@@ -153,26 +149,20 @@ export class LeagueEffects {
     this.actions$.pipe(
       ofType(leagueDeclineRequest),
       mergeMap((action) =>
-        this.leaguesService
-          .declineRequest(action.leagueId, action.requestId)
-          .pipe(
-            map(() =>
-              leagueAcceptRequestSuccess({ requestId: action.requestId })
-            ),
-            catchError((err) => {
-              if (err.status === 409) {
-                return of(
-                  leagueFailed({ errorMessage: err.error.errorMessage })
-                );
-              } else {
-                return of(
-                  leagueFailed({
-                    errorMessage: 'An unknown error occured...',
-                  })
-                );
-              }
-            })
-          )
+        this.leaguesService.declineRequest(action.leagueId, action.teamId).pipe(
+          map(() => leagueAcceptRequestSuccess({ teamId: action.teamId })),
+          catchError((err) => {
+            if (err.status === 409) {
+              return of(leagueFailed({ errorMessage: err.error.errorMessage }));
+            } else {
+              return of(
+                leagueFailed({
+                  errorMessage: 'An unknown error occured...',
+                })
+              );
+            }
+          })
+        )
       )
     )
   );
@@ -210,7 +200,7 @@ export class LeagueEffects {
       mergeMap((action) =>
         this.leaguesService.search(action.term).pipe(
           map(
-            (leagues) => leagueSearchSuccess({ payload: leagues }),
+            (leagues) => leagueSearchSuccess({ payload: leagues.entities }),
             catchError(() =>
               of(
                 leagueSearchSuccess({ payload: new Array<LeagueListItemDto>() })

@@ -11,7 +11,9 @@
     <div class="team-component">
       <f1-team-engine [teamId]="teamId"></f1-team-engine>
     </div>
-    <div class="team-component"></div>
+    <div class="team-component">
+      <f1-team-chassis [teamId]="teamId"></f1-team-chassis>
+    </div>
   </div>
   <div class="no-team" *ngIf="!isLoading && !teamId">
     <div class="team-create-card">

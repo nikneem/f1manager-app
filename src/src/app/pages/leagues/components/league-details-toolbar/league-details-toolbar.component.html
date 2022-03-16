@@ -1,0 +1,16 @@
+<mat-toolbar>
+  <span>
+    {{ "leagues.title" | translate }}
+    <span *ngIf="leagueName"> - {{ leagueName }}</span>
+  </span>
+  <span class="full-width-spacer"></span>
+  <!-- <button
+    mat-icon-button
+    class="create-icon"
+    aria-label="Search for teams to invite them to your league"
+    matTooltip="{{ 'leagues.invite-tooltip' | translate }}"
+    (click)="inviteTeam()"
+  >
+    <mat-icon>add_circle</mat-icon>
+  </button> -->
+</mat-toolbar>

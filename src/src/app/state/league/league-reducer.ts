@@ -85,11 +85,11 @@ const _leagueReducer = createReducer(
     leagueRequests: payload,
   })),
 
-  on(leagueAcceptRequestSuccess, (state, { requestId }) => {
-    return leagueRequestAssessmentResultHandler(state, requestId);
+  on(leagueAcceptRequestSuccess, (state, { teamId }) => {
+    return leagueRequestAssessmentResultHandler(state, teamId);
   }),
-  on(leagueDeclineRequestSuccess, (state, { requestId }) => {
-    return leagueRequestAssessmentResultHandler(state, requestId);
+  on(leagueDeclineRequestSuccess, (state, { teamId }) => {
+    return leagueRequestAssessmentResultHandler(state, teamId);
   }),
 
   on(leagueJoin, (state) => ({
@@ -179,15 +179,15 @@ function leagueCreatedSuccessHandler(
 }
 function leagueRequestAssessmentResultHandler(
   state: LeagueState,
-  requestId: string | undefined
+  teamId: string | undefined
 ): LeagueState {
   const copyState: LeagueState = Object.assign({}, state);
   let requestsList = copyState.leagueRequests
     ? new Array<LeagueJoinRequestDto>(...copyState.leagueRequests)
     : new Array<LeagueJoinRequestDto>();
 
-  if (requestId) {
-    const request = requestsList.find((r) => r.id === requestId);
+  if (teamId) {
+    const request = requestsList.find((r) => r.teamId === teamId);
     if (request) {
       const requestIndex = requestsList.indexOf(request);
       if (!isNaN(requestIndex)) {

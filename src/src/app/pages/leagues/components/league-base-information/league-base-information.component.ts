@@ -26,11 +26,10 @@ export class LeagueBaseInformationComponent implements OnInit, OnDestroy {
         name: new FormControl(
           { value: this.league.name, disabled: !this.league.isMaintainer },
           [Validators.required, Validators.min(5), Validators.max(100)]
-        ),
-        createdOn: new FormControl({
-          value: this.league.createdOn,
-          disabled: true,
-        }),
+        )
+      });
+      this.leagueForm.valueChanges.subscribe(formValue =>{
+        
       });
     }
   }

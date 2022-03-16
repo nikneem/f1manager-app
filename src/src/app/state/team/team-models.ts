@@ -9,6 +9,7 @@ export class TeamCreateDto {
 export interface TeamFilterDto {
   name: string;
   teamIds: Array<string>;
+  excludeTeamIds: Array<string>;
 }
 
 export interface TeamListItemDto {

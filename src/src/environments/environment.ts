@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  backendUrl: 'https://f1man-api-dev-weu-app.azurewebsites.net'
+  backendUrl: 'https://localhost:5001',
 };
 
 /*

@@ -7,14 +7,13 @@ import { SharedModule } from '../shared/shared.module';
 import { AdminTemplateNavigationComponent } from './admin-template-navigation/admin-template-navigation.component';
 import { AdminTemplateNavigationToggleComponent } from './admin-template-navigation-toggle/admin-template-navigation-toggle.component';
 
-
-
 @NgModule({
-  declarations: [AdminTemplateComponent, AdminTemplateHeaderComponent, AdminTemplateNavigationComponent, AdminTemplateNavigationToggleComponent],
-  imports: [
-    CommonModule,
-    SharedModule,
-    RouterModule
-  ]
+  declarations: [
+    AdminTemplateComponent,
+    AdminTemplateHeaderComponent,
+    AdminTemplateNavigationComponent,
+    AdminTemplateNavigationToggleComponent,
+  ],
+  imports: [CommonModule, SharedModule, RouterModule],
 })
-export class TemplateModule { }
+export class TemplateModule {}

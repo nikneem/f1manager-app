@@ -48,6 +48,31 @@ export class UserRegistrationDto {
   }
 }
 
+export class PasswordResetDto {
+  usernameOrEmail?: string;
+  baseUrl?: string;
+
+  constructor(init?: Partial<PasswordResetDto>) {
+    Object.assign(this, init);
+  }
+}
+export class PasswordResetVerificationDto {
+  usernameOrEmail?: string;
+  VerificationCode?: string;
+
+  constructor(init?: Partial<PasswordResetVerificationDto>) {
+    Object.assign(this, init);
+  }
+}
+export class ChangePasswordDto {
+  oldPassword?: string;
+  newPassword?: string;
+
+  constructor(init?: Partial<ChangePasswordDto>) {
+    Object.assign(this, init);
+  }
+}
+
 export class RefreshTokenDto {
   token?: string;
 

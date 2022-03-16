@@ -1,8 +1,8 @@
 <div class="league-join-requests" *ngIf="isOwner">
-  <mat-card>
+  <mat-card *ngIf="requests">
     <h2>{{ "leagues.details.requests.list" | translate }}</h2>
-    <mat-table [dataSource]="requests" *ngIf="requests">
-      <ng-container matColumnDef="name">
+    <mat-table [dataSource]="requests">
+      <ng-container matColumnDef="teamName">
         <div *matHeaderCellDef class="table-header name-column">
           {{ "leagues.details.requests.name" | translate }}
         </div>
@@ -10,12 +10,20 @@
           {{ request.teamName }}
         </div>
       </ng-container>
-      <ng-container matColumnDef="requestedOn">
+      <ng-container matColumnDef="createdOn">
         <div *matHeaderCellDef class="table-header requestedOn-column">
-          {{ "leagues.details.requests.requested-on" | translate }}
+          {{ "leagues.details.requests.created-on" | translate }}
         </div>
         <div *matCellDef="let request" class="table-cell requestedOn-column">
-          {{ request.requestedOn | date }}
+          {{ request.createdOn | date }}
+        </div>
+      </ng-container>
+      <ng-container matColumnDef="expiresOn">
+        <div *matHeaderCellDef class="table-header requestedOn-column">
+          {{ "leagues.details.requests.expires-on" | translate }}
+        </div>
+        <div *matCellDef="let request" class="table-cell requestedOn-column">
+          {{ request.expiresOn | date }}
         </div>
       </ng-container>
       <ng-container matColumnDef="actions">
@@ -37,6 +45,11 @@
           >
             Decline
           </button>
+        </div>
+      </ng-container>
+      <ng-container *matNoDataRow>
+        <div class="table-cell center">
+          {{ "leagues.details.requests.no-pending-requests" | translate }}
         </div>
       </ng-container>
       <mat-header-row

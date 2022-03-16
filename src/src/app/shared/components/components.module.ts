@@ -23,6 +23,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { UserRegistrationButtonComponent } from './user-registration-button/user-registration-button.component';
 import { UserLoginDialogComponent } from './user-login-dialog/user-login-dialog.component';
 import { UserLoginButtonComponent } from './user-login-button/user-login-button.component';
+import { UserResetPasswordDialogComponent } from './user-reset-password-dialog/user-reset-password-dialog.component';
+import { UserToolbarComponent } from './user-toolbar/user-toolbar.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,8 @@ import { UserLoginButtonComponent } from './user-login-button/user-login-button.
     UserRegistrationButtonComponent,
     UserLoginDialogComponent,
     UserLoginButtonComponent,
+    UserResetPasswordDialogComponent,
+    UserToolbarComponent,
   ],
   imports: [
     CommonModule,
@@ -62,6 +66,7 @@ import { UserLoginButtonComponent } from './user-login-button/user-login-button.
     UploadImageComponent,
     UserRegistrationButtonComponent,
     UserLoginButtonComponent,
+    UserToolbarComponent,
   ],
 })
 export class ComponentsModule {}

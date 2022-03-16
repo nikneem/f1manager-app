@@ -27,16 +27,19 @@
         </div>
       </div>
 
-      <div class="no-league" *ngIf="mine && mine.length === 0">
+      <div
+        class="no-league"
+        *ngIf="mine && mine.length === 0 && !isLoadingMine"
+      >
         <div class="explainer">
           <h2>{{ "leagues.empty-state.title" | translate }}</h2>
           <p>{{ "leagues.empty-state.text" | translate }}</p>
         </div>
-        <div class="action join">
+        <div class="action join" (click)="joinExistingLeague()">
           <h2>{{ "leagues.empty-state.join" | translate }}</h2>
           <p>{{ "leagues.empty-state.jointext" | translate }}</p>
         </div>
-        <div class="action create">
+        <div class="action create" (click)="createNewLeague()">
           <h2>{{ "leagues.empty-state.create" | translate }}</h2>
           <p>{{ "leagues.empty-state.createtext" | translate }}</p>
         </div>

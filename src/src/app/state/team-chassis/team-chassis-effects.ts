@@ -48,7 +48,7 @@ export class TeamChassisEffects {
     this.actions$.pipe(
       ofType(teamChassisBuy),
       mergeMap((action) =>
-        this.teamsService.buyChassis(action.teamId, action.chassisId).pipe(
+        this.teamsService.buyChassis(action.chassisId).pipe(
           mergeMap((payload) => [
             teamChassisGetSuccess({ payload: payload }),
             teamGet(),
@@ -72,7 +72,7 @@ export class TeamChassisEffects {
     this.actions$.pipe(
       ofType(teamChassisSellConfirmation),
       mergeMap((action) =>
-        this.teamsService.sellChassisConfirmation(action.teamId).pipe(
+        this.teamsService.sellChassisConfirmation(action.teamChassisId).pipe(
           map((payload) => {
             return teamChassisSellConfirmationSuccess({ payload: payload });
           }),

@@ -4,6 +4,7 @@ import {
   userLoginAttempt,
   userLoginAttemptSucceeded,
   userLoginSucceeded,
+  userLogout,
 } from './user-actions';
 import { INITIAL_USER_STATE, UserState } from './user-state';
 import jwt_decode from 'jwt-decode';
@@ -27,6 +28,14 @@ const _userReducer = createReducer(
     ...state,
     isLoading: true,
     errorMessage: undefined,
+  })),
+  on(userLogout, (state) => ({
+    ...state,
+    isLoading: false,
+    loginToken: undefined,
+    refreshToken: undefined,
+    errorMessage: undefined,
+    isLoggedOn: false,
   })),
   on(userLoginSucceeded, (state, { result }) =>
     userLoginSucceededHandler(state, result)

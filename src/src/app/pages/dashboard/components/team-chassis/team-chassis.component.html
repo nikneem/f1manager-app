@@ -1,1 +1,84 @@
-<p>team-chassis works!</p>
+<div class="component chassis">
+  <mat-card *ngIf="chassis">
+    <mat-card-header>
+      <div mat-card-avatar>
+        <img src="/assets/icons/brake.svg" class="component-type-picture" />
+      </div>
+      <mat-card-title>{{ chassis.name }}</mat-card-title>
+      <mat-card-subtitle>
+        {{ chassis.manufacturer }}
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div
+        class="component-picture"
+        [style.backgroundImage]="'url(' + chassis.pictureUrl + ')'"
+      ></div>
+      <dl *ngIf="chassis">
+        <dt>{{ "dashboard.components.bought" | translate }}</dt>
+        <dd>{{ chassis.boughtOn | date }}</dd>
+        <dt>{{ "dashboard.components.bought-for" | translate }}</dt>
+        <dd>{{ chassis.boughtFor | currency }}</dd>
+        <dt>{{ "dashboard.components.value" | translate }}</dt>
+        <dd>{{ chassis.currentPrice | currency }}</dd>
+        <dt>{{ "dashboard.components.points-gained" | translate }}</dt>
+        <dd>{{ chassis.pointsGained }}</dd>
+        <dt>{{ "dashboard.components.wear-down" | translate }}</dt>
+        <dd>{{ chassis.wearOff | number: "2.2" }}%</dd>
+        <dt>{{ "dashboard.components.max-wear-down" | translate }}</dt>
+        <dd>{{ chassis.maxWearOff | number: "2.2" }}%</dd>
+      </dl>
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        mat-flat-button
+        color="warn"
+        *ngIf="chassis"
+        (click)="sellChassis()"
+      >
+        {{ "dashboard.components.sell" | translate }}
+      </button>
+    </mat-card-actions>
+  </mat-card>
+  <mat-card *ngIf="!chassis">
+    <mat-card-header>
+      <div mat-card-avatar>
+        <img src="/assets/icons/brake.svg" class="component-type-picture" />
+      </div>
+      <mat-card-title>None</mat-card-title>
+      <mat-card-subtitle>
+        Click the buy button to buy an chassis
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div
+        class="component-picture"
+        style="background-image: url(/assets/chassis/chassis.jpg)"
+      ></div>
+      <dl>
+        <dt>{{ "dashboard.components.bought" | translate }}</dt>
+        <dd>-</dd>
+        <dt>{{ "dashboard.components.bought-for" | translate }}</dt>
+        <dd>-</dd>
+        <dt>{{ "dashboard.components.value" | translate }}</dt>
+        <dd>-</dd>
+        <dt>{{ "dashboard.components.points-gained" | translate }}</dt>
+        <dd>-</dd>
+        <dt>{{ "dashboard.components.wear-down" | translate }}</dt>
+        <dd>-</dd>
+        <dt>{{ "dashboard.components.max-wear-down" | translate }}</dt>
+        <dd>-</dd>
+      </dl>
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        mat-flat-button
+        color="primary"
+        *ngIf="!chassis"
+        (click)="buyChassis()"
+      >
+        {{ "dashboard.components.buy" | translate }}
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

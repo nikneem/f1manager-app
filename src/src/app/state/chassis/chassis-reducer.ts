@@ -68,7 +68,7 @@ const _chassisReducer = createReducer(
   on(chassisGetAvailableSuccess, (state, { payload }) => ({
     ...state,
     isLoading: false,
-    activeChassiss: payload,
+    activeChassis: payload,
   })),
 
   on(chassisError, (state, { errorMessage }) => ({

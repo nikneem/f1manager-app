@@ -9,6 +9,7 @@ import {
 } from '@state/league/league-models';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { CollectionResult } from '../shared/models/sell-confirmation-model';
 
 @Injectable({
   providedIn: 'root',
@@ -41,24 +42,26 @@ export class LeaguesService {
   }
   public acceptRequest(
     leagueId: string,
-    requestId: string
+    teamId: string
   ): Observable<LeagueJoinRequestDto> {
-    const url = `${environment.backendUrl}/api/leagues/${leagueId}/request/${requestId}/accept`;
+    const url = `${environment.backendUrl}/api/leagues/${leagueId}/request/accept/${teamId}`;
     return this.http.get<LeagueJoinRequestDto>(url);
   }
   public declineRequest(
     leagueId: string,
-    requestId: string
+    teamId: string
   ): Observable<LeagueJoinRequestDto> {
-    const url = `${environment.backendUrl}/api/leagues/${leagueId}/request/${requestId}/decline`;
+    const url = `${environment.backendUrl}/api/leagues/${leagueId}/request/decline/${teamId}`;
     return this.http.get<LeagueJoinRequestDto>(url);
   }
 
-  public search(name?: string): Observable<Array<LeagueListItemDto>> {
+  public search(
+    name?: string
+  ): Observable<CollectionResult<LeagueListItemDto>> {
     const url = name
       ? `${environment.backendUrl}/api/leagues?name=${name}`
       : `${environment.backendUrl}/api/leagues`;
-    return this.http.get<Array<LeagueListItemDto>>(url);
+    return this.http.get<CollectionResult<LeagueListItemDto>>(url);
   }
   public checkName(payload: LeagueCreateDto): Observable<LeagueCreateDto> {
     const url = `${environment.backendUrl}/api/leagues/validate`;
