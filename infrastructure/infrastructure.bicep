@@ -37,17 +37,6 @@ module cdnProfileEndpointModule 'Cdn/profiles/endpoints.bicep' = {
     standardResourceName: standardResourceName
     cdnProfileName: cdnProfileModule.outputs.cdnProfileName
     storageAccountName: storageAccountModule.outputs.storageAccountName
-  }
-}
-
-module cdnProfileEndpointDomainModule 'Cdn/profiles/endpoints/customdomain.bicep' = {
-  dependsOn: [
-    cdnProfileEndpointModule
-  ]
-  name: 'cdnProfileEndpointDomainModule'
-  params: {
-    cdnProfileName: cdnProfileModule.outputs.cdnProfileName
-    endpointName: cdnProfileEndpointModule.outputs.cdnEndpointName
     domainName: domainName
   }
 }
