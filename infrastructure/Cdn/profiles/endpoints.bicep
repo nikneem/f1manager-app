@@ -24,12 +24,12 @@ resource cdnEndpoint 'Microsoft.Cdn/profiles/endpoints@2020-09-01' = {
     ]
   }
 
-  resource customDomain 'customDomains@2020-09-01' = {
-    name: domainNameWithDashes
-    properties: {
-      hostName: domainName
-    }
-  }
+  // resource customDomain 'customDomains@2020-09-01' = {
+  //   name: domainNameWithDashes
+  //   properties: {
+  //     hostName: domainName
+  //   }
+  // }
 }
 
 output cdnEndpointName string = cdnEndpoint.name
