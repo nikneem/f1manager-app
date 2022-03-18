@@ -61,15 +61,18 @@ jobs:
         with:
           name: bicep-templates
           path: ./infrastructure
-      - name: Azure Login
-        uses: azure/login@v1
+
+      - name: Azure login
+        uses: Azure/cli@1.0.4
         with:
-          creds: ${{ secrets.AZURE_DEV }}
-      - uses: azure/arm-deploy@v1
+          azcliversion: 2.23.0
+          inlineScript: az login --service-principal -u ${{ secrets.AZURE_DEV_SERVICE_PRINCIPAL_ID }} -p ${{ secrets.AZURE_DEV_SERVICE_PRINCIPAL_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
+
+      - name: Azure login
+        uses: Azure/cli@1.0.4
         with:
-          scope: subscription
-          region: westeurope
-          template: ./infrastructure/main.json
+          azcliversion: 2.23.0
+          inlineScript: az deployment sub create --location westeurope --template-file ./infrastructure/main.json
 
   deploy-dev:
     needs: [build, infrastructure-incremental-dev]
@@ -82,10 +85,11 @@ jobs:
         with:
           name: dev-app
           path: ./published
-      - name: Azure Login
-        uses: azure/login@v1
+      - name: Azure login
+        uses: Azure/cli@1.0.4
         with:
-          creds: ${{ secrets.AZURE_DEV }}
+          azcliversion: 2.23.0
+          inlineScript: az login --service-principal -u ${{ secrets.AZURE_DEV_SERVICE_PRINCIPAL_ID }} -p ${{ secrets.AZURE_DEV_SERVICE_PRINCIPAL_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
       - name: Create static website
         uses: Azure/cli@1.0.4
         with:
