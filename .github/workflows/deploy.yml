@@ -41,11 +41,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Compile infrastructure
+        uses: Azure/cli@1.0.4
+        with:
+          azcliversion: 2.33.1
+          inlineScript: az bicep build --file ./infrastructure/main.bicep
       - name: Publish Artifact
         uses: actions/upload-artifact@v2
         with:
           name: bicep-templates
-          path: infrastructure/
+          path: infrastructure/*.json
 
   infrastructure-incremental-dev:
     needs: publish-bicep
@@ -60,12 +65,11 @@ jobs:
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_DEV }}
-      - name: Deploy Infrastructure
-        id: arm
-        uses: Azure/cli@1.0.4
+      - uses: azure/arm-deploy@v1
         with:
-          azcliversion: 2.23.0
-          inlineScript: az deployment sub create --location westeurope --template-file ./infrastructure/main.bicep
+          scope: subscription
+          region: westeurope
+          template: ./infrastructure/main.json
 
   deploy-dev:
     needs: [build, infrastructure-incremental-dev]
@@ -86,7 +90,7 @@ jobs:
         uses: Azure/cli@1.0.4
         with:
           azcliversion: 2.23.0
-          inlineScript: az storage blob service-properties update --account-name f1appdevweu --static-website --404-document 'index.html' --index-document 'index.html'
+          inlineScript: az storage blob service-properties update --account-name f1manappdevweu --static-website --404-document 'index.html' --index-document 'index.html'
       - name: Allow setting up extensions
         uses: Azure/cli@1.0.4
         with:
@@ -102,7 +106,7 @@ jobs:
         uses: Azure/cli@1.0.4
         with:
           azcliversion: 2.23.0
-          inlineScript: az storage fs directory upload -f '$web' --account-name 'f1appdevweu' -s './published/*' --recursive
+          inlineScript: az storage fs directory upload -f '$web' --account-name 'f1manappdevweu' -s './published/*' --recursive
       - name: Enable HTTPS
         uses: Azure/cli@1.0.4
         with:
