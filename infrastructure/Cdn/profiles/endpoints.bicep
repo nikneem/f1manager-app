@@ -21,3 +21,5 @@ resource cdnEndpoint 'Microsoft.Cdn/profiles/endpoints@2020-09-01' = {
     ]
   }
 }
+
+output cdnEndpointName string = cdnEndpoint.name

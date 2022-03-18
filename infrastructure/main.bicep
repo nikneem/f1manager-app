@@ -25,5 +25,6 @@ module mainInfrastructureModule 'infrastructure.bicep' = {
     azureRegion: azureRegion
     environmentName: environmentName
     systemName: systemName
+    location: targetGroup.location
   }
 }

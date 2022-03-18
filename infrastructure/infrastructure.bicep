@@ -47,7 +47,7 @@ module cdnProfileEndpointDomainModule 'Cdn/profiles/endpoints/customdomain.bicep
   name: 'cdnProfileEndpointDomainModule'
   params: {
     cdnProfileName: cdnProfileModule.outputs.cdnProfileName
-    endpointName: '${systemName}-${environmentName}-${azureRegion}'
+    endpointName: cdnProfileEndpointModule.outputs.cdnEndpointName
     domainName: domainName
   }
 }
