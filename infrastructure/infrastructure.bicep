@@ -10,7 +10,7 @@ param azureRegion string = 'weu'
 param location string = resourceGroup().location
 
 var standardResourceName = '${systemName}-${environmentName}-${azureRegion}'
-var domainName = replace('app-${environmentName}.f1mgr.com', '-prod', '')
+var domainName = toLower(replace('app-${environmentName}.f1mgr.com', '-prod', ''))
 
 module storageAccountModule 'Storage/storageAccounts.bicep' = {
   name: 'storageAccountModule'
