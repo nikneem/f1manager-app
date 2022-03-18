@@ -110,7 +110,7 @@ jobs:
         uses: Azure/cli@1.0.4
         with:
           azcliversion: 2.23.0
-          inlineScript: az storage fs directory upload -f '$web' --account-name 'f1manappdevweu' -s './published/*' --recursive
+          inlineScript: az storage fs directory upload -f '$web' --account-name 'f1manappdevweu' -s './published/*' --recursive --auth-mode login
       - name: Enable HTTPS
         uses: Azure/cli@1.0.4
         with:
