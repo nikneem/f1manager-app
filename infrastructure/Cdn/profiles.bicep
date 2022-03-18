@@ -1,14 +1,6 @@
-param systemName string = 'f1man'
-@allowed([
-  'dev'
-  'test'
-  'acc'
-  'prod'
-])
-param environmentName string = 'prod'
-param azureRegion string = 'weu'
+param standardResourceName string
 
-var profileName = '${systemName}-${environmentName}-${azureRegion}'
+var profileName = '${standardResourceName}-cdn'
 
 resource cdnProfile 'Microsoft.Cdn/profiles@2020-09-01' = {
   location: 'Global'

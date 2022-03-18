@@ -1,4 +1,4 @@
-param systemName string = 'f1app'
+param systemName string = 'f1man-app'
 @allowed([
   'dev'
   'test'
@@ -7,24 +7,23 @@ param systemName string = 'f1app'
 ])
 param environmentName string = 'dev'
 param azureRegion string = 'weu'
+param location string = resourceGroup().location
 
+var standardResourceName = '${systemName}-${environmentName}-${azureRegion}'
 var domainName = replace('app-${environmentName}.f1mgr.com', '-prod', '')
 
 module storageAccountModule 'Storage/storageAccounts.bicep' = {
   name: 'storageAccountModule'
   params: {
-    systemName: systemName
-    environmentName: environmentName
-    azureRegion: azureRegion
+    standardResourceName: standardResourceName
+    location: location
   }
 }
 
 module cdnProfileModule 'Cdn/profiles.bicep' = {
   name: 'cdnProfileModule'
   params: {
-    systemName: systemName
-    environmentName: environmentName
-    azureRegion: azureRegion
+    standardResourceName: standardResourceName
   }
 }
 
@@ -35,8 +34,8 @@ module cdnProfileEndpointModule 'Cdn/profiles/endpoints.bicep' = {
   ]
   name: 'cdnProfileEndpointModule'
   params: {
+    standardResourceName: standardResourceName
     cdnProfileName: cdnProfileModule.outputs.cdnProfileName
-    endpointName: '${systemName}-${environmentName}-${azureRegion}'
     storageAccountName: storageAccountModule.outputs.storageAccountName
   }
 }

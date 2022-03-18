@@ -1,6 +1,7 @@
 param cdnProfileName string
-param endpointName string
 param storageAccountName string
+param standardResourceName string
+var endpointName = '${standardResourceName}-cdn-ep'
 
 resource cdnEndpoint 'Microsoft.Cdn/profiles/endpoints@2020-09-01' = {
   location: 'Global'
