@@ -1,4 +1,6 @@
-param systemName string = 'f1app'
+targetScope = 'subscription'
+
+param systemName string = 'f1man-app'
 @allowed([
   'dev'
   'test'
@@ -7,48 +9,21 @@ param systemName string = 'f1app'
 ])
 param environmentName string = 'dev'
 param azureRegion string = 'weu'
+param location string = deployment().location
 
-var domainName = replace('app-${environmentName}.f1mgr.com', '-prod', '')
+var standardResourceName = '${systemName}-${environmentName}-${azureRegion}'
 
-module storageAccountModule 'Storage/storageAccounts.bicep' = {
-  name: 'storageAccountModule'
+resource targetGroup 'Microsoft.Resources/resourceGroups@2021-04-01' = {
+  name: standardResourceName
+  location: location
+}
+
+module mainInfrastructureModule 'infrastructure.bicep' = {
+  name: 'mainInfrastructureModule'
+  scope: targetGroup
   params: {
-    systemName: systemName
-    environmentName: environmentName
     azureRegion: azureRegion
-  }
-}
-
-module cdnProfileModule 'Cdn/profiles.bicep' = {
-  name: 'cdnProfileModule'
-  params: {
-    systemName: systemName
     environmentName: environmentName
-    azureRegion: azureRegion
-  }
-}
-
-module cdnProfileEndpointModule 'Cdn/profiles/endpoints.bicep' = {
-  dependsOn: [
-    cdnProfileModule
-    storageAccountModule
-  ]
-  name: 'cdnProfileEndpointModule'
-  params: {
-    cdnProfileName: cdnProfileModule.outputs.cdnProfileName
-    endpointName: '${systemName}-${environmentName}-${azureRegion}'
-    storageAccountName: storageAccountModule.outputs.storageAccountName
-  }
-}
-
-module cdnProfileEndpointDomainModule 'Cdn/profiles/endpoints/customdomain.bicep' = {
-  dependsOn: [
-    cdnProfileEndpointModule
-  ]
-  name: 'cdnProfileEndpointDomainModule'
-  params: {
-    cdnProfileName: cdnProfileModule.outputs.cdnProfileName
-    endpointName: '${systemName}-${environmentName}-${azureRegion}'
-    domainName: domainName
+    systemName: systemName
   }
 }

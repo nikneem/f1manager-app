@@ -60,17 +60,12 @@ jobs:
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_DEV }}
-      - name: Azure Create Resource Group
-        uses: Azure/cli@1.0.4
-        with:
-          azcliversion: 2.23.0
-          inlineScript: az group create -l westeurope -n ${{ secrets.AZURE_DEV_RESOURCE_GROUP }}
       - name: Deploy Infrastructure
         id: arm
         uses: Azure/cli@1.0.4
         with:
           azcliversion: 2.23.0
-          inlineScript: az deployment group create --resource-group ${{ secrets.AZURE_DEV_RESOURCE_GROUP }} --template-file ./infrastructure/main.bicep --mode Incremental
+          inlineScript: az deployment sub create --location westeurope --template-file ./infrastructure/main.bicep
 
   deploy-dev:
     needs: [build, infrastructure-incremental-dev]
