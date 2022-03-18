@@ -68,7 +68,7 @@ jobs:
           azcliversion: 2.23.0
           inlineScript: az login --service-principal -u ${{ secrets.AZURE_DEV_SERVICE_PRINCIPAL_ID }} -p ${{ secrets.AZURE_DEV_SERVICE_PRINCIPAL_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
 
-      - name: Azure login
+      - name: Create subscription deployment
         uses: Azure/cli@1.0.4
         with:
           azcliversion: 2.23.0
@@ -115,7 +115,7 @@ jobs:
         uses: Azure/cli@1.0.4
         with:
           azcliversion: 2.23.0
-          inlineScript: az cdn custom-domain enable-https -g 'F1Manager-Dev-App' --profile-name 'f1app-dev-weu' --endpoint-name 'f1app-dev-weu' -n 'app-dev-f1mgr-com'
+          inlineScript: az cdn custom-domain enable-https -g 'f1man-app-dev-weu' --profile-name 'f1man-app-dev-weu-cdn' --endpoint-name 'f1man-app-dev-weu-cdn-ep' -n 'app-dev-f1mgr-com'
 
   infrastructure-incremental-prod:
     needs: deploy-dev
