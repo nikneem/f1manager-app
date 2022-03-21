@@ -1,6 +1,10 @@
 param cdnProfileName string
-param endpointName string
 param storageAccountName string
+param standardResourceName string
+param domainName string
+
+var endpointName = '${standardResourceName}-cdn-ep'
+var domainNameWithDashes = replace(domainName, '.', '-')
 
 resource cdnEndpoint 'Microsoft.Cdn/profiles/endpoints@2020-09-01' = {
   location: 'Global'
@@ -19,4 +23,13 @@ resource cdnEndpoint 'Microsoft.Cdn/profiles/endpoints@2020-09-01' = {
       }
     ]
   }
+
+  resource customDomain 'customDomains@2020-09-01' = {
+    name: domainNameWithDashes
+    properties: {
+      hostName: domainName
+    }
+  }
 }
+
+output cdnEndpointName string = cdnEndpoint.name

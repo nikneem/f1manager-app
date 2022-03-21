@@ -1,18 +1,5 @@
-param systemName string = 'f1man'
-@allowed([
-  'dev'
-  'test'
-  'acc'
-  'prod'
-])
-param environmentName string = 'prod'
-param azureRegion string = 'weu'
-
-@allowed([
-  'Standard'
-  'Premium'
-])
-param skuTier string = 'Standard'
+param standardResourceName string
+param location string = resourceGroup().location
 
 @allowed([
   'Premium_LRS'
@@ -26,24 +13,16 @@ param skuTier string = 'Standard'
 ])
 param skuName string = 'Standard_LRS'
 
-var storageAccountName = '${systemName}${environmentName}${azureRegion}'
+var storageAccountName = toLower(replace(standardResourceName, '-', ''))
 
 resource storageAccount 'Microsoft.Storage/storageAccounts@2021-02-01' = {
   name: storageAccountName
   kind: 'StorageV2'
-  location: resourceGroup().location
+  location: location
   sku: {
     name: skuName
-    tier: skuTier
   }
 }
 
-output connectionString string = 'DefaultEndpointsProtocol=https;AccountName=${storageAccount.name};EndpointSuffix=${environment().suffixes.storage};AccountKey=${listKeys(storageAccount.id, storageAccount.apiVersion).keys[0].value}'
-output secret array = [
-  {
-    name: storageAccountName
-    value: 'DefaultEndpointsProtocol=https;AccountName=${storageAccount.name};EndpointSuffix=${environment().suffixes.storage};AccountKey=${listKeys(storageAccount.id, storageAccount.apiVersion).keys[0].value}'
-  }
-]
-output secretName string = storageAccountName
 output storageAccountName string = storageAccountName
+output primaryKey string = listKeys(storageAccount.id, storageAccount.apiVersion).keys[0].value
