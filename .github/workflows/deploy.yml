@@ -105,13 +105,13 @@ jobs:
         continue-on-error: true
         with:
           azcliversion: 2.23.0
-          inlineScript: az storage fs delete --name $web --account-name f1manappdevweu -y
+          inlineScript: az storage fs delete -n $web --account-name f1manappdevweu -y
       - name: Create container
         uses: Azure/cli@1.0.4
         continue-on-error: true
         with:
           azcliversion: 2.23.0
-          inlineScript: az storage fs create --name $web --account-name f1manappdevweu
+          inlineScript: az storage fs create -n $web --account-name f1manappdevweu
       - name: Upload files
         uses: Azure/cli@1.0.4
         with:
