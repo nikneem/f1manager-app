@@ -74,6 +74,18 @@ jobs:
           azcliversion: 2.23.0
           inlineScript: az deployment sub create --location westeurope --template-file ./infrastructure/main.json
 
+      - name: Store ARM outputs 1
+        uses: Azure/cli@1.0.4
+        with:
+          azcliversion: 2.23.0
+          inlineScript: STORAGE_ACCOUNT=$(az deployment sub show -n main --query properties.outputs | jq -r '.storageAccountName.value')
+
+      - name: Store ARM outputs 2
+        uses: Azure/cli@1.0.4
+        with:
+          azcliversion: 2.23.0
+          inlineScript: STORAGE_KEY=$(az deployment sub show -n main --query properties.outputs | jq -r '.primaryKey.value')
+
   deploy-dev:
     needs: [build, infrastructure-incremental-dev]
     runs-on: ubuntu-latest
