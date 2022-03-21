@@ -118,6 +118,10 @@ jobs:
         with:
           azcliversion: 2.23.0
           inlineScript: az storage fs delete -n '$web' --account-name '${{needs.infrastructure-incremental-dev.outputs.storageName}}' -y --account-key '${{needs.infrastructure-incremental-dev.outputs.storageKey}}'
+      - name: Sleep for 10 seconds
+        uses: jakejarvis/wait-action@master
+        with:
+          time: "10s"
       - name: Create container
         uses: Azure/cli@1.0.4
         continue-on-error: true
