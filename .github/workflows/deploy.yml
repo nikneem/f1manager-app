@@ -56,8 +56,8 @@ jobs:
     needs: publish-bicep
     runs-on: ubuntu-latest
     outputs:
-      storageName: ${{ steps.outputName.outputs.name }}
-      storageKey: ${{ steps.outputKey.outputs.key }}
+      storageName: ${{ steps.outputTask.outputs.name }}
+      storageKey: ${{ steps.outputTask.outputs.key }}
     steps:
       - name: Download Artifact
         uses: actions/download-artifact@v2
@@ -78,17 +78,10 @@ jobs:
           inlineScript: az deployment sub create --location westeurope --template-file ./infrastructure/main.json
 
       - name: Set ARM Output
-        id: outputName
+        id: outputTask
         run: |
           echo "::set-output name=name::$(az deployment sub show -n main --query properties.outputs.storageAccountName.value -o tsv)"
-          echo $STORAGE_ACCOUNT
-
-      - name: Set ARM Output
-        id: outputKey
-        run: |
-          az deployment sub show -n main --query properties.outputs.primaryKey.value -o tsv
-          echo "::set-output name=key::$STORAGE_KEY"
-          echo $STORAGE_KEY
+          echo "::set-output name=key::$(az deployment sub show -n main --query properties.outputs.primaryKey.value -o tsv)"
 
   deploy-dev:
     needs: [build, infrastructure-incremental-dev]
