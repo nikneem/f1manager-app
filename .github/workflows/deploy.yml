@@ -80,14 +80,13 @@ jobs:
       - name: Set ARM Output
         id: outputName
         run: |
-          STORAGE_ACCOUNT=$(az deployment sub show -n main --query properties.outputs.storageAccountName.value -o tsv)
-          echo "::set-output name=name::$STORAGE_ACCOUNT"
+          echo "::set-output name=name::$(az deployment sub show -n main --query properties.outputs.storageAccountName.value -o tsv)"
           echo $STORAGE_ACCOUNT
 
       - name: Set ARM Output
         id: outputKey
         run: |
-          STORAGE_KEY=$(az deployment sub show -n main --query properties.outputs.primaryKey.value -o tsv)
+          az deployment sub show -n main --query properties.outputs.primaryKey.value -o tsv
           echo "::set-output name=key::$STORAGE_KEY"
           echo $STORAGE_KEY
 
