@@ -92,8 +92,6 @@ jobs:
     environment:
       name: Development
     steps:
-      - name: Test variables
-        run: echo ${{needs.infrastructure-incremental-dev.outputs.storageName}} ${{needs.infrastructure-incremental-dev.outputs.storageKey}}
       - name: Download Artifact
         uses: actions/download-artifact@v2
         with:
