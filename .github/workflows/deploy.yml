@@ -128,7 +128,7 @@ jobs:
         uses: Azure/cli@1.0.4
         with:
           azcliversion: 2.23.0
-          inlineScript: az storage fs directory upload -f $web --account-name ${{needs.infrastructure-incremental-dev.outputs.storageName}} -s './published/*' --recursive --account-key ${{needs.infrastructure-incremental-dev.outputs.storageKey}}
+          inlineScript: az storage fs directory upload -f '$web' --account-name '${{needs.infrastructure-incremental-dev.outputs.storageName}}' -s './published/*' --recursive --account-key '${{needs.infrastructure-incremental-dev.outputs.storageKey}}'
       - name: Enable HTTPS
         uses: Azure/cli@1.0.4
         with:
