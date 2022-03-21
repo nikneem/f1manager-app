@@ -56,8 +56,8 @@ jobs:
     needs: publish-bicep
     runs-on: ubuntu-latest
     outputs:
-      storageName: ${{ steps.outputName.outputs.test }}
-      storageKey: ${{ steps.outputKey.outputs.test }}
+      storageName: ${{ steps.outputName.outputs.name }}
+      storageKey: ${{ steps.outputKey.outputs.key }}
     steps:
       - name: Download Artifact
         uses: actions/download-artifact@v2
@@ -78,18 +78,22 @@ jobs:
           inlineScript: az deployment sub create --location westeurope --template-file ./infrastructure/main.json
 
       - name: Store ARM outputs 1
-        id: outputName
         uses: Azure/cli@1.0.4
         with:
           azcliversion: 2.23.0
           inlineScript: STORAGE_ACCOUNT=$(az deployment sub show -n main --query properties.outputs | jq -r '.storageAccountName.value')
+      - name: Set ARM Output
+        id: outputName
+        run: echo "::set-output name=name::$STORAGE_ACCOUNT"
 
       - name: Store ARM outputs 2
-        id: outputKey
         uses: Azure/cli@1.0.4
         with:
           azcliversion: 2.23.0
           inlineScript: STORAGE_KEY=$(az deployment sub show -n main --query properties.outputs | jq -r '.primaryKey.value')
+      - name: Set ARM Output
+        id: outputKey
+        run: echo "::set-output name=key::$STORAGE_KEY"
 
   deploy-dev:
     needs: [build, infrastructure-incremental-dev]
