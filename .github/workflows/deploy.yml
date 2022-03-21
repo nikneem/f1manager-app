@@ -78,6 +78,7 @@ jobs:
           inlineScript: az deployment sub create --location westeurope --template-file ./infrastructure/main.json
 
       - name: Read ARM
+        uses: Azure/cli@1.0.4
         run: |
           az deployment sub show -n main --query properties.outputs.storageAccountName.value -o tsv
 
