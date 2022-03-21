@@ -102,12 +102,13 @@ jobs:
           inlineScript: az config set extension.use_dynamic_install=yes_without_prompt
       - name: Delete all the files from storage
         uses: Azure/cli@1.0.4
+        continue-on-error: true
         with:
           azcliversion: 2.23.0
           inlineScript: az storage fs delete --name $web --account-name f1manappdevweu -y
-        continue-on-error: true
       - name: Create container
         uses: Azure/cli@1.0.4
+        continue-on-error: true
         with:
           azcliversion: 2.23.0
           inlineScript: az storage fs create --name $web --account-name f1manappdevweu
