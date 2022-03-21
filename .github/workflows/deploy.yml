@@ -125,18 +125,18 @@ jobs:
         continue-on-error: true
         with:
           azcliversion: 2.23.0
-          inlineScript: az storage fs delete -n $web --account-name ${{needs.infrastructure-incremental-dev.outputs.storageName}} -y
+          inlineScript: az storage fs delete -n $web --account-name ${{needs.infrastructure-incremental-dev.outputs.storageName}} -y --account-key ${{needs.infrastructure-incremental-dev.outputs.storageKey}}
       - name: Create container
         uses: Azure/cli@1.0.4
         continue-on-error: true
         with:
           azcliversion: 2.23.0
-          inlineScript: az storage fs create -n $web --account-name ${{needs.infrastructure-incremental-dev.outputs.storageName}}
+          inlineScript: az storage fs create -n $web --account-name ${{needs.infrastructure-incremental-dev.outputs.storageName}} --account-key ${{needs.infrastructure-incremental-dev.outputs.storageKey}}
       - name: Upload files
         uses: Azure/cli@1.0.4
         with:
           azcliversion: 2.23.0
-          inlineScript: az storage fs directory upload -f $web --account-name ${{needs.infrastructure-incremental-dev.outputs.storageName}} -s './published/*' --recursive --auth-mode login
+          inlineScript: az storage fs directory upload -f $web --account-name ${{needs.infrastructure-incremental-dev.outputs.storageName}} -s './published/*' --recursive --account-key ${{needs.infrastructure-incremental-dev.outputs.storageKey}}
       - name: Enable HTTPS
         uses: Azure/cli@1.0.4
         with:
