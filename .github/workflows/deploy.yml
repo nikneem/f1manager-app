@@ -79,14 +79,18 @@ jobs:
 
       - name: Read ARM
         uses: Azure/cli@1.0.4
-        run: |
-          az deployment sub show -n main --query properties.outputs.storageAccountName.value -o tsv
+        with:
+          azcliversion: 2.23.0
+          inlineScript: az deployment sub show -n main --query properties.outputs.storageAccountName.value -o tsv
 
       - name: Set ARM Output
         id: outputTask
-        run: |
-          echo "::set-output name=name::$(az deployment sub show -n main --query properties.outputs.storageAccountName.value -o tsv)"
-          echo "::set-output name=key::$(az deployment sub show -n main --query properties.outputs.primaryKey.value -o tsv)"
+        uses: Azure/cli@1.0.4
+        with:
+          azcliversion: 2.23.0
+          inlineScript: |
+            echo "::set-output name=name::$(az deployment sub show -n main --query properties.outputs.storageAccountName.value -o tsv)"
+            echo "::set-output name=key::$(az deployment sub show -n main --query properties.outputs.primaryKey.value -o tsv)"
 
   deploy-dev:
     needs: [build, infrastructure-incremental-dev]
