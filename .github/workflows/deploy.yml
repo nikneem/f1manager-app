@@ -117,13 +117,13 @@ jobs:
         continue-on-error: true
         with:
           azcliversion: 2.23.0
-          inlineScript: az storage fs delete -n $web --account-name ${{needs.infrastructure-incremental-dev.outputs.storageName}} -y --account-key ${{needs.infrastructure-incremental-dev.outputs.storageKey}}
+          inlineScript: az storage fs delete -n '$web' --account-name '${{needs.infrastructure-incremental-dev.outputs.storageName}}' -y --account-key '${{needs.infrastructure-incremental-dev.outputs.storageKey}}'
       - name: Create container
         uses: Azure/cli@1.0.4
         continue-on-error: true
         with:
           azcliversion: 2.23.0
-          inlineScript: az storage fs create -n $web --account-name ${{needs.infrastructure-incremental-dev.outputs.storageName}} --account-key ${{needs.infrastructure-incremental-dev.outputs.storageKey}}
+          inlineScript: az storage fs create -n '$web' --account-name '${{needs.infrastructure-incremental-dev.outputs.storageName}}' --account-key '${{needs.infrastructure-incremental-dev.outputs.storageKey}}'
       - name: Upload files
         uses: Azure/cli@1.0.4
         with:
@@ -135,71 +135,78 @@ jobs:
           azcliversion: 2.23.0
           inlineScript: az cdn custom-domain enable-https -g 'f1man-app-dev-weu' --profile-name 'f1man-app-dev-weu-cdn' --endpoint-name 'f1man-app-dev-weu-cdn-ep' -n 'app-dev-f1mgr-com'
 
-  infrastructure-incremental-prod:
-    needs: deploy-dev
-    runs-on: ubuntu-latest
-    environment:
-      name: Production
-    steps:
-      - name: Download Artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: bicep-templates
-          path: ./infrastructure
-      - name: Azure Login
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_DEV }}
-      - name: Azure Create Resource Group
-        uses: Azure/cli@1.0.4
-        with:
-          azcliversion: 2.23.0
-          inlineScript: az group create -l westeurope -n ${{ secrets.AZURE_PROD_RESOURCE_GROUP }}
-      - name: Deploy Infrastructure
-        id: arm
-        uses: Azure/cli@1.0.4
-        with:
-          azcliversion: 2.23.0
-          inlineScript: az deployment group create --resource-group ${{ secrets.AZURE_PROD_RESOURCE_GROUP }} --template-file ./infrastructure/main.bicep --mode Incremental --parameters environmentName=prod
+  # infrastructure-incremental-dev:
+  #   needs: publish-bicep
+  #   runs-on: ubuntu-latest
+  #   outputs:
+  #     storageName: ${{ steps.outputTask.outputs.name }}
+  #     storageKey: ${{ steps.outputTask.outputs.key }}
+  #   steps:
+  #     - name: Download Artifact
+  #       uses: actions/download-artifact@v2
+  #       with:
+  #         name: bicep-templates
+  #         path: ./infrastructure
 
-  deploy-prod:
-    needs: [deploy-dev, infrastructure-incremental-prod]
-    runs-on: ubuntu-latest
-    environment:
-      name: Production
-    steps:
-      - name: Download Artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: prod-app
-          path: ./published
-      - name: Azure Login
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_DEV }}
-      - name: Create static website
-        uses: Azure/cli@1.0.4
-        with:
-          azcliversion: 2.23.0
-          inlineScript: az storage blob service-properties update --account-name f1appprodweu --static-website --404-document 'index.html' --index-document 'index.html'
-      - name: Allow setting up extensions
-        uses: Azure/cli@1.0.4
-        with:
-          azcliversion: 2.23.0
-          inlineScript: az config set extension.use_dynamic_install=yes_without_prompt
-        # - name: Delete all the files from storage
-        #   uses: Azure/cli@1.0.4
-        #   with:
-        #     azcliversion: 2.23.0
-        #     inlineScript: az storage fs delete --name '$web' --account-name 'f1appprodweu' -y
-        continue-on-error: true
-      - name: Upload files
-        uses: Azure/cli@1.0.4
-        with:
-          azcliversion: 2.23.0
-          inlineScript: az storage fs directory upload -f '$web' --account-name 'f1appprodweu' -s './published/*' --recursive
-      - name: Enable HTTPS
-        uses: Azure/cli@1.0.4
-        with:
-          azcliversion: 2.23.0
-          inlineScript: az cdn custom-domain enable-https -g 'F1Manager-Prod-App' --profile-name 'f1app-prod-weu' --endpoint-name 'f1app-prod-weu' -n 'app-f1mgr-com'
+  #     - name: Azure login
+  #       uses: Azure/cli@1.0.4
+  #       with:
+  #         azcliversion: 2.23.0
+  #         inlineScript: az login --service-principal -u ${{ secrets.AZURE_DEV_SERVICE_PRINCIPAL_ID }} -p ${{ secrets.AZURE_DEV_SERVICE_PRINCIPAL_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
+
+  #     - name: Create subscription deployment
+  #       uses: Azure/cli@1.0.4
+  #       with:
+  #         azcliversion: 2.23.0
+  #         inlineScript: az deployment sub create --location westeurope --template-file ./infrastructure/main.json
+
+  #     - name: Set ARM Output
+  #       id: outputTask
+  #       uses: Azure/cli@1.0.4
+  #       with:
+  #         azcliversion: 2.23.0
+  #         inlineScript: |
+  #           echo "::set-output name=name::$(az deployment sub show -n main --query properties.outputs.storageAccountName.value -o tsv)"
+  #           echo "::set-output name=key::$(az deployment sub show -n main --query properties.outputs.primaryKey.value -o tsv)"
+
+  # deploy-prod:
+  #   needs: [deploy-dev, infrastructure-incremental-prod]
+  #   runs-on: ubuntu-latest
+  #   environment:
+  #     name: Production
+  #   steps:
+  #     - name: Download Artifact
+  #       uses: actions/download-artifact@v2
+  #       with:
+  #         name: prod-app
+  #         path: ./published
+  #     - name: Azure Login
+  #       uses: azure/login@v1
+  #       with:
+  #         creds: ${{ secrets.AZURE_DEV }}
+  #     - name: Create static website
+  #       uses: Azure/cli@1.0.4
+  #       with:
+  #         azcliversion: 2.23.0
+  #         inlineScript: az storage blob service-properties update --account-name f1appprodweu --static-website --404-document 'index.html' --index-document 'index.html'
+  #     - name: Allow setting up extensions
+  #       uses: Azure/cli@1.0.4
+  #       with:
+  #         azcliversion: 2.23.0
+  #         inlineScript: az config set extension.use_dynamic_install=yes_without_prompt
+  #       # - name: Delete all the files from storage
+  #       #   uses: Azure/cli@1.0.4
+  #       #   with:
+  #       #     azcliversion: 2.23.0
+  #       #     inlineScript: az storage fs delete --name '$web' --account-name 'f1appprodweu' -y
+  #       continue-on-error: true
+  #     - name: Upload files
+  #       uses: Azure/cli@1.0.4
+  #       with:
+  #         azcliversion: 2.23.0
+  #         inlineScript: az storage fs directory upload -f '$web' --account-name 'f1appprodweu' -s './published/*' --recursive
+  #     - name: Enable HTTPS
+  #       uses: Azure/cli@1.0.4
+  #       with:
+  #         azcliversion: 2.23.0
+  #         inlineScript: az cdn custom-domain enable-https -g 'F1Manager-Prod-App' --profile-name 'f1app-prod-weu' --endpoint-name 'f1app-prod-weu' -n 'app-f1mgr-com'
