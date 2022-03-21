@@ -40,3 +40,6 @@ module cdnProfileEndpointModule 'Cdn/profiles/endpoints.bicep' = {
     domainName: domainName
   }
 }
+
+output storageAccountName string = storageAccountModule.outputs.storageAccountName
+output primaryKey string = storageAccountModule.outputs.primaryKey

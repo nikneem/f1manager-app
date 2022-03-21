@@ -28,3 +28,6 @@ module mainInfrastructureModule 'infrastructure.bicep' = {
     location: targetGroup.location
   }
 }
+
+output storageAccountName string = mainInfrastructureModule.outputs.storageAccountName
+output primaryKey string = mainInfrastructureModule.outputs.primaryKey

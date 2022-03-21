@@ -24,12 +24,5 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2021-02-01' = {
   }
 }
 
-output connectionString string = 'DefaultEndpointsProtocol=https;AccountName=${storageAccount.name};EndpointSuffix=${environment().suffixes.storage};AccountKey=${listKeys(storageAccount.id, storageAccount.apiVersion).keys[0].value}'
-output secret array = [
-  {
-    name: storageAccountName
-    value: 'DefaultEndpointsProtocol=https;AccountName=${storageAccount.name};EndpointSuffix=${environment().suffixes.storage};AccountKey=${listKeys(storageAccount.id, storageAccount.apiVersion).keys[0].value}'
-  }
-]
-output secretName string = storageAccountName
 output storageAccountName string = storageAccountName
+output primaryKey string = listKeys(storageAccount.id, storageAccount.apiVersion).keys[0].value
