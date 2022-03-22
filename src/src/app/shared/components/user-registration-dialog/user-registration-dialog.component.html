@@ -38,6 +38,10 @@
       />
     </mat-form-field>
   </form>
+  <div class="error" *ngIf="errorMessage">{{ errorMessage | translate }}</div>
+  <div class="error" *ngIf="hasPasswordValidationError()">
+    {{ "users.errors.passwordsdonotmatch" | translate }}
+  </div>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-flat-button color="accent" [mat-dialog-close]="true">
