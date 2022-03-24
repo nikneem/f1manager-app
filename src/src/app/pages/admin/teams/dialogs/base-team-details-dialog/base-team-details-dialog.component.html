@@ -9,11 +9,11 @@
         formControlName="name"
       />
     </mat-form-field>
-    <mat-form-field class="half-width">
+    <mat-form-field>
       <input
         matInput
-        placeholder="{{ 'admin.base-teams.details.origin' | translate }}"
-        formControlName="origin"
+        placeholder="{{ 'admin.base-teams.details.base' | translate }}"
+        formControlName="base"
       />
     </mat-form-field>
     <mat-form-field class="half-width">
@@ -21,6 +21,15 @@
         matInput
         placeholder="{{ 'admin.base-teams.details.principal' | translate }}"
         formControlName="principal"
+      />
+    </mat-form-field>
+    <mat-form-field class="half-width">
+      <input
+        matInput
+        placeholder="{{
+          'admin.base-teams.details.technicalChief' | translate
+        }}"
+        formControlName="technicalChief"
       />
     </mat-form-field>
 

@@ -211,9 +211,11 @@
       "title": "Base teams maintenance",
       "create-tooltip": "Create a new team",
       "details": {
+        "title": "Base team details",
         "name": "Name",
-        "origin": "Origin",
+        "base": "Base",
         "principal": "Team principal",
+        "technicalChief": "Technical Chief",
         "first-driver": "First driver",
         "second-driver": "Second driver",
         "engine": "Engine",
@@ -222,6 +224,10 @@
       "delete": {
         "title": "Delete base team",
         "message": "Are you sure you wish to delete base team '{{name}}' from the system?"
+      },
+      "undelete": {
+        "title": "Undelete base team",
+        "message": "Are you sure you wish to undelete base team '{{name}}'?"
       }
     },
     "drivers": {

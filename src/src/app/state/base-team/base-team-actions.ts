@@ -42,6 +42,15 @@ export const baseTeamDeleteSuccess = createAction(
   props<{ id: string }>()
 );
 
+export const baseTeamUndelete = createAction(
+  '[BaseTeam] Undelete',
+  props<{ id: string }>()
+);
+export const baseTeamUndeleteSuccess = createAction(
+  '[BaseTeam] Undelete Success',
+  props<{ id: string }>()
+);
+
 export const baseTeamError = createAction(
   '[BaseTeam] Error',
   props<{ errorMessage: string | undefined }>()

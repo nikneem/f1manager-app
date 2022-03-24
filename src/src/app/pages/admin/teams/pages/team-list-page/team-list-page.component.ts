@@ -7,6 +7,7 @@ import { AppState } from '@state/app.state';
 import {
   baseTeamDelete,
   baseTeamGetList,
+  baseTeamUndelete,
 } from '@state/base-team/base-team-actions';
 import { BaseTeamDto } from '@state/base-team/base-team-models';
 import { Subscription } from 'rxjs';
@@ -27,12 +28,9 @@ export class TeamListPageComponent implements OnInit, OnDestroy {
 
   displayedColumns: string[] = [
     'name',
-    'origin',
+    'base',
     'principal',
-    'firstDriver',
-    'secondDriver',
-    'engine',
-    'chassis',
+    'technicalChief',
     'actions',
   ];
 
@@ -73,6 +71,34 @@ export class TeamListPageComponent implements OnInit, OnDestroy {
           dialogRef.afterClosed().subscribe((result) => {
             if (result) {
               this.store.dispatch(baseTeamDelete({ id: baseTeamId }));
+            }
+          });
+        });
+    }
+  }
+  undeleteBaseTeam(baseTeam: BaseTeamDto) {
+    if (baseTeam.id) {
+      const baseTeamId: string = baseTeam.id;
+      this.translateService
+        .get(
+          [
+            'admin.base-teams.undelete.title',
+            'admin.base-teams.undelete.message',
+          ],
+          {
+            name: baseTeam.name,
+          }
+        )
+        .subscribe((val) => {
+          const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+            data: {
+              title: val['admin.base-teams.undelete.title'],
+              message: val['admin.base-teams.undelete.message'],
+            },
+          });
+          dialogRef.afterClosed().subscribe((result) => {
+            if (result) {
+              this.store.dispatch(baseTeamUndelete({ id: baseTeamId }));
             }
           });
         });

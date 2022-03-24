@@ -74,8 +74,11 @@ export class BaseTeamDetailsDialogComponent implements OnInit, OnDestroy {
     this.baseTeamForm = new FormGroup({
       id: new FormControl(this.baseTeam.id),
       name: new FormControl(this.baseTeam.name, [Validators.required]),
-      origin: new FormControl(this.baseTeam.origin, [Validators.required]),
+      base: new FormControl(this.baseTeam.base, [Validators.required]),
       principal: new FormControl(this.baseTeam.principal, [
+        Validators.required,
+      ]),
+      technicalChief: new FormControl(this.baseTeam.technicalChief, [
         Validators.required,
       ]),
       firstDriverId: new FormControl(this.baseTeam.firstDriverId, [
