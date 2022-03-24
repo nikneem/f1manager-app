@@ -19,22 +19,16 @@
       cursor: pointer;
     }
   }
-  .origin-column {
+  .deleted {
+    opacity: 0.5;
+  }
+  .active-from-column {
     display: none;
   }
-  .principal-column {
+  .active-to-column {
     display: none;
   }
-  .first-driver-column {
-    display: none;
-  }
-  .second-driver-column {
-    display: none;
-  }
-  .engine-column {
-    display: none;
-  }
-  .chassis-column {
+  .available-column {
     display: none;
   }
   .actions-column {
@@ -44,10 +38,7 @@
 
 @media only screen and (min-width: 768px) {
   .mat-table {
-    .first-driver-column {
-      display: flex;
-    }
-    .second-driver-column {
+    .available-column {
       display: flex;
     }
   }
@@ -55,40 +46,14 @@
 
 @media only screen and (min-width: 1200px) {
   .mat-table {
-    .first-driver-column {
+    .active-from-column {
       display: flex;
     }
-    .second-driver-column {
-      display: flex;
-    }
-    .engine-column {
-      display: flex;
-    }
-    .chassis-column {
+    .active-to-column {
       display: flex;
     }
   }
 }
 
 @media only screen and (min-width: 1600px) {
-  .mat-table {
-    .origin-column {
-      display: flex;
-    }
-    .principal-column {
-      display: flex;
-    }
-    .first-driver-column {
-      display: flex;
-    }
-    .second-driver-column {
-      display: flex;
-    }
-    .engine-column {
-      display: flex;
-    }
-    .chassis-column {
-      display: flex;
-    }
-  }
 }

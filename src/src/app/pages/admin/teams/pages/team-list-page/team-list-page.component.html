@@ -14,15 +14,15 @@
       </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="origin">
+    <ng-container matColumnDef="base">
       <mat-header-cell
         *matHeaderCellDef
-        class="column origin-column header flex-8"
+        class="column base-column header flex-8"
       >
-        {{ "admin.base-teams.details.origin" | translate }}
+        {{ "admin.base-teams.details.base" | translate }}
       </mat-header-cell>
-      <mat-cell *matCellDef="let row" class="column origin-column cell flex-8">
-        {{ row.origin }}
+      <mat-cell *matCellDef="let row" class="column base-column cell flex-8">
+        {{ row.base }}
       </mat-cell>
     </ng-container>
 
@@ -41,58 +41,21 @@
       </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="firstDriver">
+    <ng-container matColumnDef="technicalChief">
       <mat-header-cell
         *matHeaderCellDef
-        class="column first-driver-column header flex-8"
+        class="column technical-chief-column header flex-8"
       >
-        {{ "admin.base-teams.details.first-driver" | translate }}
+        {{ "admin.base-teams.details.technicalChief" | translate }}
       </mat-header-cell>
       <mat-cell
         *matCellDef="let row"
-        class="column first-driver-column cell flex-8"
+        class="column technical-chief-column cell flex-8"
       >
-        {{ row.firstDriver }}
+        {{ row.technicalChief }}
       </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="secondDriver">
-      <mat-header-cell
-        *matHeaderCellDef
-        class="column second-driver-column header flex-8"
-      >
-        {{ "admin.base-teams.details.second-driver" | translate }}
-      </mat-header-cell>
-      <mat-cell
-        *matCellDef="let row"
-        class="column second-driver-column cell flex-8"
-      >
-        {{ row.secondDriver }}
-      </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="engine">
-      <mat-header-cell
-        *matHeaderCellDef
-        class="column engine-column header flex-8"
-      >
-        {{ "admin.base-teams.details.engine" | translate }}
-      </mat-header-cell>
-      <mat-cell *matCellDef="let row" class="column engine-column cell flex-8">
-        {{ row.engine }}
-      </mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="chassis">
-      <mat-header-cell
-        *matHeaderCellDef
-        class="column chassis-column header flex-8"
-      >
-        {{ "admin.base-teams.details.chassis" | translate }}
-      </mat-header-cell>
-      <mat-cell *matCellDef="let row" class="column chassis-column cell flex-8">
-        {{ row.chassis }}
-      </mat-cell>
-    </ng-container>
     <ng-container matColumnDef="actions">
       <mat-header-cell
         *matHeaderCellDef
@@ -100,14 +63,29 @@
       >
       </mat-header-cell>
       <mat-cell *matCellDef="let row" class="column actions-column cell flex-1">
-        <button mat-icon-button (click)="deleteBaseTeam(row)" color="warn">
+        <button
+          mat-icon-button
+          (click)="deleteBaseTeam(row)"
+          color="warn"
+          *ngIf="!row.isDeleted"
+        >
           <mat-icon>delete</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          (click)="undeleteBaseTeam(row)"
+          *ngIf="row.isDeleted"
+        >
+          <mat-icon>backspace</mat-icon>
         </button>
       </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    <mat-row
+      *matRowDef="let row; columns: displayedColumns"
+      [class.deleted]="row.isDeleted"
+    ></mat-row>
   </mat-table>
 </div>
 <f1-empty-state

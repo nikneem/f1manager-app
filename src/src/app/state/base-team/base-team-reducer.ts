@@ -8,6 +8,7 @@ import {
   baseTeamFilterUpdate,
   baseTeamGetList,
   baseTeamGetListSuccess,
+  baseTeamUndeleteSuccess,
   baseTeamUpdate,
   baseTeamUpdateSuccess,
 } from './base-team-actions';
@@ -54,6 +55,9 @@ const _baseTeamReducer = createReducer(
   on(baseTeamDeleteSuccess, (state, { id }) =>
     deleteBaseTeamHandler(state, id)
   ),
+  on(baseTeamUndeleteSuccess, (state, { id }) =>
+    baseTeamUndeleteSuccessHandler(state, id)
+  ),
   on(baseTeamError, (state, { errorMessage }) => ({
     ...state,
     isLoading: false,
@@ -99,6 +103,26 @@ function deleteBaseTeamHandler(
   copyState.baseTeams = driversList;
   copyState.isLoading = false;
 
+  return copyState;
+}
+function baseTeamUndeleteSuccessHandler(
+  state: BaseTeamState,
+  id: string
+): BaseTeamState {
+  const copyState: BaseTeamState = Object.assign({}, state);
+
+  let driversList = copyState.baseTeams
+    ? new Array<BaseTeamDto>(...copyState.baseTeams)
+    : new Array<BaseTeamDto>();
+
+  const driverIndex = driversList.findIndex((elm) => elm.id === id);
+  if (driverIndex >= 0) {
+    const copyDriver: BaseTeamDto = Object.assign({}, driversList[driverIndex]);
+    copyDriver.isDeleted = false;
+    driversList.splice(driverIndex, 1, copyDriver);
+  }
+  copyState.baseTeams = driversList;
+  copyState.isLoading = false;
   return copyState;
 }
 

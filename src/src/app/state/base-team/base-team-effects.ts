@@ -12,6 +12,8 @@ import {
   baseTeamError,
   baseTeamGetList,
   baseTeamGetListSuccess,
+  baseTeamUndelete,
+  baseTeamUndeleteSuccess,
   baseTeamUpdate,
   baseTeamUpdateSuccess,
 } from './base-team-actions';
@@ -63,6 +65,17 @@ export class BaseTeamEffects {
       mergeMap((act) =>
         this.baseTeamService.delete(act.id).pipe(
           map(() => baseTeamDeleteSuccess({ id: act.id })),
+          catchError((err) => this.handleError(err))
+        )
+      )
+    )
+  );
+  baseTeamUndelete$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(baseTeamUndelete),
+      mergeMap((act) =>
+        this.baseTeamService.undelete(act.id).pipe(
+          map(() => baseTeamUndeleteSuccess({ id: act.id })),
           catchError((err) => this.handleError(err))
         )
       )
